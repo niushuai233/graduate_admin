@@ -1,0 +1,49 @@
+#环境配置
+spring:
+
+  profiles:
+    active: mysql
+  output:
+    ansi:
+      enabled: always
+  properties:
+    # 验证码开关
+    kaptchaSwitch: false
+
+  #flyway
+  flyway:
+    baseline-on-migrate: true
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+  servlet:
+    multipart:
+      max-file-size: 300Mb
+      max-request-size: 500Mb
+
+#logging
+logging:
+  root: debug
+  level:
+    cc.niushuai: debug
+  config: classpath:logback.xml
+
+#mybatis
+mybatis:
+  config-location: classpath:mybatis.xml
+  mapper-locations: classpath:mapper/*.xml
+
+# 分布式文件系统FDFS配置
+fdfs:
+  soTimeout: 9000
+  connectTimeout: 9000
+  thumbImage:             #缩略图生成参数
+    width: 150
+    height: 150
+  trackerList:            #TrackerList参数,支持多个
+    - 106.12.218.104:22122
+  pool:
+    max-total: 100
+    max-wait-millis: 60
+    jmx-enabled: false

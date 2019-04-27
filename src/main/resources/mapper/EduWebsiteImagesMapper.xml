@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cc.niushuai.graduate.mapper.EduWebsiteImagesMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="cc.niushuai.graduate.entity.EduWebsiteImages" id="eduWebsiteImagesMap">
+        <result property="imageId" column="IMAGE_ID"/>
+        <result property="imageUrl" column="IMAGE_URL"/>
+        <result property="linkAddress" column="LINK_ADDRESS"/>
+        <result property="title" column="TITLE"/>
+        <result property="typeId" column="TYPE_ID"/>
+        <result property="seriesNumber" column="SERIES_NUMBER"/>
+        <result property="previewUrl" column="PREVIEW_URL"/>
+        <result property="color" column="COLOR"/>
+        <result property="describe" column="describe"/>
+        <result property="state" column="STATE"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="updateTime" column="UPDATE_TIME"/>
+    </resultMap>
+
+	<select id="get" resultType="cc.niushuai.graduate.entity.EduWebsiteImages">
+		select * from edu_website_images where IMAGE_ID = #{value}
+	</select>
+
+	<select id="getList" resultType="cc.niushuai.graduate.entity.EduWebsiteImages">
+		select * from edu_website_images t <include refid="where_clause" />
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by IMAGE_ID desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="getCount" resultType="int">
+		select count(*) from edu_website_images t  <include refid="where_clause" />
+	</select>
+
+    <!-- 搜索数据区域 -->
+    <sql id="where_clause">
+        <where>
+            1=1
+            <if test="imageId != null and imageId != ''"> and t.IMAGE_ID = #{imageId} </if>
+    		<if test="imageIdVague != null and imageIdVague != ''"> and t.IMAGE_ID like concat('%',#{imageIdVague},'%') </if>
+            <if test="imageUrl != null and imageUrl != ''"> and t.IMAGE_URL = #{imageUrl} </if>
+    		<if test="imageUrlVague != null and imageUrlVague != ''"> and t.IMAGE_URL like concat('%',#{imageUrlVague},'%') </if>
+            <if test="linkAddress != null and linkAddress != ''"> and t.LINK_ADDRESS = #{linkAddress} </if>
+    		<if test="linkAddressVague != null and linkAddressVague != ''"> and t.LINK_ADDRESS like concat('%',#{linkAddressVague},'%') </if>
+            <if test="title != null and title != ''"> and t.TITLE = #{title} </if>
+    		<if test="titleVague != null and titleVague != ''"> and t.TITLE like concat('%',#{titleVague},'%') </if>
+            <if test="typeId != null and typeId != ''"> and t.TYPE_ID = #{typeId} </if>
+    		<if test="typeIdVague != null and typeIdVague != ''"> and t.TYPE_ID like concat('%',#{typeIdVague},'%') </if>
+            <if test="seriesNumber != null and seriesNumber != ''"> and t.SERIES_NUMBER = #{seriesNumber} </if>
+    		<if test="seriesNumberVague != null and seriesNumberVague != ''"> and t.SERIES_NUMBER like concat('%',#{seriesNumberVague},'%') </if>
+            <if test="previewUrl != null and previewUrl != ''"> and t.PREVIEW_URL = #{previewUrl} </if>
+    		<if test="previewUrlVague != null and previewUrlVague != ''"> and t.PREVIEW_URL like concat('%',#{previewUrlVague},'%') </if>
+            <if test="color != null and color != ''"> and t.COLOR = #{color} </if>
+    		<if test="colorVague != null and colorVague != ''"> and t.COLOR like concat('%',#{colorVague},'%') </if>
+            <if test="describe != null and describe != ''"> and t.describe = #{describe} </if>
+    		<if test="describeVague != null and describeVague != ''"> and t.describe like concat('%',#{describeVague},'%') </if>
+            <if test="state != null and state != ''"> and t.STATE = #{state} </if>
+    		<if test="stateVague != null and stateVague != ''"> and t.STATE like concat('%',#{stateVague},'%') </if>
+            <if test="createTime != null and createTime != ''"> and t.CREATE_TIME = #{createTime} </if>
+    		<if test="createTimeVague != null and createTimeVague != ''"> and t.CREATE_TIME like concat('%',#{createTimeVague},'%') </if>
+            <if test="updateTime != null and updateTime != ''"> and t.UPDATE_TIME = #{updateTime} </if>
+    		<if test="updateTimeVague != null and updateTimeVague != ''"> and t.UPDATE_TIME like concat('%',#{updateTimeVague},'%') </if>
+        </where>
+    </sql>
+	 
+	<insert id="save" parameterType="cc.niushuai.graduate.entity.EduWebsiteImages" useGeneratedKeys="true" keyProperty="imageId">
+		insert into edu_website_images
+		(
+			`IMAGE_URL`, 
+			`LINK_ADDRESS`, 
+			`TITLE`, 
+			`TYPE_ID`, 
+			`SERIES_NUMBER`, 
+			`PREVIEW_URL`, 
+			`COLOR`, 
+			`describe`, 
+			`STATE`, 
+			`CREATE_TIME`, 
+			`UPDATE_TIME`
+		)
+		values
+		(
+			#{imageUrl}, 
+			#{linkAddress}, 
+			#{title}, 
+			#{typeId}, 
+			#{seriesNumber}, 
+			#{previewUrl}, 
+			#{color}, 
+			#{describe}, 
+			#{state}, 
+			#{createTime}, 
+			#{updateTime}
+		)
+	</insert>
+
+	<update id="update" parameterType="cc.niushuai.graduate.entity.EduWebsiteImages">
+		update edu_website_images 
+		<set>
+			<if test="imageUrl != null">`IMAGE_URL` = #{imageUrl}, </if>
+			<if test="linkAddress != null">`LINK_ADDRESS` = #{linkAddress}, </if>
+			<if test="title != null">`TITLE` = #{title}, </if>
+			<if test="typeId != null">`TYPE_ID` = #{typeId}, </if>
+			<if test="seriesNumber != null">`SERIES_NUMBER` = #{seriesNumber}, </if>
+			<if test="previewUrl != null">`PREVIEW_URL` = #{previewUrl}, </if>
+			<if test="color != null">`COLOR` = #{color}, </if>
+			<if test="describe != null">`describe` = #{describe}, </if>
+			<if test="state != null">`STATE` = #{state}, </if>
+			<if test="createTime != null">`CREATE_TIME` = #{createTime}, </if>
+			<if test="updateTime != null">`UPDATE_TIME` = #{updateTime}</if>
+		</set>
+		where IMAGE_ID = #{imageId}
+	</update>
+	
+	<delete id="delete">
+		delete from edu_website_images where IMAGE_ID = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from edu_website_images where IMAGE_ID in 
+		<foreach item="imageId" collection="array" open="(" separator="," close=")">
+			#{imageId}
+		</foreach>
+	</delete>
+
+</mapper>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cc.niushuai.graduate.mapper.EduUserMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="cc.niushuai.graduate.entity.EduUser" id="eduUserMap">
+        <result property="userId" column="USER_ID"/>
+        <result property="stuNo" column="STU_NO"/>
+        <result property="mobile" column="MOBILE"/>
+        <result property="email" column="EMAIL"/>
+        <result property="password" column="PASSWORD"/>
+        <result property="userName" column="USER_NAME"/>
+        <result property="showName" column="SHOW_NAME"/>
+        <result property="sex" column="SEX"/>
+        <result property="age" column="AGE"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="lastLoginTime" column="LAST_LOGIN_TIME"/>
+        <result property="lastLoginIp" column="LAST_LOGIN_IP"/>
+        <result property="isAvalible" column="IS_AVALIBLE"/>
+        <result property="picImg" column="PIC_IMG"/>
+        <result property="bannerUrl" column="BANNER_URL"/>
+        <result property="msgNum" column="MSG_NUM"/>
+        <result property="sysMsgNum" column="SYS_MSG_NUM"/>
+        <result property="lastSystemTime" column="LAST_SYSTEM_TIME"/>
+    </resultMap>
+
+	<select id="get" resultType="cc.niushuai.graduate.entity.EduUser">
+		select * from edu_user where USER_ID = #{value}
+	</select>
+
+	<select id="getList" resultType="cc.niushuai.graduate.entity.EduUser">
+		select * from edu_user t <include refid="where_clause" />
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by USER_ID desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="getCount" resultType="int">
+		select count(*) from edu_user t  <include refid="where_clause" />
+	</select>
+
+    <!-- 搜索数据区域 -->
+    <sql id="where_clause">
+        <where>
+            1=1
+            <if test="userId != null and userId != ''"> and t.USER_ID = #{userId} </if>
+    		<if test="userIdVague != null and userIdVague != ''"> and t.USER_ID like concat('%',#{userIdVague},'%') </if>
+            <if test="stuNo != null and stuNo != ''"> and t.STU_NO = #{stuNo} </if>
+    		<if test="stuNoVague != null and stuNoVague != ''"> and t.STU_NO like concat('%',#{stuNoVague},'%') </if>
+            <if test="mobile != null and mobile != ''"> and t.MOBILE = #{mobile} </if>
+    		<if test="mobileVague != null and mobileVague != ''"> and t.MOBILE like concat('%',#{mobileVague},'%') </if>
+            <if test="email != null and email != ''"> and t.EMAIL = #{email} </if>
+    		<if test="emailVague != null and emailVague != ''"> and t.EMAIL like concat('%',#{emailVague},'%') </if>
+            <if test="password != null and password != ''"> and t.PASSWORD = #{password} </if>
+    		<if test="passwordVague != null and passwordVague != ''"> and t.PASSWORD like concat('%',#{passwordVague},'%') </if>
+            <if test="userName != null and userName != ''"> and t.USER_NAME = #{userName} </if>
+    		<if test="userNameVague != null and userNameVague != ''"> and t.USER_NAME like concat('%',#{userNameVague},'%') </if>
+            <if test="showName != null and showName != ''"> and t.SHOW_NAME = #{showName} </if>
+    		<if test="showNameVague != null and showNameVague != ''"> and t.SHOW_NAME like concat('%',#{showNameVague},'%') </if>
+            <if test="sex != null and sex != ''"> and t.SEX = #{sex} </if>
+    		<if test="sexVague != null and sexVague != ''"> and t.SEX like concat('%',#{sexVague},'%') </if>
+            <if test="age != null and age != ''"> and t.AGE = #{age} </if>
+    		<if test="ageVague != null and ageVague != ''"> and t.AGE like concat('%',#{ageVague},'%') </if>
+            <if test="createTime != null and createTime != ''"> and t.CREATE_TIME = #{createTime} </if>
+    		<if test="createTimeVague != null and createTimeVague != ''"> and t.CREATE_TIME like concat('%',#{createTimeVague},'%') </if>
+            <if test="lastLoginTime != null and lastLoginTime != ''"> and t.LAST_LOGIN_TIME = #{lastLoginTime} </if>
+    		<if test="lastLoginTimeVague != null and lastLoginTimeVague != ''"> and t.LAST_LOGIN_TIME like concat('%',#{lastLoginTimeVague},'%') </if>
+            <if test="lastLoginIp != null and lastLoginIp != ''"> and t.LAST_LOGIN_IP = #{lastLoginIp} </if>
+    		<if test="lastLoginIpVague != null and lastLoginIpVague != ''"> and t.LAST_LOGIN_IP like concat('%',#{lastLoginIpVague},'%') </if>
+            <if test="isAvalible != null and isAvalible != ''"> and t.IS_AVALIBLE = #{isAvalible} </if>
+    		<if test="isAvalibleVague != null and isAvalibleVague != ''"> and t.IS_AVALIBLE like concat('%',#{isAvalibleVague},'%') </if>
+            <if test="picImg != null and picImg != ''"> and t.PIC_IMG = #{picImg} </if>
+    		<if test="picImgVague != null and picImgVague != ''"> and t.PIC_IMG like concat('%',#{picImgVague},'%') </if>
+            <if test="bannerUrl != null and bannerUrl != ''"> and t.BANNER_URL = #{bannerUrl} </if>
+    		<if test="bannerUrlVague != null and bannerUrlVague != ''"> and t.BANNER_URL like concat('%',#{bannerUrlVague},'%') </if>
+            <if test="msgNum != null and msgNum != ''"> and t.MSG_NUM = #{msgNum} </if>
+    		<if test="msgNumVague != null and msgNumVague != ''"> and t.MSG_NUM like concat('%',#{msgNumVague},'%') </if>
+            <if test="sysMsgNum != null and sysMsgNum != ''"> and t.SYS_MSG_NUM = #{sysMsgNum} </if>
+    		<if test="sysMsgNumVague != null and sysMsgNumVague != ''"> and t.SYS_MSG_NUM like concat('%',#{sysMsgNumVague},'%') </if>
+            <if test="lastSystemTime != null and lastSystemTime != ''"> and t.LAST_SYSTEM_TIME = #{lastSystemTime} </if>
+    		<if test="lastSystemTimeVague != null and lastSystemTimeVague != ''"> and t.LAST_SYSTEM_TIME like concat('%',#{lastSystemTimeVague},'%') </if>
+        </where>
+    </sql>
+	 
+	<insert id="save" parameterType="cc.niushuai.graduate.entity.EduUser" useGeneratedKeys="true" keyProperty="userId">
+		insert into edu_user
+		(
+			`STU_NO`, 
+			`MOBILE`, 
+			`EMAIL`, 
+			`PASSWORD`, 
+			`USER_NAME`, 
+			`SHOW_NAME`, 
+			`SEX`, 
+			`AGE`, 
+			`CREATE_TIME`, 
+			`LAST_LOGIN_TIME`, 
+			`LAST_LOGIN_IP`, 
+			`IS_AVALIBLE`, 
+			`PIC_IMG`, 
+			`BANNER_URL`, 
+			`MSG_NUM`, 
+			`SYS_MSG_NUM`, 
+			`LAST_SYSTEM_TIME`
+		)
+		values
+		(
+			#{stuNo}, 
+			#{mobile}, 
+			#{email}, 
+			#{password}, 
+			#{userName}, 
+			#{showName}, 
+			#{sex}, 
+			#{age}, 
+			#{createTime}, 
+			#{lastLoginTime}, 
+			#{lastLoginIp}, 
+			#{isAvalible}, 
+			#{picImg}, 
+			#{bannerUrl}, 
+			#{msgNum}, 
+			#{sysMsgNum}, 
+			#{lastSystemTime}
+		)
+	</insert>
+
+	<update id="update" parameterType="cc.niushuai.graduate.entity.EduUser">
+		update edu_user 
+		<set>
+			<if test="stuNo != null">`STU_NO` = #{stuNo}, </if>
+			<if test="mobile != null">`MOBILE` = #{mobile}, </if>
+			<if test="email != null">`EMAIL` = #{email}, </if>
+			<if test="password != null">`PASSWORD` = #{password}, </if>
+			<if test="userName != null">`USER_NAME` = #{userName}, </if>
+			<if test="showName != null">`SHOW_NAME` = #{showName}, </if>
+			<if test="sex != null">`SEX` = #{sex}, </if>
+			<if test="age != null">`AGE` = #{age}, </if>
+			<if test="createTime != null">`CREATE_TIME` = #{createTime}, </if>
+			<if test="lastLoginTime != null">`LAST_LOGIN_TIME` = #{lastLoginTime}, </if>
+			<if test="lastLoginIp != null">`LAST_LOGIN_IP` = #{lastLoginIp}, </if>
+			<if test="isAvalible != null">`IS_AVALIBLE` = #{isAvalible}, </if>
+			<if test="picImg != null">`PIC_IMG` = #{picImg}, </if>
+			<if test="bannerUrl != null">`BANNER_URL` = #{bannerUrl}, </if>
+			<if test="msgNum != null">`MSG_NUM` = #{msgNum}, </if>
+			<if test="sysMsgNum != null">`SYS_MSG_NUM` = #{sysMsgNum}, </if>
+			<if test="lastSystemTime != null">`LAST_SYSTEM_TIME` = #{lastSystemTime}</if>
+		</set>
+		where USER_ID = #{userId}
+	</update>
+	
+	<delete id="delete">
+		delete from edu_user where USER_ID = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from edu_user where USER_ID in 
+		<foreach item="userId" collection="array" open="(" separator="," close=")">
+			#{userId}
+		</foreach>
+	</delete>
+
+</mapper>

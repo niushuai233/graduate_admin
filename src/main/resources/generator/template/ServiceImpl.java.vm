@@ -1,0 +1,68 @@
+package ${package}.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
+import java.util.Date;
+import java.util.Map;
+
+import ${package}.mapper.${className}Mapper;
+import ${package}.entity.${className};
+import ${package}.service.${className}Service;
+
+
+@Service("${classname}Service")
+@Transactional
+public class ${className}ServiceImpl implements ${className}Service {
+	@Autowired
+	private ${className}Mapper ${classname}Mapper;
+	
+	@Override
+	public ${className} get(${pk.attrType} ${pk.attrname}){
+		return ${classname}Mapper.get(${pk.attrname});
+	}
+
+	@Override
+	public List<${className}> getList(Map<String, Object> map){
+		return ${classname}Mapper.getList(map);
+	}
+
+	@Override
+	public int getCount(Map<String, Object> map){
+		return ${classname}Mapper.getCount(map);
+	}
+
+	@Override
+	public void save(${className} ${classname}){
+		${classname}.setCreateDate(new Date());
+		${classname}Mapper.save(${classname});
+	}
+
+	@Override
+	public void update(${className} ${classname}){
+		${classname}.setUpdateDate(new Date());
+		${classname}Mapper.update(${classname});
+	}
+
+	@Override
+	public void delete(${pk.attrType} ${pk.attrname}){
+		${classname}Mapper.delete(${pk.attrname});
+	}
+
+	@Override
+	public void deleteBatch(${pk.attrType}[] ${pk.attrname}s){
+		${classname}Mapper.deleteBatch(${pk.attrname}s);
+	}
+
+    @Override
+    public void updateState(${pk.attrType}[] ids,String stateValue) {
+        for (${pk.attrType} id:ids){
+			${className} ${classname}=get(id);
+			${classname}.setState(stateValue);
+			${classname}.setUpdateDate(new Date());
+            update(${classname});
+        }
+    }
+	
+}
