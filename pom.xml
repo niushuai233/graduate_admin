@@ -116,13 +116,8 @@
         <!--Hutool-->
         <dependency>
             <groupId>cn.hutool</groupId>
-            <artifactId>hutool-core</artifactId>
-            <version>4.0.12</version>
-        </dependency>
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-poi</artifactId>
-            <version>4.0.12</version>
+            <artifactId>hutool-all</artifactId>
+            <version>4.1.12</version>
         </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>
