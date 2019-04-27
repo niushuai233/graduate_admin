@@ -9,6 +9,9 @@ package cc.niushuai.graduate.commons.constant;
  */
 public class Constant {
 
+    public final static String ID = "id";
+    public final static String STRING_TYPE = "java.lang.String";
+
     public final static String CREATE_BY = "createBy";
     public final static String CREATE_DATE = "createDate";
     public final static String CREATE_TIME = "createTime";
