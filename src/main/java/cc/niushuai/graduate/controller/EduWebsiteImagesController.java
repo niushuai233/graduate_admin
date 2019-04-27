@@ -1,7 +1,9 @@
 package cc.niushuai.graduate.controller;
 
+import cc.niushuai.graduate.commons.constant.Constant;
 import cc.niushuai.graduate.commons.enumresource.StateEnum;
 import cc.niushuai.graduate.commons.utils.PageUtils;
+import cc.niushuai.graduate.commons.utils.PathUtil;
 import cc.niushuai.graduate.commons.utils.Query;
 import cc.niushuai.graduate.commons.utils.ResultUtil;
 import cc.niushuai.graduate.config.log.Log;
@@ -9,6 +11,7 @@ import cc.niushuai.graduate.entity.EduWebsiteImages;
 import cc.niushuai.graduate.service.AttachmentService;
 import cc.niushuai.graduate.service.EduWebsiteImagesService;
 import com.github.tobato.fastdfs.domain.fdfs.StorePath;
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,7 +44,9 @@ public class EduWebsiteImagesController {
      */
     @RequestMapping("/list")
     @RequiresPermissions("eduwebsiteimages:list")
-    public String list() {
+    public String list(Model model) {
+        // 增加图片访问前缀
+        model.addAttribute(Constant.FDFS_ACCESS_PREFIX, PathUtil.fdfsAccessPrefix);
         return "eduwebsiteimages/list";
     }
 
@@ -56,11 +61,29 @@ public class EduWebsiteImagesController {
         Query query = new Query(params);
 
         List<EduWebsiteImages> eduWebsiteImagesList = eduWebsiteImagesService.getList(query);
+        addFdfsPerfix(eduWebsiteImagesList);
         int total = eduWebsiteImagesService.getCount(query);
 
         PageUtils pageUtil = new PageUtils(eduWebsiteImagesList, total, query.getLimit(), query.getPage());
 
         return ResultUtil.ok().put("page", pageUtil);
+    }
+
+    /**
+     * 遍历替换图片路径
+     *
+     * @param eduWebsiteImagesList
+     */
+    private void addFdfsPerfix(List<EduWebsiteImages> eduWebsiteImagesList) {
+        eduWebsiteImagesList.forEach(item -> {
+            String imageUrl = item.getImageUrl();
+            if (StringUtils.isNotEmpty(imageUrl)) {
+                item.setImageUrl(PathUtil.fdfsAccessPrefix + imageUrl);
+            } else {
+                item.setImageUrl(Constant.DEFAULT_CROPPERJS_IMAGE);
+            }
+        });
+
     }
 
     /**
@@ -79,6 +102,16 @@ public class EduWebsiteImagesController {
     @RequiresPermissions("eduwebsiteimages:update")
     public String edit(Model model, @PathVariable("id") Integer id) {
         EduWebsiteImages eduWebsiteImages = eduWebsiteImagesService.get(id);
+        String imageUrl = eduWebsiteImages.getImageUrl();
+        if (StringUtils.isEmpty(imageUrl)) {
+            // 如果为空 放置默认图片
+            // 增加图片访问前缀
+            model.addAttribute(Constant.FDFS_ACCESS_PREFIX, Constant.DEFAULT_CROPPERJS_IMAGE);
+        } else {
+            // 如果不为空 放入全路径
+            // 增加图片访问前缀
+            model.addAttribute(Constant.FDFS_ACCESS_PREFIX, PathUtil.fdfsAccessPrefix + imageUrl);
+        }
         model.addAttribute("model", eduWebsiteImages);
         return "eduwebsiteimages/edit";
     }

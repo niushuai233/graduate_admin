@@ -28,7 +28,7 @@
     <label class="layui-form-label mylable">上传图片<span class="span_must">*</span></label>
     <div class="layui-input-normal">
         <label class="label" data-toggle="tooltip" title="选择一张图片">
-            <img class="rounded" id="avatar" src="${(model.imageUrl)!"/statics/plugins/cropperjs/images/picture.jpg"}" alt="avatar" style="width:255px; height: 255px;">
+            <img class="rounded" id="avatar" src="${(fdfsAccessPrefix)!"/statics/plugins/cropperjs/images/picture.jpg"}" alt="avatar" style="width:255px; height: 255px;">
             <input type="file" class="sr-only" id="input" accept="image/*" data-id="file" data-filename="filename.jpg">
         </label>
         <div class="progress" style="width:255px;">

@@ -2,7 +2,9 @@ package cc.niushuai.graduate.service.impl;
 
 import cc.niushuai.graduate.entity.EduWebsiteImages;
 import cc.niushuai.graduate.mapper.EduWebsiteImagesMapper;
+import cc.niushuai.graduate.service.AttachmentService;
 import cc.niushuai.graduate.service.EduWebsiteImagesService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,12 +12,14 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Map;
 
-
+@Slf4j
 @Service("eduWebsiteImagesService")
 @Transactional
 public class EduWebsiteImagesServiceImpl extends BaseServiceImpl<EduWebsiteImages> implements EduWebsiteImagesService {
     @Autowired
     private EduWebsiteImagesMapper eduWebsiteImagesMapper;
+    @Autowired
+    private AttachmentService attachmentService;
 
     @Override
     public EduWebsiteImages get(Integer imageId) {
@@ -46,11 +50,31 @@ public class EduWebsiteImagesServiceImpl extends BaseServiceImpl<EduWebsiteImage
 
     @Override
     public void delete(Integer imageId) {
+        destoryImageBeforeDel(new Integer[]{imageId});
         eduWebsiteImagesMapper.delete(imageId);
+    }
+
+    /**
+     * 在删除之前先删除图片
+     *
+     * @param imageIds
+     */
+    private void destoryImageBeforeDel(Integer[] imageIds) {
+        try {
+            for (Integer imageId : imageIds) {
+                EduWebsiteImages eduWebsiteImages = get(imageId);
+                String imageUrl = eduWebsiteImages.getImageUrl();
+                attachmentService.imageDestroy(imageUrl);
+            }
+        } catch (Exception e) {
+            log.error("删除图片出现异常, {}", e.getMessage());
+        }
     }
 
     @Override
     public void deleteBatch(Integer[] imageIds) {
+
+        destoryImageBeforeDel(imageIds);
         eduWebsiteImagesMapper.deleteBatch(imageIds);
     }
 
