@@ -13,7 +13,7 @@ import java.util.Map;
 
 @Service("eduWebsiteImagesService")
 @Transactional
-public class EduWebsiteImagesServiceImpl implements EduWebsiteImagesService {
+public class EduWebsiteImagesServiceImpl extends BaseServiceImpl<EduWebsiteImages> implements EduWebsiteImagesService {
     @Autowired
     private EduWebsiteImagesMapper eduWebsiteImagesMapper;
 
@@ -34,11 +34,13 @@ public class EduWebsiteImagesServiceImpl implements EduWebsiteImagesService {
 
     @Override
     public void save(EduWebsiteImages eduWebsiteImages) {
+        super.addValue(eduWebsiteImages, false, 0);
         eduWebsiteImagesMapper.save(eduWebsiteImages);
     }
 
     @Override
     public void update(EduWebsiteImages eduWebsiteImages) {
+        super.addValue(eduWebsiteImages, false, 1);
         eduWebsiteImagesMapper.update(eduWebsiteImages);
     }
 

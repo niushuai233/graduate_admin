@@ -12,7 +12,7 @@ import java.util.Map;
  * @email niushuai951101@gmail.com
  * @date 2019-03-19 16:36:50
  */
-public interface EduWebsiteImagesService {
+public interface EduWebsiteImagesService extends BaseService<EduWebsiteImages> {
 
     EduWebsiteImages get(Integer imageId);
 
