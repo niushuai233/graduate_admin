@@ -1,20 +1,23 @@
 package cc.niushuai.graduate.controller;
 
-import java.util.List;
-import java.util.Map;
 import cc.niushuai.graduate.commons.enumresource.StateEnum;
-import cc.niushuai.graduate.config.log.Log;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.stereotype.Controller;
-
-import cc.niushuai.graduate.entity.EduWebsiteImages;
-import cc.niushuai.graduate.service.EduWebsiteImagesService;
 import cc.niushuai.graduate.commons.utils.PageUtils;
 import cc.niushuai.graduate.commons.utils.Query;
 import cc.niushuai.graduate.commons.utils.ResultUtil;
+import cc.niushuai.graduate.config.log.Log;
+import cc.niushuai.graduate.entity.EduWebsiteImages;
+import cc.niushuai.graduate.service.AttachmentService;
+import cc.niushuai.graduate.service.EduWebsiteImagesService;
+import com.github.tobato.fastdfs.domain.fdfs.StorePath;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -29,6 +32,9 @@ import cc.niushuai.graduate.commons.utils.ResultUtil;
 public class EduWebsiteImagesController {
 	@Autowired
 	private EduWebsiteImagesService eduWebsiteImagesService;
+
+	@Autowired
+    private AttachmentService attachmentService;
 	
     /**
      * 跳转到列表页
@@ -151,5 +157,19 @@ public class EduWebsiteImagesController {
 		
 		return ResultUtil.ok();
 	}
+
+	@Log("上传Banner图片")
+	@RequestMapping("/imageUpload")
+    @ResponseBody
+//    @RequiresPermissions("eduwebsiteimages:upload")
+	public ResultUtil imageUpload(MultipartFile file){
+
+        StorePath storePath = attachmentService.imageUpload(file);
+        if (null != storePath) {
+            return ResultUtil.ok(storePath.getFullPath());
+        }
+
+        return ResultUtil.error();
+    }
 	
 }
