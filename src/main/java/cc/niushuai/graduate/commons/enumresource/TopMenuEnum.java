@@ -7,7 +7,7 @@ public enum TopMenuEnum {
     private final String desc;
     private final String code;
 
-    private TopMenuEnum(String code, String desc) {
+    TopMenuEnum(String code, String desc) {
         this.code = code;
         this.desc = desc;
     }

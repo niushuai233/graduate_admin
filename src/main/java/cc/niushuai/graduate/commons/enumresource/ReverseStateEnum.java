@@ -6,7 +6,7 @@ public enum ReverseStateEnum implements EnumMessage {
     private final String code;
     private final String value;
 
-    private ReverseStateEnum(String code, String value) {
+    ReverseStateEnum(String code, String value) {
         this.code = code;
         this.value = value;
     }

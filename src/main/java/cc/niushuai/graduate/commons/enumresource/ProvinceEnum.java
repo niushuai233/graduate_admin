@@ -35,7 +35,7 @@ public enum ProvinceEnum implements EnumMessage {
     private final String code;
     private final String value;
 
-    private ProvinceEnum(String code, String value) {
+    ProvinceEnum(String code, String value) {
         this.code = code;
         this.value = value;
     }

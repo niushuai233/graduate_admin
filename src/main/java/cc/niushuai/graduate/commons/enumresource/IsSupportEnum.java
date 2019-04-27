@@ -7,7 +7,7 @@ public enum IsSupportEnum implements EnumMessage {
     private final String code;
     private final String value;
 
-    private IsSupportEnum(String code, String value) {
+    IsSupportEnum(String code, String value) {
         this.code = code;
         this.value = value;
     }

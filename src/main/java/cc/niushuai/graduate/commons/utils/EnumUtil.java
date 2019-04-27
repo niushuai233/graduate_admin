@@ -13,10 +13,11 @@ public class EnumUtil {
 
     /**
      * 根据code获取value值
+     *
      * @param code
      * @return
      */
-    public static <T extends EnumMessage> String getValueByCode(String code, Class<T> enumClass){
+    public static <T extends EnumMessage> String getValueByCode(String code, Class<T> enumClass) {
 
         T[] enumConstants = enumClass.getEnumConstants();
         String value = "";
@@ -30,7 +31,7 @@ public class EnumUtil {
     }
 
 
-    public static <T extends Enum> String getCodeByValue(String value, Class<T> enumClass){
+    public static <T extends Enum> String getCodeByValue(String value, Class<T> enumClass) {
         String code = "";
 
         T[] enumConstants = enumClass.getEnumConstants();

@@ -1,10 +1,10 @@
 package cc.niushuai.graduate.controller;
 
-import cc.niushuai.graduate.service.SysLogService;
 import cc.niushuai.graduate.commons.utils.PageUtils;
 import cc.niushuai.graduate.commons.utils.Query;
 import cc.niushuai.graduate.commons.utils.ResultUtil;
 import cc.niushuai.graduate.entity.admin.SysLog;
+import cc.niushuai.graduate.service.SysLogService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,6 +34,7 @@ public class SysLogController {
     public String list() {
         return "log/list";
     }
+
     /**
      * 列表
      */
@@ -53,15 +54,15 @@ public class SysLogController {
 
 
     /**
+     * @param
      * @author niushuai
      * @Description 新增
-     * @param
      * @date 2018/6/27 11:17
      **/
     @ResponseBody
     @RequestMapping("/save")
     @RequiresPermissions("sys:log:add")
-    public ResultUtil save(@RequestBody SysLog syslog){
+    public ResultUtil save(@RequestBody SysLog syslog) {
         syslog.setCreateDate(new Date());
         syslog.setIp("1231454685");
         syslog.setMethod("asd");
@@ -71,53 +72,57 @@ public class SysLogController {
 
         return ResultUtil.ok();
     }
-   /**
-    * @author niushuai
-    * @Description 修改
-    * @param
-    * @date 2018/6/27 11:17
-    **/
+
+    /**
+     * @param
+     * @author niushuai
+     * @Description 修改
+     * @date 2018/6/27 11:17
+     **/
     @ResponseBody
     @RequestMapping("/update")
     @RequiresPermissions("sys:log:edit")
-    public ResultUtil update(@RequestBody SysLog syslog){
+    public ResultUtil update(@RequestBody SysLog syslog) {
         sysLogService.update(syslog);
         return ResultUtil.ok();
     }
+
     /**
+     * @param
      * @author niushuai
      * @Description 跳转到新增页面
-     * @param
      * @date 2018/6/27 11:17
      **/
     @RequestMapping("/add")
     @RequiresPermissions("sys:log:add")
-    public String add(){
+    public String add() {
         return "syslog/add.jsp";
     }
+
     /**
-     * @author niushuai
-     * @Description  跳转到修改页面
      * @param
+     * @author niushuai
+     * @Description 跳转到修改页面
      * @date 2018/6/27 11:17
      **/
     @RequestMapping("/edit/{id}")
     @RequiresPermissions("sys:log:edit")
-    public String edit(HttpServletRequest request, Model model, @PathVariable("id") Long id){
+    public String edit(HttpServletRequest request, Model model, @PathVariable("id") Long id) {
         SysLog sysLog = sysLogService.queryObject(id);
         model.addAttribute("model", sysLog);
         return "syslog/edit.jsp";
     }
+
     /**
+     * @param
      * @author niushuai
      * @Description 删除
-     * @param
      * @date 2018/6/27 11:37
      **/
     @ResponseBody
     @RequestMapping("/deleteBatch")
     @RequiresPermissions("sys:log:delete")
-    public ResultUtil deleteBatch(@RequestBody Long[] ids){
+    public ResultUtil deleteBatch(@RequestBody Long[] ids) {
         sysLogService.deleteBatch(ids);
         return ResultUtil.ok();
     }

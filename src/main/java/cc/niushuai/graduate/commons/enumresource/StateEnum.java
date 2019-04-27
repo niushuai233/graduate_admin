@@ -6,7 +6,7 @@ public enum StateEnum implements EnumMessage {
     private final String code;
     private final String value;
 
-    private StateEnum(String code, String value) {
+    StateEnum(String code, String value) {
         this.code = code;
         this.value = value;
     }

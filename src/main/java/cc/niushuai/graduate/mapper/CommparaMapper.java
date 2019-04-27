@@ -8,7 +8,7 @@ import java.util.Map;
 
 /**
  * 字典管理
- * 
+ *
  * @author niushuai
  * @email qqniushuai951101@gmail.com
  * @date 2018-11-06 14:49:28

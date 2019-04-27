@@ -9,113 +9,113 @@ import java.util.Date;
 
 /**
  * 记录组织机构管理信息
- * 
+ *
  * @author niushuai
  * @email qqniushuai951101@gmail.com
  * @date 2018-11-06 17:39:31
  */
 public class Organize implements Serializable {
-	private static final long serialVersionUID = 1L;
-	
-	//部门标识
-	private String orgId;
-	//部门编号
-	private String orgCode;
-	//部门名称
-	private String orgName;
-	//上一级部门标识
-	private String parentOrgId;
-	//排序
-	private BigDecimal sortNo;
-	//是否显示  0：否 1：是
-	private String state;
-	//添加时间
-	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	private Date inDate;
-	private boolean open;
+    private static final long serialVersionUID = 1L;
 
-	public boolean isOpen() {
-		return open;
-	}
+    //部门标识
+    private String orgId;
+    //部门编号
+    private String orgCode;
+    //部门名称
+    private String orgName;
+    //上一级部门标识
+    private String parentOrgId;
+    //排序
+    private BigDecimal sortNo;
+    //是否显示  0：否 1：是
+    private String state;
+    //添加时间
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date inDate;
+    private boolean open;
 
-	public void setOpen(boolean open) {
-		this.open = open;
-	}
+    public boolean isOpen() {
+        return open;
+    }
 
-	//父部门名称
-	private String parentOrgName;
-	//父部门编号
-	private String parentOrgCode;
+    public void setOpen(boolean open) {
+        this.open = open;
+    }
 
-	public String getParentOrgCode() {
-		return parentOrgCode;
-	}
+    //父部门名称
+    private String parentOrgName;
+    //父部门编号
+    private String parentOrgCode;
 
-	public void setParentOrgCode(String parentOrgCode) {
-		this.parentOrgCode = parentOrgCode;
-	}
+    public String getParentOrgCode() {
+        return parentOrgCode;
+    }
 
-	public String getParentOrgName() {
-		return parentOrgName;
-	}
+    public void setParentOrgCode(String parentOrgCode) {
+        this.parentOrgCode = parentOrgCode;
+    }
 
-	public void setParentOrgName(String parentOrgName) {
-		this.parentOrgName = parentOrgName;
-	}
+    public String getParentOrgName() {
+        return parentOrgName;
+    }
 
-	public String getOrgId() {
-		return orgId;
-	}
+    public void setParentOrgName(String parentOrgName) {
+        this.parentOrgName = parentOrgName;
+    }
 
-	public void setOrgId(String orgId) {
-		this.orgId = orgId;
-	}
+    public String getOrgId() {
+        return orgId;
+    }
 
-	public String getOrgCode() {
-		return orgCode;
-	}
+    public void setOrgId(String orgId) {
+        this.orgId = orgId;
+    }
 
-	public void setOrgCode(String orgCode) {
-		this.orgCode = orgCode;
-	}
+    public String getOrgCode() {
+        return orgCode;
+    }
 
-	public String getOrgName() {
-		return orgName;
-	}
+    public void setOrgCode(String orgCode) {
+        this.orgCode = orgCode;
+    }
 
-	public void setOrgName(String orgName) {
-		this.orgName = orgName;
-	}
+    public String getOrgName() {
+        return orgName;
+    }
 
-	public String getParentOrgId() {
-		return parentOrgId;
-	}
+    public void setOrgName(String orgName) {
+        this.orgName = orgName;
+    }
 
-	public void setParentOrgId(String parentOrgId) {
-		this.parentOrgId = parentOrgId;
-	}
+    public String getParentOrgId() {
+        return parentOrgId;
+    }
 
-	public BigDecimal getSortNo() {
-		return sortNo;
-	}
+    public void setParentOrgId(String parentOrgId) {
+        this.parentOrgId = parentOrgId;
+    }
 
-	public void setSortNo(BigDecimal sortNo) {
-		this.sortNo = sortNo;
-	}
+    public BigDecimal getSortNo() {
+        return sortNo;
+    }
 
-	public String getState() {
-		return state;
-	}
+    public void setSortNo(BigDecimal sortNo) {
+        this.sortNo = sortNo;
+    }
 
-	public void setState(String state) {
-		this.state = state;
-	}
+    public String getState() {
+        return state;
+    }
 
-	public Date getInDate() {
-		return inDate;
-	}
+    public void setState(String state) {
+        this.state = state;
+    }
 
-	public void setInDate(Date inDate) {
-		this.inDate = inDate;
-	}
+    public Date getInDate() {
+        return inDate;
+    }
+
+    public void setInDate(Date inDate) {
+        this.inDate = inDate;
+    }
 }

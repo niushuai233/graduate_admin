@@ -15,52 +15,52 @@ import java.util.Map;
 @Service("eduWebsiteImagesTypeService")
 @Transactional
 public class EduWebsiteImagesTypeServiceImpl implements EduWebsiteImagesTypeService {
-	@Autowired
-	private EduWebsiteImagesTypeMapper eduWebsiteImagesTypeMapper;
-	
-	@Override
-	public EduWebsiteImagesType get(Integer typeId){
-		return eduWebsiteImagesTypeMapper.get(typeId);
-	}
-
-	@Override
-	public List<EduWebsiteImagesType> getList(Map<String, Object> map){
-		return eduWebsiteImagesTypeMapper.getList(map);
-	}
-
-	@Override
-	public int getCount(Map<String, Object> map){
-		return eduWebsiteImagesTypeMapper.getCount(map);
-	}
-
-	@Override
-	public void save(EduWebsiteImagesType eduWebsiteImagesType){
-		eduWebsiteImagesTypeMapper.save(eduWebsiteImagesType);
-	}
-
-	@Override
-	public void update(EduWebsiteImagesType eduWebsiteImagesType){
-		eduWebsiteImagesTypeMapper.update(eduWebsiteImagesType);
-	}
-
-	@Override
-	public void delete(Integer typeId){
-		eduWebsiteImagesTypeMapper.delete(typeId);
-	}
-
-	@Override
-	public void deleteBatch(Integer[] typeIds){
-		eduWebsiteImagesTypeMapper.deleteBatch(typeIds);
-	}
+    @Autowired
+    private EduWebsiteImagesTypeMapper eduWebsiteImagesTypeMapper;
 
     @Override
-    public void updateState(Integer[] ids,String stateValue) {
-        for (Integer id:ids){
-			EduWebsiteImagesType eduWebsiteImagesType=get(id);
-			eduWebsiteImagesType.setUpdateDate(new Date());
-			eduWebsiteImagesType.setState(Integer.valueOf(stateValue));
+    public EduWebsiteImagesType get(Integer typeId) {
+        return eduWebsiteImagesTypeMapper.get(typeId);
+    }
+
+    @Override
+    public List<EduWebsiteImagesType> getList(Map<String, Object> map) {
+        return eduWebsiteImagesTypeMapper.getList(map);
+    }
+
+    @Override
+    public int getCount(Map<String, Object> map) {
+        return eduWebsiteImagesTypeMapper.getCount(map);
+    }
+
+    @Override
+    public void save(EduWebsiteImagesType eduWebsiteImagesType) {
+        eduWebsiteImagesTypeMapper.save(eduWebsiteImagesType);
+    }
+
+    @Override
+    public void update(EduWebsiteImagesType eduWebsiteImagesType) {
+        eduWebsiteImagesTypeMapper.update(eduWebsiteImagesType);
+    }
+
+    @Override
+    public void delete(Integer typeId) {
+        eduWebsiteImagesTypeMapper.delete(typeId);
+    }
+
+    @Override
+    public void deleteBatch(Integer[] typeIds) {
+        eduWebsiteImagesTypeMapper.deleteBatch(typeIds);
+    }
+
+    @Override
+    public void updateState(Integer[] ids, String stateValue) {
+        for (Integer id : ids) {
+            EduWebsiteImagesType eduWebsiteImagesType = get(id);
+            eduWebsiteImagesType.setUpdateDate(new Date());
+            eduWebsiteImagesType.setState(Integer.valueOf(stateValue));
             update(eduWebsiteImagesType);
         }
     }
-	
+
 }

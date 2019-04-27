@@ -52,7 +52,7 @@ public class GetDataController {
             try {
                 clzz = Class.forName(ConstantMethod.PACKAGE_NAME + "." + enumName);
                 Method method = clzz.getMethod("values");
-                EnumMessage inter[] = (EnumMessage[]) method.invoke(new Object[]{}, new Object[]{});
+                EnumMessage[] inter = (EnumMessage[]) method.invoke(new Object[]{}, new Object[]{});
                 for (EnumMessage enumMessage : inter) {
                     EnumBean e = new EnumBean();
                     e.setCode(enumMessage.getCode());
@@ -140,7 +140,7 @@ public class GetDataController {
             throw new MyException("上传文件不能为空");
         }
         String fileName = file.getOriginalFilename();
-        String _extName = fileName.substring(fileName.indexOf("."), fileName.length());//获取扩展名
+        String _extName = fileName.substring(fileName.indexOf("."));//获取扩展名
 
         if (file.getSize() > 1 * 1024 * 1024) {
             throw new MyException("图片不能大于1M");
@@ -162,7 +162,7 @@ public class GetDataController {
             throw new MyException("上传文件不能为空");
         }
         String fileName = file[0].getOriginalFilename();
-        String _extName = fileName.substring(fileName.indexOf("."), fileName.length());//获取扩展名
+        String _extName = fileName.substring(fileName.indexOf("."));//获取扩展名
         Long size = file[0].getSize();
 //        if (size > 1 * 1024 * 1024) {
 //            throw new MyException("图片不能大于1M");

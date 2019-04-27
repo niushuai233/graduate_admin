@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
 public class Underline2Camel {
 
     public static final Pattern PATTERN = Pattern.compile("([A-Za-z\\d]+)(_)?");
+
     /**
      * 下划线转驼峰法
      *

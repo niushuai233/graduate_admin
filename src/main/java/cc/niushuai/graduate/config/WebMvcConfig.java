@@ -35,7 +35,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     protected void addInterceptors(InterceptorRegistry registry) {
         BaseInterceptor baseInterceptor = new BaseInterceptor();
         InterceptorRegistration interceptorRegistration = registry.addInterceptor(baseInterceptor);
-        interceptorRegistration.excludePathPatterns("/common/**","/frontframe/**","/js/**","/login/**","/statics/**");
+        interceptorRegistration.excludePathPatterns("/common/**", "/frontframe/**", "/js/**", "/login/**", "/statics/**");
 
         super.addInterceptors(registry);
     }
@@ -49,7 +49,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**").
-                addResourceLocations("classpath:/META-INF/resources/","classpath:/static/","classpath:/templates/").setCachePeriod(0);
+                addResourceLocations("classpath:/META-INF/resources/", "classpath:/static/", "classpath:/templates/").setCachePeriod(0);
 
 
         super.addResourceHandlers(registry);

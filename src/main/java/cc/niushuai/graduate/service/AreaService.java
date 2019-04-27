@@ -8,33 +8,31 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 
- * 
  * @author niushuai
  * @email qqniushuai951101@gmail.com
  * @date 2018-08-10 16:00:04
  */
 public interface AreaService {
 
-	Area queryObject(String areaId);
+    Area queryObject(String areaId);
 
-	List<Area> queryList(Map<String, Object> map);
+    List<Area> queryList(Map<String, Object> map);
 
-	int queryTotal(Map<String, Object> map);
+    int queryTotal(Map<String, Object> map);
 
-	void save(Area area);
+    void save(Area area);
 
-	void update(Area area);
+    void update(Area area);
 
-	void delete(String areaId);
+    void delete(String areaId);
 
-	void deleteBatch(String[] areaIds);
+    void deleteBatch(String[] areaIds);
 
-	List<Area> getAreaListByIsShow(HashMap<String, Object> paraMap);
+    List<Area> getAreaListByIsShow(HashMap<String, Object> paraMap);
 
-	int getCount(Map<String, Object> params);
+    int getCount(Map<String, Object> params);
 
-	void updateState(String[] ids, String stateValue);
+    void updateState(String[] ids, String stateValue);
 
-	String getAreaNameStr(String area_id_str);
+    String getAreaNameStr(String area_id_str);
 }

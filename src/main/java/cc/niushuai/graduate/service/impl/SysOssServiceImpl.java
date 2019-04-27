@@ -1,8 +1,8 @@
 package cc.niushuai.graduate.service.impl;
 
+import cc.niushuai.graduate.entity.admin.SysOss;
 import cc.niushuai.graduate.mapper.SysOssMapper;
 import cc.niushuai.graduate.service.SysOssService;
-import cc.niushuai.graduate.entity.admin.SysOss;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

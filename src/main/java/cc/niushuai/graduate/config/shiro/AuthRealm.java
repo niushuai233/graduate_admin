@@ -1,9 +1,9 @@
 package cc.niushuai.graduate.config.shiro;
 
-import cc.niushuai.graduate.mapper.SysMenuMapper;
-import cc.niushuai.graduate.mapper.SysUserMapper;
 import cc.niushuai.graduate.entity.admin.SysMenu;
 import cc.niushuai.graduate.entity.admin.SysUser;
+import cc.niushuai.graduate.mapper.SysMenuMapper;
+import cc.niushuai.graduate.mapper.SysUserMapper;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;

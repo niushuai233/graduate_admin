@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Bean;
 import java.util.Map;
 
 //@Configuration
-public class XssConfig{
+public class XssConfig {
 
     /**
      * xss过滤拦截器

@@ -22,10 +22,10 @@ public class FileUtil {
             return false;
         }
         // 获得文件后缀名
-        String tmpName = fileName.substring(fileName.lastIndexOf(".") + 1,
-                fileName.length());
+        String tmpName = fileName.substring(fileName.lastIndexOf(".") + 1
+        );
         // 声明图片后缀名数组
-        String imgeArray[] = {"bmp", "gif", "jpe", "jpeg", "jpg", "png", "tif", "tiff", "ico"};
+        String[] imgeArray = {"bmp", "gif", "jpe", "jpeg", "jpg", "png", "tif", "tiff", "ico"};
         // 遍历名称数组
         for (int i = 0; i < imgeArray.length; i++) {
             // 判断单个类型文件的场合

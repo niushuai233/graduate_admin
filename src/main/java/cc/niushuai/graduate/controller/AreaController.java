@@ -35,7 +35,7 @@ public class AreaController {
     public String list() {
         return "area/list";
     }
-    
+
     /**
      * 列表
      */
@@ -122,7 +122,7 @@ public class AreaController {
         //算出子菜单的等级
         area.setAreaId(area_id);
         //设置拼音
-        String pinyin= ChineseToEnglishUtil.getPingYin(area.getAreaName().trim()).trim();
+        String pinyin = ChineseToEnglishUtil.getPingYin(area.getAreaName().trim()).trim();
         area.setEnName(pinyin);
         area.setWordIndex(pinyin.substring(0, 1).toUpperCase());
         //设置排序
@@ -130,20 +130,20 @@ public class AreaController {
         //设置 area_level;//lev+1
         area.setLevelArea("0");
         area.setIsCity("0");
-        String[] parentIds=area.getParentAreaIds();
-        String parentId=parentIds[parentIds.length-1];
-        if("".equals(parentId)){
-            parentId=parentIds[parentIds.length-2];
+        String[] parentIds = area.getParentAreaIds();
+        String parentId = parentIds[parentIds.length - 1];
+        if ("".equals(parentId)) {
+            parentId = parentIds[parentIds.length - 2];
         }
-        area.setParentAreaId(parentId.substring(parentId.length()-10,parentId.length()));
+        area.setParentAreaId(parentId.substring(parentId.length() - 10));
         //设置行政级别（上级行政级别+1）
-        Area parent=areaService.queryObject(parentId.substring(parentId.length()-10,parentId.length()));
-        int parent_level=parent.getAreaLevel();
-        if (parent_level==-1){
-            parent_level=0;
+        Area parent = areaService.queryObject(parentId.substring(parentId.length() - 10));
+        int parent_level = parent.getAreaLevel();
+        if (parent_level == -1) {
+            parent_level = 0;
         }
-        if (parent_level<4){
-            parent_level=parent_level+1;
+        if (parent_level < 4) {
+            parent_level = parent_level + 1;
         }
         area.setAreaLevel(parent_level);
         area.setState(area.getState());
@@ -151,19 +151,20 @@ public class AreaController {
 
         return ResultUtil.ok();
     }
+
     //验证表码
     private void verifyForm(Area area) {
         int count;
-        Map<String, Object> params=new HashMap<>();
-        params.put("areaName",area.getAreaName());
-        count= areaService.getCount(params);
-        if(count>0){
+        Map<String, Object> params = new HashMap<>();
+        params.put("areaName", area.getAreaName());
+        count = areaService.getCount(params);
+        if (count > 0) {
             throw new MyException("地区名称已存在");
         }
         params.clear();
-        params.put("xzCode",area.getXzCode());
-        count= areaService.getCount(params);
-        if(count>0){
+        params.put("xzCode", area.getXzCode());
+        count = areaService.getCount(params);
+        if (count > 0) {
             throw new MyException("行政编码已存在");
         }
 
@@ -177,22 +178,22 @@ public class AreaController {
     @RequiresPermissions("area:update")
     public ResultUtil update(@RequestBody Area area) {
         Area oldArea = areaService.queryObject(area.getAreaId());
-        String oldAreaName=oldArea.getAreaName();
-        String oldXzCode=oldArea.getXzCode();
+        String oldAreaName = oldArea.getAreaName();
+        String oldXzCode = oldArea.getXzCode();
         int count;
-        if(!oldAreaName.equals(area.getAreaName())){
-            Map<String, Object> params=new HashMap<>();
-            params.put("areaName",area.getAreaName());
-            count= areaService.getCount(params);
-            if(count>0){
+        if (!oldAreaName.equals(area.getAreaName())) {
+            Map<String, Object> params = new HashMap<>();
+            params.put("areaName", area.getAreaName());
+            count = areaService.getCount(params);
+            if (count > 0) {
                 throw new MyException("地区名称已存在");
             }
         }
-        if(!area.getXzCode().equals(oldXzCode)){
-            Map<String, Object> params=new HashMap<>();
-            params.put("xzCode",area.getXzCode());
-            count= areaService.getCount(params);
-            if(count>0){
+        if (!area.getXzCode().equals(oldXzCode)) {
+            Map<String, Object> params = new HashMap<>();
+            params.put("xzCode", area.getXzCode());
+            count = areaService.getCount(params);
+            if (count > 0) {
                 throw new MyException("行政编码已存在");
             }
         }
@@ -220,11 +221,12 @@ public class AreaController {
     @Log("启用地区")
     @RequestMapping("/enable")
     @RequiresPermissions("area:update")
-    public ResultUtil enable(@RequestBody String[] ids){
-        String stateValue= StateEnum.ENABLE.getCode();
-        areaService.updateState(ids,stateValue);
+    public ResultUtil enable(@RequestBody String[] ids) {
+        String stateValue = StateEnum.ENABLE.getCode();
+        areaService.updateState(ids, stateValue);
         return ResultUtil.ok();
     }
+
     /**
      * 禁用
      */
@@ -232,9 +234,9 @@ public class AreaController {
     @Log("禁用地区")
     @RequestMapping("/disable")
     @RequiresPermissions("area:update")
-    public ResultUtil disable(@RequestBody String[] ids){
-        String stateValue=StateEnum.DIASABLE.getCode();
-        areaService.updateState(ids,stateValue);
+    public ResultUtil disable(@RequestBody String[] ids) {
+        String stateValue = StateEnum.DIASABLE.getCode();
+        areaService.updateState(ids, stateValue);
         return ResultUtil.ok();
     }
 }

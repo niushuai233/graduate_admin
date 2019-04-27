@@ -6,7 +6,7 @@ public enum TopCatEnum {
     private final String desc;
     private final String code;
 
-    private TopCatEnum(String code, String desc) {
+    TopCatEnum(String code, String desc) {
         this.code = code;
         this.desc = desc;
     }

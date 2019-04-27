@@ -1,8 +1,8 @@
 package cc.niushuai.graduate.controller;
 
 import cc.niushuai.graduate.commons.utils.ResultUtil;
-import cc.niushuai.graduate.service.SysUserService;
 import cc.niushuai.graduate.commons.utils.ShiroUtils;
+import cc.niushuai.graduate.service.SysUserService;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 import lombok.extern.slf4j.Slf4j;
@@ -53,7 +53,7 @@ public class SysLoginController extends AbstractController {
         BufferedImage image = producer.createImage(text);
         //保存到shiro session
         ShiroUtils.setSessionAttribute(Constants.KAPTCHA_SESSION_KEY, text);
-        log.info("验证码："+text);
+        log.info("验证码：" + text);
         ServletOutputStream out = response.getOutputStream();
         ImageIO.write(image, "jpg", out);
     }
@@ -106,16 +106,16 @@ public class SysLoginController extends AbstractController {
         return "redirect:login.html";
     }
 
-	@RequestMapping("/goLogin")
-	public String goLogin(){
+    @RequestMapping("/goLogin")
+    public String goLogin() {
         log.info("Hello go login");
-	    return "/index/login";
+        return "/index/login";
     }
 
     @RequestMapping("/goIndex")
-	public String goIndex(){
+    public String goIndex() {
         log.info("Hello Index/Index");
-	    return "/index/index";
+        return "/index/index";
     }
 
 

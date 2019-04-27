@@ -8,6 +8,7 @@ package cc.niushuai.graduate.commons.enumresource;
  * @Date 2019/3/13
  */
 public interface EnumMessage {
-    public String getCode();
-    public String getValue();
+    String getCode();
+
+    String getValue();
 }

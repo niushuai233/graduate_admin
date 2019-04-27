@@ -17,12 +17,12 @@ import javax.servlet.http.HttpServletRequest;
 public class GlobalExceptionHandler {
     @ResponseBody
     @ExceptionHandler(MyException.class)
-    public ResultUtil handleMyException(HttpServletRequest req, MyException e){
+    public ResultUtil handleMyException(HttpServletRequest req, MyException e) {
         ResultUtil result = new ResultUtil();
         result.put("code", e.getCode());
         result.put("msg", e.getMsg());
-        result.put("detail",e.getMessage());
-        result.put("url",req.getRequestURL().toString());
+        result.put("detail", e.getMessage());
+        result.put("url", req.getRequestURL().toString());
 
         return result;
     }

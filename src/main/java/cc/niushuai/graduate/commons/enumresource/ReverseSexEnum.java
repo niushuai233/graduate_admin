@@ -10,7 +10,7 @@ public enum ReverseSexEnum implements EnumMessage {
     private final String code;
     private final String value;
 
-    private ReverseSexEnum(String code, String value) {
+    ReverseSexEnum(String code, String value) {
         this.code = code;
         this.value = value;
     }

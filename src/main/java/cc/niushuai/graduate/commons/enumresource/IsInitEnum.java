@@ -7,7 +7,7 @@ public enum IsInitEnum implements EnumMessage {
     private final String code;
     private final String value;
 
-    private IsInitEnum(String code, String value) {
+    IsInitEnum(String code, String value) {
         this.code = code;
         this.value = value;
     }

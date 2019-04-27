@@ -60,5 +60,5 @@ public class EduUserServiceImpl implements EduUserService {
             update(eduUser);
         }
     }
-	
+
 }

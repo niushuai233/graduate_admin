@@ -20,7 +20,7 @@ import java.util.Map;
 
 /**
  * 图片类型表
- * 
+ *
  * @author niushuai
  * @email niushuai951101@gmail.com
  * @date 2019-03-19 16:36:50
@@ -28,9 +28,9 @@ import java.util.Map;
 @Controller
 @RequestMapping("eduwebsiteimagestype")
 public class EduWebsiteImagesTypeController {
-	@Autowired
-	private EduWebsiteImagesTypeService eduWebsiteImagesTypeService;
-	
+    @Autowired
+    private EduWebsiteImagesTypeService eduWebsiteImagesTypeService;
+
     /**
      * 跳转到列表页
      */
@@ -39,81 +39,81 @@ public class EduWebsiteImagesTypeController {
     public String list() {
         return "eduwebsiteimagestype/list";
     }
-    
-	/**
-	 * 列表数据
-	 */
+
+    /**
+     * 列表数据
+     */
     @ResponseBody
-	@RequestMapping("/listData")
-	@RequiresPermissions("eduwebsiteimagestype:list")
-	public ResultUtil listData(@RequestParam Map<String, Object> params){
-		//查询列表数据
+    @RequestMapping("/listData")
+    @RequiresPermissions("eduwebsiteimagestype:list")
+    public ResultUtil listData(@RequestParam Map<String, Object> params) {
+        //查询列表数据
         Query query = new Query(params);
 
-		List<EduWebsiteImagesType> eduWebsiteImagesTypeList = eduWebsiteImagesTypeService.getList(query);
-		int total = eduWebsiteImagesTypeService.getCount(query);
-		
-		PageUtils pageUtil = new PageUtils(eduWebsiteImagesTypeList, total, query.getLimit(), query.getPage());
-		
-		return ResultUtil.ok().put("page", pageUtil);
-	}
+        List<EduWebsiteImagesType> eduWebsiteImagesTypeList = eduWebsiteImagesTypeService.getList(query);
+        int total = eduWebsiteImagesTypeService.getCount(query);
+
+        PageUtils pageUtil = new PageUtils(eduWebsiteImagesTypeList, total, query.getLimit(), query.getPage());
+
+        return ResultUtil.ok().put("page", pageUtil);
+    }
 
     /**
      * 跳转到新增页面
      **/
     @RequestMapping("/add")
     @RequiresPermissions("eduwebsiteimagestype:save")
-    public String add(){
+    public String add() {
         return "eduwebsiteimagestype/add";
     }
 
     /**
-     *   跳转到修改页面
+     * 跳转到修改页面
      **/
     @RequestMapping("/edit/{id}")
     @RequiresPermissions("eduwebsiteimagestype:update")
-    public String edit(Model model, @PathVariable("id") Integer id){
-		EduWebsiteImagesType eduWebsiteImagesType = eduWebsiteImagesTypeService.get(id);
-        model.addAttribute("model",eduWebsiteImagesType);
+    public String edit(Model model, @PathVariable("id") Integer id) {
+        EduWebsiteImagesType eduWebsiteImagesType = eduWebsiteImagesTypeService.get(id);
+        model.addAttribute("model", eduWebsiteImagesType);
         return "eduwebsiteimagestype/edit";
     }
 
-	/**
-	 * 信息
-	 */
+    /**
+     * 信息
+     */
     @ResponseBody
     @RequestMapping("/info/{typeId}")
     @RequiresPermissions("eduwebsiteimagestype:info")
-    public ResultUtil info(@PathVariable("typeId") Integer typeId){
+    public ResultUtil info(@PathVariable("typeId") Integer typeId) {
         EduWebsiteImagesType eduWebsiteImagesType = eduWebsiteImagesTypeService.get(typeId);
         return ResultUtil.ok().put("eduWebsiteImagesType", eduWebsiteImagesType);
     }
 
     /**
-	 * 保存
-	 */
+     * 保存
+     */
     @ResponseBody
     @Log("保存图片类型表")
-	@RequestMapping("/save")
-	@RequiresPermissions("eduwebsiteimagestype:save")
-	public ResultUtil save(@RequestBody EduWebsiteImagesType eduWebsiteImagesType){
-		eduWebsiteImagesTypeService.save(eduWebsiteImagesType);
-		
-		return ResultUtil.ok();
-	}
-	
-	/**
-	 * 修改
-	 */
+    @RequestMapping("/save")
+    @RequiresPermissions("eduwebsiteimagestype:save")
+    public ResultUtil save(@RequestBody EduWebsiteImagesType eduWebsiteImagesType) {
+        eduWebsiteImagesTypeService.save(eduWebsiteImagesType);
+
+        return ResultUtil.ok();
+    }
+
+    /**
+     * 修改
+     */
     @ResponseBody
     @Log("修改图片类型表")
-	@RequestMapping("/update")
-	@RequiresPermissions("eduwebsiteimagestype:update")
-	public ResultUtil update(@RequestBody EduWebsiteImagesType eduWebsiteImagesType){
-		eduWebsiteImagesTypeService.update(eduWebsiteImagesType);
-		
-		return ResultUtil.ok();
-	}
+    @RequestMapping("/update")
+    @RequiresPermissions("eduwebsiteimagestype:update")
+    public ResultUtil update(@RequestBody EduWebsiteImagesType eduWebsiteImagesType) {
+        eduWebsiteImagesTypeService.update(eduWebsiteImagesType);
+
+        return ResultUtil.ok();
+    }
 
     /**
      * 启用
@@ -122,11 +122,12 @@ public class EduWebsiteImagesTypeController {
     @Log("启用图片类型表")
     @RequestMapping("/enable")
     @RequiresPermissions("eduwebsiteimagestype:update")
-    public ResultUtil enable(@RequestBody Integer[] ids){
-        String stateValue=StateEnum.ENABLE.getCode();
-		eduWebsiteImagesTypeService.updateState(ids,stateValue);
+    public ResultUtil enable(@RequestBody Integer[] ids) {
+        String stateValue = StateEnum.ENABLE.getCode();
+        eduWebsiteImagesTypeService.updateState(ids, stateValue);
         return ResultUtil.ok();
     }
+
     /**
      * 禁用
      */
@@ -134,29 +135,29 @@ public class EduWebsiteImagesTypeController {
     @Log("禁用图片类型表")
     @RequestMapping("/disable")
     @RequiresPermissions("eduwebsiteimagestype:update")
-    public ResultUtil disable(@RequestBody Integer[] ids){
-        String stateValue=StateEnum.DIASABLE.getCode();
-		eduWebsiteImagesTypeService.updateState(ids,stateValue);
+    public ResultUtil disable(@RequestBody Integer[] ids) {
+        String stateValue = StateEnum.DIASABLE.getCode();
+        eduWebsiteImagesTypeService.updateState(ids, stateValue);
         return ResultUtil.ok();
     }
-	
-	/**
-	 * 删除
-	 */
+
+    /**
+     * 删除
+     */
     @ResponseBody
     @Log("删除图片类型表")
-	@RequestMapping("/delete")
-	@RequiresPermissions("eduwebsiteimagestype:delete")
-	public ResultUtil delete(@RequestBody Integer[] typeIds){
-		eduWebsiteImagesTypeService.deleteBatch(typeIds);
-		
-		return ResultUtil.ok();
-	}
+    @RequestMapping("/delete")
+    @RequiresPermissions("eduwebsiteimagestype:delete")
+    public ResultUtil delete(@RequestBody Integer[] typeIds) {
+        eduWebsiteImagesTypeService.deleteBatch(typeIds);
+
+        return ResultUtil.ok();
+    }
 
 
-	@ResponseBody
+    @ResponseBody
     @RequestMapping("/getImageTypeJson")
-	public ResultUtil getImageTypeJson(){
+    public ResultUtil getImageTypeJson() {
 
         try {
             Map<String, Object> params = new HashMap<String, Object>();
@@ -174,5 +175,5 @@ public class EduWebsiteImagesTypeController {
         }
 
     }
-	
+
 }

@@ -21,7 +21,7 @@ import java.util.Map;
 
 /**
  * oss配置
- * 
+ *
  * @author niushuai
  * @email niushuai951101@gmail.com
  * @date 2018-12-13 10:07:04
@@ -29,93 +29,94 @@ import java.util.Map;
 @Controller
 @RequestMapping("sysoss")
 public class SysOssController {
-	@Autowired
-	private SysOssService sysOssService;
+    @Autowired
+    private SysOssService sysOssService;
 
     @RequestMapping("/list")
     public String list() {
         return "sysoss/list";
     }
-	/**
-	 * 列表
-	 */
+
+    /**
+     * 列表
+     */
     @ResponseBody
-	@RequestMapping("/listData")
-	@RequiresPermissions("sysoss:list")
+    @RequestMapping("/listData")
+    @RequiresPermissions("sysoss:list")
     @Log
-	public ResultUtil listData(@RequestParam Map<String, Object> params){
-		//查询列表数据
+    public ResultUtil listData(@RequestParam Map<String, Object> params) {
+        //查询列表数据
         Query query = new Query(params);
 
-		List<SysOss> sysOssList = sysOssService.getList(query);
-		int total = sysOssService.getCount(query);
-		
-		PageUtils pageUtil = new PageUtils(sysOssList, total, query.getLimit(), query.getPage());
-		
-		return ResultUtil.ok().put("page", pageUtil);
-	}
+        List<SysOss> sysOssList = sysOssService.getList(query);
+        int total = sysOssService.getCount(query);
+
+        PageUtils pageUtil = new PageUtils(sysOssList, total, query.getLimit(), query.getPage());
+
+        return ResultUtil.ok().put("page", pageUtil);
+    }
 
     /**
      * 跳转到新增页面
      **/
     @RequestMapping("/add")
     @RequiresPermissions("sysoss:save")
-    public String add(){
+    public String add() {
         return "sysoss/add";
     }
 
     /**
-     *   跳转到修改页面
+     * 跳转到修改页面
      **/
     @RequestMapping("/edit/{id}")
     @RequiresPermissions("sysoss:update")
-    public String edit(Model model, @PathVariable("id") String id){
-		SysOss sysOss = sysOssService.get(id);
-        model.addAttribute("model",sysOss);
+    public String edit(Model model, @PathVariable("id") String id) {
+        SysOss sysOss = sysOssService.get(id);
+        model.addAttribute("model", sysOss);
         return "sysoss/edit";
     }
 
-	/**
-	 * 信息
-	 */
+    /**
+     * 信息
+     */
     @ResponseBody
     @RequestMapping("/info/{bucket}")
     @RequiresPermissions("sysoss:info")
-    public ResultUtil info(@PathVariable("bucket") String bucket){
+    public ResultUtil info(@PathVariable("bucket") String bucket) {
         SysOss sysOss = sysOssService.get(bucket);
         return ResultUtil.ok().put("sysOss", sysOss);
     }
 
     /**
-	 * 保存
-	 */
+     * 保存
+     */
     @ResponseBody
     @Log("保存oss配置")
-	@RequestMapping("/save")
-	@RequiresPermissions("sysoss:save")
-	public ResultUtil save(@RequestBody SysOss sysOss){
-        SysOss sysoss=sysOssService.get(sysOss.getBucket());
-        if(sysoss!=null){
+    @RequestMapping("/save")
+    @RequiresPermissions("sysoss:save")
+    public ResultUtil save(@RequestBody SysOss sysOss) {
+        SysOss sysoss = sysOssService.get(sysOss.getBucket());
+        if (sysoss != null) {
             throw new MyException("该bucket已存在");
         }
         sysOss.setCreateTime(new Date());
-		sysOssService.save(sysOss);
-		
-		return ResultUtil.ok();
-	}
-	
-	/**
-	 * 修改
-	 */
+        sysOssService.save(sysOss);
+
+        return ResultUtil.ok();
+    }
+
+    /**
+     * 修改
+     */
     @ResponseBody
     @Log("修改oss配置")
-	@RequestMapping("/update")
-	@RequiresPermissions("sysoss:update")
-	public ResultUtil update(@RequestBody SysOss sysOss){
-		sysOssService.update(sysOss);
-		
-		return ResultUtil.ok();
-	}
+    @RequestMapping("/update")
+    @RequiresPermissions("sysoss:update")
+    public ResultUtil update(@RequestBody SysOss sysOss) {
+        sysOssService.update(sysOss);
+
+        return ResultUtil.ok();
+    }
 
     /**
      * 启用
@@ -124,11 +125,12 @@ public class SysOssController {
     @Log("启用oss配置")
     @RequestMapping("/enable")
     @RequiresPermissions("sysoss:update")
-    public ResultUtil enable(@RequestBody String[] ids){
-        String stateValue= StateEnum.ENABLE.getCode();
-		sysOssService.updateState(ids,stateValue);
+    public ResultUtil enable(@RequestBody String[] ids) {
+        String stateValue = StateEnum.ENABLE.getCode();
+        sysOssService.updateState(ids, stateValue);
         return ResultUtil.ok();
     }
+
     /**
      * 禁用
      */
@@ -136,23 +138,23 @@ public class SysOssController {
     @Log("禁用oss配置")
     @RequestMapping("/disable")
     @RequiresPermissions("sysoss:update")
-    public ResultUtil disable(@RequestBody String[] ids){
-        String stateValue= StateEnum.DIASABLE.getCode();
-		sysOssService.updateState(ids,stateValue);
+    public ResultUtil disable(@RequestBody String[] ids) {
+        String stateValue = StateEnum.DIASABLE.getCode();
+        sysOssService.updateState(ids, stateValue);
         return ResultUtil.ok();
     }
-	
-	/**
-	 * 删除
-	 */
+
+    /**
+     * 删除
+     */
     @ResponseBody
     @Log("删除oss配置")
-	@RequestMapping("/delete")
-	@RequiresPermissions("sysoss:delete")
-	public ResultUtil delete(@RequestBody String[] buckets){
-		sysOssService.deleteBatch(buckets);
-		
-		return ResultUtil.ok();
-	}
-	
+    @RequestMapping("/delete")
+    @RequiresPermissions("sysoss:delete")
+    public ResultUtil delete(@RequestBody String[] buckets) {
+        sysOssService.deleteBatch(buckets);
+
+        return ResultUtil.ok();
+    }
+
 }
