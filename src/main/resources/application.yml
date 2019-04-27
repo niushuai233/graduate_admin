@@ -41,8 +41,7 @@ fdfs:
   thumbImage:             #缩略图生成参数
     width: 150
     height: 150
-  trackerList:            #TrackerList参数,支持多个
-    - 106.12.218.104:22122
+  trackerList: 106.12.218.104:22122
   pool:
     max-total: 100
     max-wait-millis: 60
