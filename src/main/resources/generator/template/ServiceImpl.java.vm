@@ -14,7 +14,7 @@ import ${package}.service.${className}Service;
 
 @Service("${classname}Service")
 @Transactional
-public class ${className}ServiceImpl implements ${className}Service {
+public class ${className}ServiceImpl extends BaseServiceImpl<${className}> implements ${className}Service {
 	@Autowired
 	private ${className}Mapper ${classname}Mapper;
 	
@@ -35,12 +35,13 @@ public class ${className}ServiceImpl implements ${className}Service {
 
 	@Override
 	public void save(${className} ${classname}){
-		${classname}.setCreateDate(new Date());
+		super.addValue(${classname},false,0);
 		${classname}Mapper.save(${classname});
 	}
 
 	@Override
 	public void update(${className} ${classname}){
+		super.addValue(${classname},false,1);
 		${classname}.setUpdateDate(new Date());
 		${classname}Mapper.update(${classname});
 	}

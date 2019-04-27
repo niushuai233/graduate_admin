@@ -12,7 +12,7 @@ import java.util.Map;
  * @email ${email}
  * @date ${datetime}
  */
-public interface ${className}Service {
+public interface ${className}Service extends BaseService<${className}>{
 	
 	${className} get(${pk.attrType} ${pk.attrname});
 	
