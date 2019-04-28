@@ -51,7 +51,12 @@ public class ShiroConfig {
         return bean;
     }
 
-    //配置核心安全事务管理器
+    /*
+     * @description: 配置核心安全事务管理器
+     * @params: [authRealm]
+     * @author: ns
+     * @date: 2019/4/28 13:40
+     */
     @Bean(name = "securityManager")
     public SecurityManager securityManager(@Qualifier("authRealm") AuthRealm authRealm) {
         System.err.println("--------------shiro已经加载----------------");
@@ -60,7 +65,12 @@ public class ShiroConfig {
         return manager;
     }
 
-    //配置自定义的权限登录器
+    /**
+     * @description: 配置自定义的权限登录器
+     * @params: [matcher]
+     * @author: ns
+     * @date: 2019/4/28 13:40
+     */
     @Bean(name = "authRealm")
     public AuthRealm authRealm(@Qualifier("credentialsMatcher") CredentialsMatcher matcher) {
         AuthRealm authRealm = new AuthRealm();
@@ -68,7 +78,12 @@ public class ShiroConfig {
         return authRealm;
     }
 
-    //配置自定义的密码比较器
+    /**
+     * @description: 配置自定义的密码比较器
+     * @params:
+     * @author: ns
+     * @date: 2019/4/28 13:40
+     */
     @Bean(name = "credentialsMatcher")
     public CredentialsMatcher credentialsMatcher() {
         return new CredentialsMatcher() {
