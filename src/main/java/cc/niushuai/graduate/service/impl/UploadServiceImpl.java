@@ -1,6 +1,6 @@
 package cc.niushuai.graduate.service.impl;
 
-import cc.niushuai.graduate.service.AttachmentService;
+import cc.niushuai.graduate.service.UploadService;
 import com.github.tobato.fastdfs.domain.fdfs.StorePath;
 import com.github.tobato.fastdfs.domain.fdfs.ThumbImageConfig;
 import com.github.tobato.fastdfs.service.FastFileStorageClient;
@@ -14,12 +14,12 @@ import java.io.IOException;
  * 附件管理类   此处此类需要整合fastdfs进行分布式文件管理
  *
  * @author 牛帅
- * @class_name AttachmentServiceImpl
+ * @class_name UploadServiceImpl
  * @email niushuai951101@gmail.com
  * @date 2018-9-12  下午5:17:11
  */
 @Service
-public class AttachmentServiceImpl implements AttachmentService {
+public class UploadServiceImpl implements UploadService {
 
     @Autowired
     private ThumbImageConfig thumbImageConfig;

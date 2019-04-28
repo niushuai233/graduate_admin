@@ -10,7 +10,7 @@ import java.util.Map;
  * 地产附件表
  *
  * @author niushuai
- * @email qqniushuai951101@gmail.com
+ * @email niushuai951101@gmail.com
  * @date 2018-11-17 11:52:01
  */
 public interface FileService {

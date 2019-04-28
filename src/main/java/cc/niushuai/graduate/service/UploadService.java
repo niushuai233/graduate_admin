@@ -7,12 +7,12 @@ import com.github.tobato.fastdfs.domain.fdfs.StorePath;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- * @class_name AttachmentService
+ * @class_name UploadService
  * @author 牛帅
  * @email niushuai951101@gmail.com
  * @date 2018-9-12  下午5:10:21
  */
-public interface AttachmentService {
+public interface UploadService {
 
     /**
      * 上传图片并制作缩略图保存服务器，存储数据库记录

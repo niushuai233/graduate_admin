@@ -22,7 +22,7 @@ import java.util.Map;
  * 系统配置信息表
  *
  * @author niushuai
- * @email qqniushuai951101@gmail.com
+ * @email niushuai951101@gmail.com
  * @date 2018-08-02 17:19:29
  */
 @Controller

@@ -1,6 +1,6 @@
 /**
  * Created by niushuai on 2017-10-20 13:54:57
- *  email   :  qqniushuai951101@gmail.com//
+ *  email   :  niushuai951101@gmail.com//
  */
 /**数据渲染对象*/
 var Render = {
