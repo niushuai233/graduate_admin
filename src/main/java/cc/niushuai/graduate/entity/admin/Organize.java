@@ -11,7 +11,7 @@ import java.util.Date;
  * 记录组织机构管理信息
  *
  * @author niushuai
- * @email qqniushuai951101@gmail.com
+ * @email niushuai951101@gmail.com
  * @date 2018-11-06 17:39:31
  */
 public class Organize implements Serializable {

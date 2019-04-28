@@ -10,7 +10,7 @@ import java.util.Date;
  * 地产附件表
  *
  * @author niushuai
- * @email qqniushuai951101@gmail.com
+ * @email niushuai951101@gmail.com
  */
 public class File implements Serializable {
     private static final long serialVersionUID = 1L;
