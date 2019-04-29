@@ -1,6 +1,8 @@
 package cc.niushuai.graduate.service;
 
 import cc.niushuai.graduate.entity.EduWebsiteImages;
+import com.github.tobato.fastdfs.domain.fdfs.StorePath;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -29,4 +31,6 @@ public interface EduWebsiteImagesService extends BaseService<EduWebsiteImages> {
     void deleteBatch(Integer[] imageIds);
 
     void updateState(Integer[] ids, String stateValue);
+
+    StorePath uploadImage(MultipartFile file);
 }

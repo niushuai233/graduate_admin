@@ -8,8 +8,8 @@ import cc.niushuai.graduate.commons.utils.Query;
 import cc.niushuai.graduate.commons.utils.ResultUtil;
 import cc.niushuai.graduate.config.log.Log;
 import cc.niushuai.graduate.entity.EduWebsiteImages;
-import cc.niushuai.graduate.service.AttachmentService;
 import cc.niushuai.graduate.service.EduWebsiteImagesService;
+import cc.niushuai.graduate.service.UploadService;
 import com.github.tobato.fastdfs.domain.fdfs.StorePath;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -37,7 +37,7 @@ public class EduWebsiteImagesController {
     private EduWebsiteImagesService eduWebsiteImagesService;
 
     @Autowired
-    private AttachmentService attachmentService;
+    private UploadService uploadService;
 
     /**
      * 跳转到列表页
@@ -197,8 +197,7 @@ public class EduWebsiteImagesController {
     @ResponseBody
 //    @RequiresPermissions("eduwebsiteimages:upload")
     public ResultUtil imageUpload(MultipartFile file) {
-
-        StorePath storePath = attachmentService.imageUpload(file);
+        StorePath storePath = eduWebsiteImagesService.uploadImage(file);
         if (null != storePath) {
             return ResultUtil.ok(storePath.getFullPath());
         }

@@ -2,12 +2,14 @@ package cc.niushuai.graduate.service.impl;
 
 import cc.niushuai.graduate.entity.EduWebsiteImages;
 import cc.niushuai.graduate.mapper.EduWebsiteImagesMapper;
-import cc.niushuai.graduate.service.AttachmentService;
 import cc.niushuai.graduate.service.EduWebsiteImagesService;
+import cc.niushuai.graduate.service.UploadService;
+import com.github.tobato.fastdfs.domain.fdfs.StorePath;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -19,7 +21,7 @@ public class EduWebsiteImagesServiceImpl extends BaseServiceImpl<EduWebsiteImage
     @Autowired
     private EduWebsiteImagesMapper eduWebsiteImagesMapper;
     @Autowired
-    private AttachmentService attachmentService;
+    private UploadService uploadService;
 
     @Override
     public EduWebsiteImages get(Integer imageId) {
@@ -64,7 +66,7 @@ public class EduWebsiteImagesServiceImpl extends BaseServiceImpl<EduWebsiteImage
             for (Integer imageId : imageIds) {
                 EduWebsiteImages eduWebsiteImages = get(imageId);
                 String imageUrl = eduWebsiteImages.getImageUrl();
-                attachmentService.imageDestroy(imageUrl);
+                uploadService.imageDestroy(imageUrl);
             }
         } catch (Exception e) {
             log.error("删除图片出现异常, {}", e.getMessage());
@@ -85,6 +87,11 @@ public class EduWebsiteImagesServiceImpl extends BaseServiceImpl<EduWebsiteImage
             eduWebsiteImages.setState(Integer.valueOf(stateValue));
             update(eduWebsiteImages);
         }
+    }
+
+    @Override
+    public StorePath uploadImage(MultipartFile file) {
+        return uploadService.imageUpload(file);
     }
 
 }
