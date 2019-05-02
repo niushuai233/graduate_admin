@@ -21,6 +21,15 @@ spring:
     multipart:
       max-file-size: 300Mb
       max-request-size: 500Mb
+  # mail
+  mail:
+    protocol: smtp
+    default-encoding: UTF-8
+    port: 25
+    host: smtp.163.com
+    username: 18203699422@163.com
+    password: aa123456
+
 
 #logging
 logging:
