@@ -10,7 +10,7 @@
 </div>
 
 <div class="layui-form-item">
-    <label class="layui-form-label">位置<span class="span_must">*</span></label>
+    <label class="layui-form-label">链接<span class="span_must">*</span></label>
     <div class="layui-input-normal">
         <input type="text" name="url" maxlength="100" lay-verify="required"
                value="${(model.url)!""}" placeholder="请输入导航显示位置" class="layui-input">

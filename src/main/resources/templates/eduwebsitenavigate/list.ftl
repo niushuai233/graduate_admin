@@ -70,7 +70,7 @@
 
             <th width="10%" param="{name:'name'}">名称</th>
 
-            <th width="10%" param="{name:'url'}">位置</th>
+            <th width="10%" param="{name:'url'}">链接</th>
 
             <th width="10%" param="{name:'type', render:'Render.customerType'}">类型</th>
 
