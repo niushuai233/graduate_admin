@@ -65,14 +65,12 @@
             <th width="10%" param="{name:'id',isPrimary:'true',hide:'true'}"></th>
             
 		                			
-		          <th width="10%" param="{name:'type'}">类型</th>
+		          <th width="10%" param="{name:'type'}1">类型</th>
 			            			
 		          <th width="10%" param="{name:'desciption'}">内容JSON格式</th>
 			            			
 		          <th width="10%" param="{name:'explain'}">说明</th>
-			            			
-		          <th width="10%" param="{name:'state'}">0禁用 1启用</th>
-			            			
+
 		          <th width="10%" param="{name:'createBy'}">创建人</th>
 			            			
 		          <th width="10%" param="{name:'createDate'}">创建时间</th>
