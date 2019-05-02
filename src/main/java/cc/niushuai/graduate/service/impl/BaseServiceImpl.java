@@ -59,7 +59,7 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
                     if (null != operator) {
                         Field field = clazz.getDeclaredField(operator);
                         field.setAccessible(true);
-                        field.set(record, loginUser.getUserId());
+                        field.set(record, loginUser.getUsername());
                     }
                 } catch (Exception e) {
                     log.error("exception happen {}", e.getMessage());
