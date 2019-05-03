@@ -66,8 +66,9 @@
             <th width="10%" param="{name:'sortNo'}">排序</th>
 
             <!--isPrimary：渲染列-->
-            <th width="10%" param="{name:'state',codeName:'state',render:'Render.customState'}">状态</th>
-            <th width="10%" param="{operate:'true',buttons:'Render.state,Render.edit,Render.delete'}">操作</th>
+            <#--<th width="10%" param="{name:'state',codeName:'state',render:'Render.customState'}">状态</th>-->
+            <th width="10%" param="{operate:'true',buttons:'Render.edit,Render.delete'}">操作</th>
+            <#--<th width="10%" param="{operate:'true',buttons:'Render.state,Render.edit,Render.delete'}">操作</th>-->
         </tr>
         </thead>
     </table>

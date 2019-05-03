@@ -3,7 +3,7 @@
     <label class="layui-form-label">参数编码<span class="span_must">*</span></label>
     <div class="layui-input-normal">
         <input type="text" name="paraCode" value="${(model.paraCode)!""}" lay-verify="required"
-               placeholder="请输入参数编码" maxlength="50" class="layui-input">
+               placeholder="请输入参数编码" maxlength="12" class="layui-input">
     </div>
 </div>
 <div class="layui-form-item">
@@ -22,6 +22,7 @@
     </div>
 </div>
 
+
 <div class="layui-form-item">
     <label class="layui-form-label">排序<span class="span_must">*</span></label>
     <div class="layui-input-normal">
@@ -29,7 +30,8 @@
                maxlength="8" class="layui-input">
     </div>
 </div>
-
+<input type="hidden" value="0" name="state"/>
+<#--
 
 <div class="layui-form-item">
     <label class="layui-form-label">状态<span class="span_must">*</span></label>
@@ -37,3 +39,5 @@
          name="state" value="${(model.state)!"1"}" class="layui-input-normal">
     </div>
 </div>
+
+-->
