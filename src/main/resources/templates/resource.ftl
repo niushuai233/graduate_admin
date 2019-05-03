@@ -3,7 +3,8 @@
 <!--layui ztree样式-->
 <link rel="stylesheet" href="/statics/plugins/layui/css/layui.css" media="all">
 <script src="/statics/plugins/layer/layer.js"></script>
-<script src="/statics/plugins/layui/layui.js"></script>
+<#--<script src="/statics/plugins/layui/layui.js"></script>-->
+<script src="/statics/plugins/layui-v2.4.5/layui.all.js"></script>
 <script src="/statics/plugins/ztree/jquery.ztree.all.min.js"></script>
 <link rel="stylesheet" href="/statics/plugins/ztree/css/metroStyle/metroStyle.css">
 <!--js组件-->
