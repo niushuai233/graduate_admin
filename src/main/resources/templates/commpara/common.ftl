@@ -30,7 +30,8 @@
                maxlength="8" class="layui-input">
     </div>
 </div>
-<input type="hidden" value="0" name="state"/>
+<input type="hidden" value="0" name="state" filter=""/>
+
 <#--
 
 <div class="layui-form-item">
