@@ -32,5 +32,5 @@ public interface EduWebsiteImagesService extends BaseService<EduWebsiteImages> {
 
     void updateState(Integer[] ids, String stateValue);
 
-    StorePath uploadImage(MultipartFile file);
+    StorePath uploadImage(MultipartFile file) throws Exception;
 }

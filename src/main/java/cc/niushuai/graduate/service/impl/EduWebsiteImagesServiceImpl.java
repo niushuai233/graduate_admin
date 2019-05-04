@@ -90,7 +90,7 @@ public class EduWebsiteImagesServiceImpl extends BaseServiceImpl<EduWebsiteImage
     }
 
     @Override
-    public StorePath uploadImage(MultipartFile file) {
+    public StorePath uploadImage(MultipartFile file) throws Exception {
         return uploadService.imageUpload(file);
     }
 

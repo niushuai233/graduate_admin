@@ -11,6 +11,7 @@ import cc.niushuai.graduate.entity.EduWebsiteImages;
 import cc.niushuai.graduate.service.EduWebsiteImagesService;
 import cc.niushuai.graduate.service.UploadService;
 import com.github.tobato.fastdfs.domain.fdfs.StorePath;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,7 @@ import java.util.Map;
  * @email niushuai951101@gmail.com
  * @date 2019-03-19 16:36:50
  */
+@Slf4j
 @Controller
 @RequestMapping("eduwebsiteimages")
 public class EduWebsiteImagesController {
@@ -78,7 +80,7 @@ public class EduWebsiteImagesController {
         eduWebsiteImagesList.forEach(item -> {
             String imageUrl = item.getImageUrl();
             if (StringUtils.isNotEmpty(imageUrl)) {
-                item.setImageUrl(PathUtil.fdfsAccessPrefix + imageUrl);
+                item.setImageUrl(PathUtil.fillFdfsPath(imageUrl));
             } else {
                 item.setImageUrl(Constant.DEFAULT_CROPPERJS_IMAGE);
             }
@@ -110,7 +112,7 @@ public class EduWebsiteImagesController {
         } else {
             // 如果不为空 放入全路径
             // 增加图片访问前缀
-            model.addAttribute(Constant.FDFS_ACCESS_PREFIX, PathUtil.fdfsAccessPrefix + imageUrl);
+            model.addAttribute(Constant.FDFS_ACCESS_PREFIX, PathUtil.fillFdfsPath(imageUrl));
         }
         model.addAttribute("model", eduWebsiteImages);
         return "eduwebsiteimages/edit";
@@ -197,9 +199,13 @@ public class EduWebsiteImagesController {
     @ResponseBody
 //    @RequiresPermissions("eduwebsiteimages:upload")
     public ResultUtil imageUpload(MultipartFile file) {
-        StorePath storePath = eduWebsiteImagesService.uploadImage(file);
-        if (null != storePath) {
-            return ResultUtil.ok(storePath.getFullPath());
+        try {
+            StorePath storePath = eduWebsiteImagesService.uploadImage(file);
+            if (null != storePath) {
+                return ResultUtil.ok(storePath.getFullPath());
+            }
+        } catch (Exception e) {
+            log.error("上传Banner图片失败: {}", e.getMessage());
         }
 
         return ResultUtil.error();
