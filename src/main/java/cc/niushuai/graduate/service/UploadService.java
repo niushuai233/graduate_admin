@@ -6,6 +6,8 @@ package cc.niushuai.graduate.service;
 import com.github.tobato.fastdfs.domain.fdfs.StorePath;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+
 /**
  * @class_name UploadService
  * @author 牛帅
@@ -18,7 +20,7 @@ public interface UploadService {
      * 上传图片并制作缩略图保存服务器，存储数据库记录
      * @param file
      */
-    StorePath imageUpload(MultipartFile file);
+    StorePath imageUpload(MultipartFile file) throws Exception;
 
     /**
      * 销毁图片及缩略图
@@ -30,7 +32,7 @@ public interface UploadService {
      * 上传文件
      * @param file
      */
-    StorePath fileUpload(MultipartFile file);
+    StorePath fileUpload(MultipartFile file) throws IOException;
 
     /**
      * 销毁附件

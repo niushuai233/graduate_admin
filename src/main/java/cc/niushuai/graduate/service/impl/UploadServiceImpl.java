@@ -27,27 +27,23 @@ public class UploadServiceImpl implements UploadService {
     private FastFileStorageClient fastDFSClient;
 
     @Override
-    public StorePath imageUpload(MultipartFile file) {
+    public StorePath imageUpload(MultipartFile file) throws Exception {
         StorePath storePath = null;
-        try {
-            //获取文件大小
-            Long fileSize = file.getSize();
-            //限制图片大小
-            if (fileSize > 2 * 1024 * 1024) {
-                throw new Exception("图片过大");
-            }
-            //获取源文件名
-            String fileName = file.getOriginalFilename();
-            //获取源文件类型  不带.
-            String fileType = fileName.substring(fileName.lastIndexOf(".") + 1);
-            //此处需要过滤文件类型  待添加
-
-            //保存源文件字节流
-            storePath = fastDFSClient.uploadImageAndCrtThumbImage(file.getInputStream(), fileSize, fileType, null);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("GG思密达");
+        //获取文件大小
+        Long fileSize = file.getSize();
+        //限制图片大小
+        if (fileSize > 2 * 1024 * 1024) {
+            throw new Exception("图片过大");
         }
+        //获取源文件名
+        String fileName = file.getOriginalFilename();
+        //获取源文件类型  不带.
+        String fileType = fileName.substring(fileName.lastIndexOf(".") + 1);
+        //此处需要过滤文件类型  待添加
+
+        //保存源文件字节流
+        storePath = fastDFSClient.uploadImageAndCrtThumbImage(file.getInputStream(), fileSize, fileType, null);
+
         return storePath;
     }
 
@@ -59,7 +55,7 @@ public class UploadServiceImpl implements UploadService {
     }
 
     @Override
-    public StorePath fileUpload(MultipartFile file) {
+    public StorePath fileUpload(MultipartFile file) throws IOException {
         StorePath storePath = null;
         //获取文件大小
         Long fileSize = file.getSize();
@@ -69,12 +65,7 @@ public class UploadServiceImpl implements UploadService {
         //获取源文件类型   不带.
         String fileType = fileName.substring(fileName.lastIndexOf(".") + 1);
         //此处需要过滤文件类型  待添加
-        try {
-            storePath = fastDFSClient.uploadFile(file.getInputStream(), fileSize, fileType, null);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return storePath;
+        return fastDFSClient.uploadFile(file.getInputStream(), fileSize, fileType, null);
     }
 
     @Override

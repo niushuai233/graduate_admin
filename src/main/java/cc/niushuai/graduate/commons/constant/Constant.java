@@ -53,4 +53,18 @@ public class Constant {
     public static final String FDFS_ACCESS_PREFIX = "fdfsAccessPrefix";
 
     public static final String DEFAULT_CROPPERJS_IMAGE = "/statics/plugins/cropperjs/images/picture.jpg";
+
+    /**
+     * 数字keys
+     */
+    public static final String NUMBER_0 = "0";
+    public static final String NUMBER_1 = "1";
+    public static final String NUMBER_2 = "2";
+    public static final String NUMBER_3 = "3";
+    public static final String NUMBER_4 = "4";
+    public static final String NUMBER_5 = "5";
+    public static final String NUMBER_6 = "6";
+    public static final String NUMBER_7 = "7";
+    public static final String NUMBER_8 = "8";
+    public static final String NUMBER_9 = "9";
 }

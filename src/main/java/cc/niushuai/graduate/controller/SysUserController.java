@@ -17,6 +17,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -231,5 +233,24 @@ public class SysUserController extends AbstractController {
         if (StringUtils.isEmpty(user.getEmail())) {
             throw new MyException("邮箱不能为空");
         }
+    }
+
+    @ResponseBody
+    @RequestMapping("/findAllUseSelectTool")
+    @RequiresPermissions("sys:user:list")
+    public ResultUtil findAll() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("status", 1);
+        List<SysUser> list = sysUserService.queryList(map);
+
+        List<EnumBean> values = new ArrayList<>();
+        for (SysUser user : list) {
+            EnumBean enumBean = new EnumBean();
+            enumBean.setCode(user.getUserId() + "|" + user.getEmail());
+            enumBean.setValue(user.getUsername() + "|" + user.getEmail());
+            values.add(enumBean);
+        }
+
+        return ResultUtil.ok().put("data", values);
     }
 }
