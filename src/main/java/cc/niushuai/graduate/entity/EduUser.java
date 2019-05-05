@@ -1,6 +1,7 @@
 package cc.niushuai.graduate.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -15,6 +16,7 @@ import java.util.Date;
  * @date 2019-03-13 20:58:42
  */
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class EduUser implements Serializable {
     private static final long serialVersionUID = 1L;
 
