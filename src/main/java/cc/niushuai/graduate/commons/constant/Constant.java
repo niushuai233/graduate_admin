@@ -67,4 +67,12 @@ public class Constant {
     public static final String NUMBER_7 = "7";
     public static final String NUMBER_8 = "8";
     public static final String NUMBER_9 = "9";
+
+    /**
+     * @description: 定时任务使用
+     * @author: ns
+     * @date: 2019/5/5 11:17
+     */
+    public static final String MAIL_SEND_JOB_DETAIL_IDENTITY = "mailSendJobDefaultIdentity";
+    public static final String MAIL_SEND_CRON_TRIGGER_IDENTITY = "cronTriggerIdentity";
 }
