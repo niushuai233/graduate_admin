@@ -66,8 +66,8 @@
 <div class="layui-form-item">
     <label class="layui-form-label mylable">教师简介<span class="span_must">*</span></label>
     <div class="layui-input-normal">
-        <input type="text" name="career" maxlength="255" lay-verify="required"
-               value="${(model.career)!""}" placeholder="请输入教师简介" class="layui-input">
+        <textarea name="career" lay-verify="required"
+                  placeholder="请输入教师简介" class="layui-textarea">${(model.career)!""}</textarea>
     </div>
 </div>
 
