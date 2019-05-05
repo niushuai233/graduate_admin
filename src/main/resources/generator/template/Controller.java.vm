@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
+import lombok.extern.slf4j.Slf4j;
 
 import ${package}.entity.${className};
 import ${package}.service.${className}Service;
@@ -24,6 +25,7 @@ import ${package}.commons.utils.ResultUtil;
  * @email ${email}
  * @date ${datetime}
  */
+@Slf4j
 @Controller
 @RequestMapping("${pathName}")
 public class ${className}Controller {

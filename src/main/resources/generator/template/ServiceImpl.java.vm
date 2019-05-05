@@ -1,5 +1,6 @@
 package ${package}.service.impl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,7 +12,7 @@ import ${package}.mapper.${className}Mapper;
 import ${package}.entity.${className};
 import ${package}.service.${className}Service;
 
-
+@Slf4j
 @Service("${classname}Service")
 @Transactional
 public class ${className}ServiceImpl extends BaseServiceImpl<${className}> implements ${className}Service {
