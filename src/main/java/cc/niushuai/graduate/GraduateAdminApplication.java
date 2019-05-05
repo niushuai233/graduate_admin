@@ -12,12 +12,14 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.SpringVersion;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Slf4j
 @Import(FdfsClientConfig.class)
 @EnableWebMvc
+@EnableScheduling
 @EnableAutoConfiguration
 @SpringBootConfiguration
 @EnableTransactionManagement
