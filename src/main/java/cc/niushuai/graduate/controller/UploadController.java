@@ -2,6 +2,7 @@ package cc.niushuai.graduate.controller;
 
 import cc.niushuai.graduate.commons.utils.EditorMdResult;
 import cc.niushuai.graduate.commons.utils.PathUtil;
+import cc.niushuai.graduate.commons.utils.ResultUtil;
 import cc.niushuai.graduate.service.UploadService;
 import com.github.tobato.fastdfs.domain.fdfs.StorePath;
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +32,7 @@ public class UploadController {
      * @return
      */
     @RequestMapping("/eImageUpload")
-    public EditorMdResult imageUpload(@RequestParam(value = "editormd-image-file") MultipartFile file) {
+    public EditorMdResult eImageUpload(@RequestParam(value = "editormd-image-file") MultipartFile file) {
 
         try {
             StorePath storePath = uploadService.imageUpload(file);
@@ -42,6 +43,24 @@ public class UploadController {
         } catch (Exception e) {
             log.error("上传文件失败：{}", e.getMessage());
             return EditorMdResult.error("上传失败");
+        }
+    }
+
+    /**
+     * 通用图片上传
+     *
+     * @param file
+     * @return
+     */
+    @RequestMapping("/imageUpload")
+    public ResultUtil imageUpload(MultipartFile file) {
+
+        try {
+            StorePath storePath = uploadService.imageUpload(file);
+            return ResultUtil.ok(storePath.getFullPath());
+        } catch (Exception e) {
+            log.error("图片上传失败: {}", e.getMessage());
+            return ResultUtil.error("图片上传失败");
         }
     }
 

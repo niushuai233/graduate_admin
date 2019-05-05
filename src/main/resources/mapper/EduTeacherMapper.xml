@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cc.niushuai.graduate.mapper.EduTeacherMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="cc.niushuai.graduate.entity.EduTeacher" id="eduTeacherMap">
+        <result property="id" column="ID"/>
+        <result property="name" column="NAME"/>
+        <result property="education" column="EDUCATION"/>
+        <result property="career" column="CAREER"/>
+        <result property="isStar" column="IS_STAR"/>
+        <result property="picPath" column="PIC_PATH"/>
+        <result property="status" column="STATUS"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="updateTime" column="UPDATE_TIME"/>
+        <result property="subjectId" column="SUBJECT_ID"/>
+        <result property="sort" column="SORT"/>
+        <result property="createBy" column="CREATE_BY"/>
+        <result property="updateBy" column="UPDATE_BY"/>
+    </resultMap>
+
+	<select id="get" resultType="cc.niushuai.graduate.entity.EduTeacher">
+		select * from edu_teacher where ID = #{value}
+	</select>
+
+	<select id="getList" resultType="cc.niushuai.graduate.entity.EduTeacher">
+		select * from edu_teacher t <include refid="where_clause" />
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by ID desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="getCount" resultType="int">
+		select count(*) from edu_teacher t  <include refid="where_clause" />
+	</select>
+
+    <!-- 搜索数据区域 -->
+    <sql id="where_clause">
+        <where>
+            1=1
+            <if test="id != null and id != ''"> and t.ID = #{id} </if>
+    		<if test="idVague != null and idVague != ''"> and t.ID like concat('%',#{idVague},'%') </if>
+            <if test="name != null and name != ''"> and t.NAME = #{name} </if>
+    		<if test="nameVague != null and nameVague != ''"> and t.NAME like concat('%',#{nameVague},'%') </if>
+            <if test="education != null and education != ''"> and t.EDUCATION = #{education} </if>
+    		<if test="educationVague != null and educationVague != ''"> and t.EDUCATION like concat('%',#{educationVague},'%') </if>
+            <if test="career != null and career != ''"> and t.CAREER = #{career} </if>
+    		<if test="careerVague != null and careerVague != ''"> and t.CAREER like concat('%',#{careerVague},'%') </if>
+            <if test="isStar != null and isStar != ''"> and t.IS_STAR = #{isStar} </if>
+    		<if test="isStarVague != null and isStarVague != ''"> and t.IS_STAR like concat('%',#{isStarVague},'%') </if>
+            <if test="picPath != null and picPath != ''"> and t.PIC_PATH = #{picPath} </if>
+    		<if test="picPathVague != null and picPathVague != ''"> and t.PIC_PATH like concat('%',#{picPathVague},'%') </if>
+            <if test="status != null and status != ''"> and t.STATUS = #{status} </if>
+    		<if test="statusVague != null and statusVague != ''"> and t.STATUS like concat('%',#{statusVague},'%') </if>
+            <if test="createTime != null and createTime != ''"> and t.CREATE_TIME = #{createTime} </if>
+    		<if test="createTimeVague != null and createTimeVague != ''"> and t.CREATE_TIME like concat('%',#{createTimeVague},'%') </if>
+            <if test="updateTime != null and updateTime != ''"> and t.UPDATE_TIME = #{updateTime} </if>
+    		<if test="updateTimeVague != null and updateTimeVague != ''"> and t.UPDATE_TIME like concat('%',#{updateTimeVague},'%') </if>
+            <if test="subjectId != null and subjectId != ''"> and t.SUBJECT_ID = #{subjectId} </if>
+    		<if test="subjectIdVague != null and subjectIdVague != ''"> and t.SUBJECT_ID like concat('%',#{subjectIdVague},'%') </if>
+            <if test="sort != null and sort != ''"> and t.SORT = #{sort} </if>
+    		<if test="sortVague != null and sortVague != ''"> and t.SORT like concat('%',#{sortVague},'%') </if>
+            <if test="createBy != null and createBy != ''"> and t.CREATE_BY = #{createBy} </if>
+    		<if test="createByVague != null and createByVague != ''"> and t.CREATE_BY like concat('%',#{createByVague},'%') </if>
+            <if test="updateBy != null and updateBy != ''"> and t.UPDATE_BY = #{updateBy} </if>
+    		<if test="updateByVague != null and updateByVague != ''"> and t.UPDATE_BY like concat('%',#{updateByVague},'%') </if>
+        </where>
+    </sql>
+	 
+	<insert id="save" parameterType="cc.niushuai.graduate.entity.EduTeacher" useGeneratedKeys="true" keyProperty="id">
+		insert into edu_teacher
+		(
+			`NAME`, 
+			`EDUCATION`, 
+			`CAREER`, 
+			`IS_STAR`, 
+			`PIC_PATH`, 
+			`STATUS`, 
+			`CREATE_TIME`, 
+			`UPDATE_TIME`, 
+			`SUBJECT_ID`, 
+			`SORT`, 
+			`CREATE_BY`, 
+			`UPDATE_BY`
+		)
+		values
+		(
+			#{name}, 
+			#{education}, 
+			#{career}, 
+			#{isStar}, 
+			#{picPath}, 
+			#{status}, 
+			#{createTime}, 
+			#{updateTime}, 
+			#{subjectId}, 
+			#{sort}, 
+			#{createBy}, 
+			#{updateBy}
+		)
+	</insert>
+
+	<update id="update" parameterType="cc.niushuai.graduate.entity.EduTeacher">
+		update edu_teacher 
+		<set>
+			<if test="name != null">`NAME` = #{name}, </if>
+			<if test="education != null">`EDUCATION` = #{education}, </if>
+			<if test="career != null">`CAREER` = #{career}, </if>
+			<if test="isStar != null">`IS_STAR` = #{isStar}, </if>
+			<if test="picPath != null">`PIC_PATH` = #{picPath}, </if>
+			<if test="status != null">`STATUS` = #{status}, </if>
+			<if test="createTime != null">`CREATE_TIME` = #{createTime}, </if>
+			<if test="updateTime != null">`UPDATE_TIME` = #{updateTime}, </if>
+			<if test="subjectId != null">`SUBJECT_ID` = #{subjectId}, </if>
+			<if test="sort != null">`SORT` = #{sort}, </if>
+			<if test="createBy != null">`CREATE_BY` = #{createBy}, </if>
+			<if test="updateBy != null">`UPDATE_BY` = #{updateBy}</if>
+		</set>
+		where ID = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from edu_teacher where ID = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from edu_teacher where ID in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>
