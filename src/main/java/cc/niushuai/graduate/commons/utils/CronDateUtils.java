@@ -74,7 +74,6 @@ public class CronDateUtils {
      *
      * @param expressionStr
      * @return
-     * @songwen 2018年8月28日
      */
     public static boolean isValidExpressionStr(String expressionStr) {
         if (StringUtils.isEmpty(expressionStr)) {
@@ -124,6 +123,30 @@ public class CronDateUtils {
 
     }
 
+    /**
+     * 校验时间是否是合法时间
+     *
+     * @param sendTime
+     * @return
+     */
+    public static boolean isValidDate(String sendTime) {
+        try {
+            return isCanDoExpression(getCron(sendTime));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     * 校验时间是否是合法时间
+     *
+     * @param sendTime
+     * @return
+     */
+    public static boolean isValidDate(Date sendTime) {
+        return isValidDate(DateUtil.formatDateTime(sendTime));
+    }
 
     public static void main(String[] args) {
         String cron = CronDateUtils.getCron(new Date());
@@ -131,4 +154,5 @@ public class CronDateUtils {
         Date date = CronDateUtils.getDate(cron);
         System.out.println(DateUtil.formatDateTime(date));
     }
+
 }

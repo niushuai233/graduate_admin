@@ -58,7 +58,7 @@
         <div class="page-footer">
             <div class="btn-list">
                 <div class="btnlist">
-                    <button class="layui-btn" lay-submit="" lay-filter="submit" data-url="/eduemailsendhistory/send">
+                    <button class="layui-btn" lay-submit="" lay-filter="submit" data-url="/eduemailsendhistory/sendEmail">
                         <i class="fa fa-floppy-o">&nbsp;</i>发送
                     </button>
                 </div>

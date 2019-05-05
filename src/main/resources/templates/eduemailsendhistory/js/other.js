@@ -59,7 +59,35 @@ layui.use(['form'], function () {
         return false;
     });
 
+
+    //监听提交
+    form.on('submit(submit)', function (data) {
+        var url=$(this).attr("data-url");
+        $.ajax({
+            url: url,
+            type: "post",
+            contentType: "application/json",
+            data: JSON.stringify(data.field),
+            async: false,
+            dataType: "json",
+            success: function (R) {
+                if (R.code == 0) {
+                    location.href = '/eduemailsendhistory/send';
+                    //刷新页面
+                    parent.layer.msg('操作成功 !', {icon: 1});
+                } else {
+                    parent.layer.msg(R.msg, {icon: 5});
+                }
+            },
+            error: function () {
+                alert("系统繁忙");
+            }
+        });
+        return false;
+    });
+
 });
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

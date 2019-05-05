@@ -1,22 +1,17 @@
 package cc.niushuai.graduate.service;
 
 /**
- * email 服务配置
+ * email 服务发送 包含立即发送和定时发送 不包含附件内容 可以富文本显示
  *
  * @author niushuai
  * @date
  */
 public interface MailService {
 
-    /**
-     * 发送邮件才测试类
-     *
-     * @param to
-     */
-    void testSend(String... to);
 
     /**
      * 定时发送邮件
+     *
      * @param emails
      * @param title
      * @param content

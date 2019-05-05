@@ -1,6 +1,7 @@
 package cc.niushuai.graduate.controller;
 
 import cc.niushuai.graduate.commons.enumresource.StateEnum;
+import cc.niushuai.graduate.commons.utils.CronDateUtils;
 import cc.niushuai.graduate.commons.utils.PageUtils;
 import cc.niushuai.graduate.commons.utils.Query;
 import cc.niushuai.graduate.commons.utils.ResultUtil;
@@ -174,7 +175,8 @@ public class EduEmailsendHistoryController {
      *
      * @return
      */
-    @PostMapping("/send")
+    @RequestMapping("/sendEmail")
+    @ResponseBody
     public ResultUtil send(@RequestBody String bodyJson) {
         try {
             JSONObject jsonObject = JSONObject.parseObject(bodyJson);
@@ -187,6 +189,7 @@ public class EduEmailsendHistoryController {
                 return ResultUtil.error("接收人不能为空");
             }
             email = email.replace("\"", "").replace("[", "").replace("]", "");
+
             /**
              * 邮箱标题
              */
@@ -194,6 +197,7 @@ public class EduEmailsendHistoryController {
             if (StringUtils.isEmpty(title)) {
                 return ResultUtil.error("标题不能为空");
             }
+
             /**
              * 类型 1 立即发送 2定时发送
              */
@@ -201,6 +205,7 @@ public class EduEmailsendHistoryController {
             if (StringUtils.isEmpty(type)) {
                 return ResultUtil.error("发送类型不能为空");
             }
+
             /**
              * 邮箱定时发送时间 只有type为2时会用到
              */
@@ -208,6 +213,12 @@ public class EduEmailsendHistoryController {
             if ("2".equalsIgnoreCase(type) && StringUtils.isEmpty(sendTime)) {
                 return ResultUtil.error("定时发送时间不能为空");
             }
+
+            // 校验日期是否能被定时处理
+            if (!CronDateUtils.isValidDate(sendTime)) {
+                return ResultUtil.error("定时发送时间[" + sendTime + "]永远不可能到达");
+            }
+
             /**
              * md格式正文
              */
@@ -215,6 +226,7 @@ public class EduEmailsendHistoryController {
             if (StringUtils.isEmpty(markdown)) {
                 return ResultUtil.error("正文不能为空");
             }
+
             /**
              * html正文
              */
@@ -222,8 +234,9 @@ public class EduEmailsendHistoryController {
             if (StringUtils.isEmpty(html)) {
                 return ResultUtil.error("正文不能为空");
             }
-            ResultUtil resultUtil = eduEmailsendHistoryService.sendEmail(email, title, sendTime, type, markdown, html);
-            return resultUtil;
+
+            return eduEmailsendHistoryService.sendEmail(email, title, sendTime, type, markdown, html);
+
         } catch (Exception e) {
             e.printStackTrace();
             log.error("邮件发送失败:{}", e.getMessage());
