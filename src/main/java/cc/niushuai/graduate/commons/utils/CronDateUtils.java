@@ -1,10 +1,15 @@
 package cc.niushuai.graduate.commons.utils;
 
 import cn.hutool.core.date.DateUtil;
+import org.apache.commons.lang.StringUtils;
+import org.quartz.CronExpression;
+import org.quartz.TriggerUtils;
+import org.quartz.impl.triggers.CronTriggerImpl;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 提供Quartz的cron表达式与Date之间的转换
@@ -49,6 +54,62 @@ public class CronDateUtils {
         }
         return date;
     }
+
+    /**
+     * 校验定时任务格式
+     *
+     * @param expressionStr
+     * @return
+     * @songwen 2018年8月28日
+     */
+    public static boolean isValidExpressionStr(String expressionStr) {
+        if (StringUtils.isEmpty(expressionStr)) {
+            return false;
+        }
+        return CronExpression.isValidExpression(expressionStr);
+    }
+
+    /**
+     * 校验表达式是否能触发(相对于当前时间)
+     *
+     * @param expressionStr
+     * @return
+     * @throws ParseException
+     */
+    public static boolean isCanDoExpression(String expressionStr) throws ParseException {
+        //先判断表达式格式是否正确
+        if (!isValidExpressionStr(expressionStr)) {
+            return false;
+        }
+        CronTriggerImpl triggerImpl = new CronTriggerImpl();
+        triggerImpl.setCronExpression(expressionStr);
+        Date date = triggerImpl.computeFirstFireTime(null);
+        return date != null && date.after(new Date());
+    }
+
+    /**
+     * 获取一段时间内可以运行日期
+     *
+     * @param expressionStr
+     * @param beginDate
+     * @param endDate
+     * @return
+     * @throws ParseException
+     */
+    public static List<Date> getCanDoBetween(String expressionStr, Date beginDate, Date endDate) throws ParseException {
+        //先判断表达式格式是否正确
+        if (!isValidExpressionStr(expressionStr)) {
+            return null;
+        }
+        if (endDate.before(beginDate)) {
+            return null;
+        }
+        CronTriggerImpl triggerImpl = new CronTriggerImpl();
+        triggerImpl.setCronExpression(expressionStr);
+        return TriggerUtils.computeFireTimesBetween(triggerImpl, null, beginDate, endDate);
+
+    }
+
 
     public static void main(String[] args) {
         String cron = CronDateUtils.getCron(new Date());
