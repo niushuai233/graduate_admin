@@ -1,5 +1,7 @@
 package cc.niushuai.graduate.commons.constant;
 
+import java.util.UUID;
+
 /**
  * @ClassName Constant
  * @Description:
@@ -8,6 +10,16 @@ package cc.niushuai.graduate.commons.constant;
  * @Date 2019/3/13
  */
 public class Constant {
+
+    /**
+     * @description: 时间格式化样式
+     * @params:
+     * @author: ns
+     * @date: 2019/5/5 13:41
+     */
+    public static final String DATE_DEFAULT_FORMAT = "yyyy-MM-dd HH:mm:ss";
+
+    public static String randomUUID = UUID.randomUUID().toString();
 
     /**
      * 主键
@@ -69,10 +81,51 @@ public class Constant {
     public static final String NUMBER_9 = "9";
 
     /**
+     * 数字keys
+     */
+    public static final int NUMBER_0_INT = 0;
+    public static final int NUMBER_1_INT = 1;
+    public static final int NUMBER_2_INT = 2;
+    public static final int NUMBER_3_INT = 3;
+    public static final int NUMBER_4_INT = 4;
+    public static final int NUMBER_5_INT = 5;
+    public static final int NUMBER_6_INT = 6;
+    public static final int NUMBER_7_INT = 7;
+    public static final int NUMBER_8_INT = 8;
+    public static final int NUMBER_9_INT = 9;
+
+    /**
      * @description: 定时任务使用
      * @author: ns
      * @date: 2019/5/5 11:17
      */
     public static final String MAIL_SEND_JOB_DETAIL_IDENTITY = "mailSendJobDefaultIdentity";
     public static final String MAIL_SEND_CRON_TRIGGER_IDENTITY = "cronTriggerIdentity";
+
+    /**
+     * @description: 一堆可以用作分隔符的符号
+     * @params:
+     * @author: ns
+     * @date: 2019/5/5 13:04
+     */
+    public static final String REGEX_LINE = "|";
+    public static final String REGEX_POINT = ".";
+    public static final String REGEX_COMMA = ",";
+    public static final String REGEX_PERCENT = "%";
+    public static final String REGEX_DOLLAR = "$";
+    public static final String REGEX_RMD = "￥";
+    public static final String REGEX_ASTERISK = "*";
+    public static final String REGEX_LEFT_BRACKETS = "(";
+    public static final String REGEX_RIGHT_BRACKETS = ")";
+    public static final String REGEX_SMALL_RIGHT_BRACKETS = "}";
+    public static final String REGEX_BIG_RIGHT_BRACKETS = "}";
+    public static final String REGEX_AI_TE = "@";
+    public static final String REGEX_EXCLAMATION_MARK = "!";
+    public static final String REGEX_ADD_MARK = "+";
+    public static final String REGEX_MINUS_MARK = "-";
+    public static final String REGEX_POSITIVE_SLASH = "/";
+    public static final String REGEX_BACKSLASH = "\\";
+
+
+
 }

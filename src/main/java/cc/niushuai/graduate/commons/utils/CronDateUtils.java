@@ -1,7 +1,10 @@
 package cc.niushuai.graduate.commons.utils;
 
+import cc.niushuai.graduate.commons.constant.Constant;
 import cn.hutool.core.date.DateUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.quartz.CronExpression;
 import org.quartz.TriggerUtils;
 import org.quartz.impl.triggers.CronTriggerImpl;
@@ -16,8 +19,19 @@ import java.util.List;
  *
  * @author niushuai
  */
+@Slf4j
 public class CronDateUtils {
     private static final String CRON_DATE_FORMAT = "ss mm HH dd MM ? yyyy";
+
+    public static String getCron(final String dateStr) {
+        Date date = null;
+        try {
+            date = DateUtils.parseDate(dateStr, Constant.DATE_DEFAULT_FORMAT);
+        } catch (ParseException e) {
+            log.error("封装时间出错");
+        }
+        return getCron(date);
+    }
 
     /***
      *

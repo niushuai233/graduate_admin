@@ -186,6 +186,7 @@ public class EduEmailsendHistoryController {
             if (StringUtils.isEmpty(email) || email.equalsIgnoreCase(",")) {
                 return ResultUtil.error("接收人不能为空");
             }
+            email = email.replace("\"", "").replace("[", "").replace("]", "");
             /**
              * 邮箱标题
              */
@@ -224,6 +225,7 @@ public class EduEmailsendHistoryController {
             ResultUtil resultUtil = eduEmailsendHistoryService.sendEmail(email, title, sendTime, type, markdown, html);
             return resultUtil;
         } catch (Exception e) {
+            e.printStackTrace();
             log.error("邮件发送失败:{}", e.getMessage());
         }
         return ResultUtil.error("邮件发送失败");

@@ -35,7 +35,7 @@ public class PathInit implements ApplicationRunner {
         // 此处得到的内容样式如：106.12.218.104:22122 需要将端口号分开
         String[] split = property.split(":");
         PathUtil.fdfsAccessPrefix = PathUtil.http.replace(Constant.IP_STRING_KEY, split[0]).replace(Constant.PORT_STRING_KEY, Constant.HTTP_PORT);
-        log.info("init fdfsAccessPrefix:{} success", PathUtil.fdfsAccessPrefix);
+        log.info("init fdfsAccessPrefix: [{}] success", PathUtil.fdfsAccessPrefix);
 
         log.info("PathInit over ...");
     }

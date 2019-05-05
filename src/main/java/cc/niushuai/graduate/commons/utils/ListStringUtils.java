@@ -115,4 +115,18 @@ public class ListStringUtils {
     private static boolean verifyList(List list) {
         return CollectionUtil.isNotEmpty(list);
     }
+
+    /**
+     * @description: list 转 string arr
+     * @params: [toList]
+     * @author: ns
+     * @date: 2019/5/5 14:05
+     */
+    public static String[] list2StringArray(List<String> toList) {
+        String[] strs = new String[toList.size()];
+        for (int i = 0; i < toList.size(); i++) {
+            strs[i] = toList.get(i);
+        }
+        return strs;
+    }
 }

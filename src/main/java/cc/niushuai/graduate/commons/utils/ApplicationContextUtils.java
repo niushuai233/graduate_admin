@@ -30,6 +30,17 @@ public class ApplicationContextUtils implements ApplicationContextAware {
         return applicationContext.getBean(name, requiredType);
     }
 
+    /**
+     * 通过class获取Bean.
+     *
+     * @param clazz
+     * @param <T>
+     * @return
+     */
+    public static <T> T getBean(Class<T> clazz) {
+        return applicationContext.getBean(clazz);
+    }
+
     public static boolean containsBean(String name) {
         return applicationContext.containsBean(name);
     }

@@ -49,7 +49,7 @@ public class EduEmailsendHistory implements Serializable {
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date sendTime;
     /**
-     * 1 已发送 2 未发送
+     * 0 发送失败 1 已发送 2 待发送
      */
     private Integer status;
     /**
