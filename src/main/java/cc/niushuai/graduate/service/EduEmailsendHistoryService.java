@@ -8,26 +8,26 @@ import java.util.Map;
 
 /**
  * 邮件发送记录
- * 
+ *
  * @author niushuai
  * @email niushuai951101@gmail.com
  * @date 2019-05-03 12:16:04
  */
-public interface EduEmailsendHistoryService extends BaseService<EduEmailsendHistory>{
-	
-	EduEmailsendHistory get(Integer id);
-	
-	List<EduEmailsendHistory> getList(Map<String, Object> map);
-	
-	int getCount(Map<String, Object> map);
-	
-	void save(EduEmailsendHistory eduEmailsendHistory);
-	
-	void update(EduEmailsendHistory eduEmailsendHistory);
-	
-	void delete(Integer id);
-	
-	void deleteBatch(Integer[] ids);
+public interface EduEmailsendHistoryService extends BaseService<EduEmailsendHistory> {
+
+    EduEmailsendHistory get(Integer id);
+
+    List<EduEmailsendHistory> getList(Map<String, Object> map);
+
+    int getCount(Map<String, Object> map);
+
+    void save(EduEmailsendHistory eduEmailsendHistory);
+
+    void update(EduEmailsendHistory eduEmailsendHistory);
+
+    void delete(Integer id);
+
+    void deleteBatch(Integer[] ids);
 
     void updateState(Integer[] ids, String stateValue);
 

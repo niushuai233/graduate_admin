@@ -9,61 +9,53 @@ import java.util.Date;
 
 
 /**
- * 导航表
+ * 问答标签
  *
  * @author niushuai
  * @email niushuai951101@gmail.com
- * @date 2019-05-02 17:16:49
+ * @date 2019-05-06 13:48:05
  */
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class EduWebsiteNavigate implements Serializable {
+public class EduQuestionsTag implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * ID
+     * 主键id
      */
-    private Integer id;
+    private Integer questionsTagId;
     /**
-     * 导航显示名称
+     * 标签名
      */
-    private String name;
+    private String questionsTagName;
     /**
-     * 导航显示位置
+     * 父级id
      */
-    private String url;
+    private String parentId;
     /**
-     * 是否在新页面打开0是1否
+     * 父级标签名称
      */
-    private Integer newpage;
+    private String parentName;
     /**
-     * 类型：INDEX首页、USER个人中心、FRIENDLINK尾部友链、TAB尾部标签
-     */
-    private String type;
-    /**
-     * 显示排序
-     */
-    private Integer ordernum;
-    /**
-     * 0正常1冻结
+     * 状态0默认1删除
      */
     private Integer status;
     /**
-     * 创建日期
+     * 标签创建时间
      */
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date createDate;
+    private Date createTime;
     /**
-     * 更新日期
+     * 更新时间
      */
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date updateDate;
+    private Date updateTime;
     /**
-     * 创建人
+     *
      */
     private String createBy;
     /**
-     * 更新人
+     *
      */
     private String updateBy;
 

@@ -43,6 +43,12 @@ public class SysSubjectServiceImpl extends BaseServiceImpl<SysSubject> implement
     @Override
     public void update(SysSubject sysSubject) {
         super.addValue(sysSubject, false, 1);
+
+        // 添加父级菜单做冗余
+        Long parentId = sysSubject.getParentId();
+        SysSubject parent = get(parentId);
+        sysSubject.setParentName(parent.getSubjectName());
+
         sysSubject.setUpdateTime(new Date());
         sysSubjectMapper.update(sysSubject);
     }

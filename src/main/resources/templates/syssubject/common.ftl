@@ -1,6 +1,5 @@
 <#--  专业信息公用页面-->
-<#--  niushuai 2019-05-06 01:56:41-->
-
+<#--  niushuai 2019-05-06 12:46:32-->
 <div class="layui-form-item">
     <label class="layui-form-label">专业名称<span class="span_must">*</span></label>
     <div class="layui-input-normal">
@@ -10,18 +9,18 @@
 </div>
 
 <div class="layui-form-item">
-    <label class="layui-form-label">上级专业<span class="span_must">*</span></label>
+    <label class="layui-form-label">上级菜单<span class="span_must">*</span></label>
     <div class="layui-input-normal">
-        <input value="${(model.parentId)!""}" id="parentId" name="parentId" cyType="treeTool"
-               cyProps="url:'/sys/menu/select',name:'parentId'"
-               placeholder="请选择上级专业" class="layui-input"/>
+        <input value="${(model.parentId)!""}" id="parentId" cyType="treeTool" lay-verify="required"
+               cyProps="url:'/syssubject/selectTreeTool',name:'parentId'"
+               placeholder="请选择上级菜单" class="layui-input"/>
     </div>
 </div>
 
 <div class="layui-form-item">
     <label class="layui-form-label">排序<span class="span_must">*</span></label>
     <div class="layui-input-normal">
-        <input type="text" name="sort" maxlength="2" lay-verify="required"
+        <input type="text" name="sort" maxlength="20" lay-verify="required"
                value="${(model.sort)!""}" placeholder="请输入排序" class="layui-input">
     </div>
 </div>

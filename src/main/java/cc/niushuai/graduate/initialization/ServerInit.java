@@ -23,8 +23,6 @@ public class ServerInit implements ApplicationRunner {
         log.info("ServerInit run ...");
 
 
-
-
         log.info("ServerInit over ...");
     }
 }

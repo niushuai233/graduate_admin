@@ -1,8 +1,8 @@
 /**
- * 专业信息
+ * 问答标签
  * @author niushuai
  * @email niushuai951101@gmail.com
- * @date 2019-05-06 12:46:32
+ * @date 2019-05-06 13:48:05
  */
 
 /**数据渲染对象*/
@@ -29,7 +29,7 @@ var Render = {
      * @description      详情按钮渲染
      */
     info:function(rowdata,renderData){
-        var btn=' <button  onclick="detailOne(\''+"/syssubject/info"+'\',\''+rowdata.subjectId+'\')" class="layui-btn layui-btn-mini">详情</button>';
+        var btn=' <button  onclick="detailOne(\''+"/eduquestionstag/info"+'\',\''+rowdata.questionsTagId+'\')" class="layui-btn layui-btn-mini">详情</button>';
         return btn;
     },
     /**
@@ -38,7 +38,7 @@ var Render = {
      * @description      修改按钮渲染
      */
     edit:function(rowdata,renderData){
-        var btn=' <button  onclick="editOne(\''+"/syssubject/edit"+'\',\''+rowdata.subjectId+'\')" class="layui-btn layui-btn-mini">修改</button>';
+        var btn=' <button  onclick="editOne(\''+"/eduquestionstag/edit"+'\',\''+rowdata.questionsTagId+'\')" class="layui-btn layui-btn-mini">修改</button>';
         return btn;
     },
     img: function (rowdata,renderData, index, value) {
@@ -50,7 +50,7 @@ var Render = {
      * @description      删除按钮渲染
      */
     delete:function(rowdata,renderData){
-        var btn=' <button  onclick="deleteOne(\''+"删除"+'\',\''+"/syssubject/delete"+'\',\''+rowdata.subjectId+'\')" class="layui-btn layui-btn-mini layui-btn-delete">删除</button>';
+        var btn=' <button  onclick="deleteOne(\''+"删除"+'\',\''+"/eduquestionstag/delete"+'\',\''+rowdata.questionsTagId+'\')" class="layui-btn layui-btn-mini layui-btn-delete">删除</button>';
         return btn;
     },
     /**
@@ -61,13 +61,13 @@ var Render = {
     state:function(rowdata,renderData){
         // 表明已禁用 按钮需要变为启用
         if(rowdata.status=='0'){
-            return' <button onclick="updateStateOne(\''+"启用"+'\',\''+"/syssubject/enable"+'\',\''+rowdata.subjectId+'\')"' +
+            return' <button onclick="updateStateOne(\''+"启用"+'\',\''+"/eduquestionstag/enable"+'\',\''+rowdata.questionsTagId+'\')"' +
                 '  class="layui-btn layui-btn-mini layui-btn-green">启用</button>';
         }
 
         // 表明已启用 按钮需要变为禁用
         if(rowdata.status=='1'){
-            return' <button  onclick="updateStateOne(\''+"禁用"+'\',\''+"/syssubject/disable"+'\',\''+rowdata.subjectId+'\')" ' +
+            return' <button  onclick="updateStateOne(\''+"禁用"+'\',\''+"/eduquestionstag/disable"+'\',\''+rowdata.questionsTagId+'\')" ' +
                 'class="layui-btn layui-btn-mini layui-btn-danger">禁用</button>';
         }
         return "";

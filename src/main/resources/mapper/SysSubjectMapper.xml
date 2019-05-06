@@ -8,6 +8,7 @@
         <result property="subjectId" column="SUBJECT_ID"/>
         <result property="subjectName" column="SUBJECT_NAME"/>
         <result property="parentId" column="PARENT_ID"/>
+        <result property="parentName" column="PARENT_NAME"/>
         <result property="sort" column="sort"/>
         <result property="status" column="STATUS"/>
         <result property="createBy" column="CREATE_BY"/>
@@ -27,7 +28,7 @@
                 order by ${sidx} ${order}
             </when>
 			<otherwise>
-                order by SUBJECT_ID desc
+                order by sort asc
 			</otherwise>
         </choose>
 		<if test="offset != null and limit != null">
@@ -49,10 +50,12 @@
     		<if test="subjectNameVague != null and subjectNameVague != ''"> and t.SUBJECT_NAME like concat('%',#{subjectNameVague},'%') </if>
             <if test="parentId != null and parentId != ''"> and t.PARENT_ID = #{parentId} </if>
     		<if test="parentIdVague != null and parentIdVague != ''"> and t.PARENT_ID like concat('%',#{parentIdVague},'%') </if>
+            <if test="parentName != null and parentName != ''"> and t.PARENT_NAME = #{parentName} </if>
+    		<if test="parentNameVague != null and parentNameVague != ''"> and t.PARENT_NAME like concat('%',#{parentNameVague},'%') </if>
             <if test="sort != null and sort != ''"> and t.sort = #{sort} </if>
     		<if test="sortVague != null and sortVague != ''"> and t.sort like concat('%',#{sortVague},'%') </if>
-            <if test="status != null and status != ''"> and t.STATUS = #{status} </if>
-    		<if test="statusVague != null and statusVague != ''"> and t.STATUS like concat('%',#{statusVague},'%') </if>
+			<if test="status != null and status != ''"> and t.STATUS = #{status} </if>
+			<if test="statusVague != null and statusVague != ''"> and t.STATUS like concat('%',#{statusVague},'%') </if>
             <if test="createBy != null and createBy != ''"> and t.CREATE_BY = #{createBy} </if>
     		<if test="createByVague != null and createByVague != ''"> and t.CREATE_BY like concat('%',#{createByVague},'%') </if>
             <if test="updateBy != null and updateBy != ''"> and t.UPDATE_BY = #{updateBy} </if>
@@ -69,7 +72,8 @@
 		(
 			`SUBJECT_NAME`, 
 			`PARENT_ID`, 
-			`sort`, 
+			`PARENT_NAME`,
+			`sort`,
 			`STATUS`, 
 			`CREATE_BY`, 
 			`UPDATE_BY`, 
@@ -80,7 +84,8 @@
 		(
 			#{subjectName}, 
 			#{parentId}, 
-			#{sort}, 
+			#{parentName},
+			#{sort},
 			#{status}, 
 			#{createBy}, 
 			#{updateBy}, 
@@ -94,6 +99,7 @@
 		<set>
 			<if test="subjectName != null">`SUBJECT_NAME` = #{subjectName}, </if>
 			<if test="parentId != null">`PARENT_ID` = #{parentId}, </if>
+			<if test="parentName != null">`PARENT_NAME` = #{parentName}, </if>
 			<if test="sort != null">`sort` = #{sort}, </if>
 			<if test="status != null">`STATUS` = #{status}, </if>
 			<if test="createBy != null">`CREATE_BY` = #{createBy}, </if>

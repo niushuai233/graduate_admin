@@ -1,21 +1,20 @@
 package cc.niushuai.graduate.controller;
 
-import java.util.List;
-import java.util.Map;
-
 import cc.niushuai.graduate.commons.enumresource.StateEnum;
-import cc.niushuai.graduate.config.log.Log;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.stereotype.Controller;
-
-import cc.niushuai.graduate.entity.EduWebsiteProfile;
-import cc.niushuai.graduate.service.EduWebsiteProfileService;
 import cc.niushuai.graduate.commons.utils.PageUtils;
 import cc.niushuai.graduate.commons.utils.Query;
 import cc.niushuai.graduate.commons.utils.ResultUtil;
+import cc.niushuai.graduate.config.log.Log;
+import cc.niushuai.graduate.entity.EduWebsiteProfile;
+import cc.niushuai.graduate.service.EduWebsiteProfileService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
 
 
 /**

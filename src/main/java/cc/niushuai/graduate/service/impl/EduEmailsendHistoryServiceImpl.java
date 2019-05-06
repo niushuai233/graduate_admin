@@ -7,14 +7,11 @@ import cc.niushuai.graduate.entity.EduEmailsendHistory;
 import cc.niushuai.graduate.mapper.EduEmailsendHistoryMapper;
 import cc.niushuai.graduate.service.EduEmailsendHistoryService;
 import cc.niushuai.graduate.service.MailService;
-import cn.hutool.core.date.DateUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
 
 import java.text.ParseException;
 import java.util.*;
