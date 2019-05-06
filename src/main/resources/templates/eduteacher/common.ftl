@@ -83,7 +83,7 @@
 <div class="layui-form-item">
     <label class="layui-form-label mylable">讲师专业<span class="span_must">*</span></label>
     <div class="layui-input-normal">
-        <input value="${(model.subjectId)!""}" id="subjectId" name="subjectId" cyType="treeTool" cyProps="url:'/sys/menu/select',name:'parentId'"
+        <input value="${(model.subjectId)!""}" id="subjectId" name="subjectId" cyType="treeTool" cyProps="url:'/syssubject/selectTreeTool',name:'subjectId'"
                placeholder="请选择专业" class="layui-input"/>
     </div>
 </div>
