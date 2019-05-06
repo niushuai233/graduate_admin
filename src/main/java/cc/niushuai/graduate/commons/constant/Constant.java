@@ -126,5 +126,10 @@ public class Constant {
     public static final String REGEX_POSITIVE_SLASH = "/";
     public static final String REGEX_BACKSLASH = "\\";
 
+    /**
+     * 读取自定义配置key
+     */
+
+    public static final String NS_FRONT_PATH = "ns.front-path";
 
 }

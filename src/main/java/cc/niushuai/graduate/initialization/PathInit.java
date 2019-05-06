@@ -37,6 +37,17 @@ public class PathInit implements ApplicationRunner {
         PathUtil.fdfsAccessPrefix = PathUtil.http.replace(Constant.IP_STRING_KEY, split[0]).replace(Constant.PORT_STRING_KEY, Constant.HTTP_PORT);
         log.info("init fdfsAccessPrefix: [{}] success", PathUtil.fdfsAccessPrefix);
 
+
+        String nsFrontPath = (String) YAMLUtil.getProperty(Constant.MAIN_CONFIG_YAML, Constant.NS_FRONT_PATH);
+        if (StringUtils.isEmpty(nsFrontPath)) {
+            log.error("the property {} in {} doesn't exist, please check the file", Constant.NS_FRONT_PATH, Constant.MAIN_CONFIG_YAML);
+            log.info("PathInit over ...");
+        }
+
+        PathUtil.questionInfoPrefix = nsFrontPath;
+        log.info("init questionInfoPath: [{}] success", PathUtil.questionInfoPrefix);
+
+
         log.info("PathInit over ...");
     }
 }

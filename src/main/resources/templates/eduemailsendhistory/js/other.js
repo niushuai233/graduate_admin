@@ -42,7 +42,7 @@ $(function () {
     }
 
     var ed = initEditor('/upload/eImageUpload', "", "95%", "65%");
-    console.log(ed);
+    // console.log(ed);
 })
 
 layui.use(['form'], function () {

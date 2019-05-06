@@ -55,3 +55,7 @@ fdfs:
     max-total: 100
     max-wait-millis: 60
     jmx-enabled: false
+
+# 自定义配置
+ns:
+  front-path: http://106.12.218.104:8080
