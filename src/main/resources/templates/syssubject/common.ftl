@@ -9,10 +9,11 @@
 </div>
 
 <div class="layui-form-item">
-    <label class="layui-form-label">父ID<span class="span_must">*</span></label>
+    <label class="layui-form-label">上级菜单<span class="span_must">*</span></label>
     <div class="layui-input-normal">
-        <input type="text" name="parentId" maxlength="30" lay-verify="required"
-               value="${(model.parentId)!""}" placeholder="请输入父ID" class="layui-input">
+        <input value="${(model.parentId)!""}" id="parentId" cyType="treeTool" lay-verify="required"
+               cyProps="url:'/syssubject/selectTreeTool',name:'parentId'"
+               placeholder="请选择上级菜单" class="layui-input"/>
     </div>
 </div>
 

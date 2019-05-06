@@ -1,17 +1,16 @@
 package cc.niushuai.graduate.service.impl;
 
+import cc.niushuai.graduate.entity.SysSubject;
+import cc.niushuai.graduate.mapper.SysSubjectMapper;
+import cc.niushuai.graduate.service.SysSubjectService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
-
-import cc.niushuai.graduate.mapper.SysSubjectMapper;
-import cc.niushuai.graduate.entity.SysSubject;
-import cc.niushuai.graduate.service.SysSubjectService;
 
 @Slf4j
 @Service("sysSubjectService")
@@ -44,6 +43,12 @@ public class SysSubjectServiceImpl extends BaseServiceImpl<SysSubject> implement
     @Override
     public void update(SysSubject sysSubject) {
         super.addValue(sysSubject, false, 1);
+
+        // 添加父级菜单做冗余
+        Long parentId = sysSubject.getParentId();
+        SysSubject parent = get(parentId);
+        sysSubject.setParentName(parent.getSubjectName());
+
         sysSubject.setUpdateTime(new Date());
         sysSubjectMapper.update(sysSubject);
     }

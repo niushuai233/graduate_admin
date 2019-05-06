@@ -1,11 +1,13 @@
 package cc.niushuai.graduate.entity;
 
+import cc.niushuai.graduate.entity.admin.SysMenu;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -32,6 +34,14 @@ public class SysSubject implements Serializable {
      * 父ID
      */
     private Long parentId;
+
+    /**
+     * @description: `父级菜单
+     * @params:  `
+     * @author: ns `
+     * @date: 2019/5/6 12:59 `
+     */
+    private String parentName;
     /**
      * 排序
      */
@@ -59,6 +69,23 @@ public class SysSubject implements Serializable {
      */
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
+
+    /**
+     * ztree属性
+     */
+    private Boolean open;
+
+    private List<?> list;
+
+    private List<SysMenu> children;
+
+    public List<SysMenu> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<SysMenu> children) {
+        this.children = children;
+    }
 
 
 }

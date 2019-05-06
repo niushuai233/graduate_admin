@@ -1,9 +1,14 @@
 package cc.niushuai.graduate.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import cc.niushuai.graduate.commons.enumresource.StateEnum;
+import cc.niushuai.graduate.commons.enumresource.TopMenuEnum;
+import cc.niushuai.graduate.commons.utils.ZtreeBean;
 import cc.niushuai.graduate.config.log.Log;
+import cc.niushuai.graduate.entity.admin.SysMenu;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -153,5 +158,38 @@ public class SysSubjectController {
 		
 		return ResultUtil.ok();
 	}
+
+    /**
+     * 选择菜单(添加、修改菜单)
+     */
+    @ResponseBody
+    @RequestMapping("/selectTreeTool")
+    @RequiresPermissions("syssubject:list")
+    public ResultUtil select() {
+        //查询列表数据
+        Map<String, Object> queryMap = new HashMap<>();
+        queryMap.put("status", 1);
+        List<SysSubject> subjectList = sysSubjectService.getList(queryMap);
+
+        //添加顶级菜单
+        SysSubject root = new SysSubject();
+        root.setSubjectId(Long.parseLong(TopMenuEnum.TopMenu.getCode()));
+        root.setSubjectName(TopMenuEnum.TopMenu.getDesc());
+        root.setParentId((long) -1);
+        root.setOpen(true);
+        subjectList.add(root);
+        List<ZtreeBean> ztreeBeans = new ArrayList<>();
+        for (SysSubject subject : subjectList) {
+            ZtreeBean tree = new ZtreeBean();
+            tree.setId(subject.getSubjectId() + "");
+            tree.setpId(subject.getParentId() + "");
+            tree.setName(subject.getSubjectName());
+            tree.setOpen(subject.getOpen() + "");
+            tree.setChkDisabled("false");
+            ztreeBeans.add(tree);
+        }
+
+        return ResultUtil.ok().put("data", ztreeBeans);
+    }
 	
 }
