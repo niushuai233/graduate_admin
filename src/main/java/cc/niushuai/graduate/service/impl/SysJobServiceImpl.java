@@ -1,16 +1,15 @@
 package cc.niushuai.graduate.service.impl;
 
+import cc.niushuai.graduate.entity.SysJob;
+import cc.niushuai.graduate.mapper.SysJobMapper;
+import cc.niushuai.graduate.service.SysJobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
-
-import cc.niushuai.graduate.mapper.SysJobMapper;
-import cc.niushuai.graduate.entity.SysJob;
-import cc.niushuai.graduate.service.SysJobService;
 
 
 @Service("sysJobService")

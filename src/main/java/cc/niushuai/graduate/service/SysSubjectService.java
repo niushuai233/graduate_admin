@@ -7,26 +7,26 @@ import java.util.Map;
 
 /**
  * 专业信息
- * 
+ *
  * @author niushuai
  * @email niushuai951101@gmail.com
  * @date 2019-05-06 12:46:32
  */
-public interface SysSubjectService extends BaseService<SysSubject>{
-	
-	SysSubject get(Long subjectId);
-	
-	List<SysSubject> getList(Map<String, Object> map);
-	
-	int getCount(Map<String, Object> map);
-	
-	void save(SysSubject sysSubject);
-	
-	void update(SysSubject sysSubject);
-	
-	void delete(Long subjectId);
-	
-	void deleteBatch(Long[] subjectIds);
+public interface SysSubjectService extends BaseService<SysSubject> {
+
+    SysSubject get(Long subjectId);
+
+    List<SysSubject> getList(Map<String, Object> map);
+
+    int getCount(Map<String, Object> map);
+
+    void save(SysSubject sysSubject);
+
+    void update(SysSubject sysSubject);
+
+    void delete(Long subjectId);
+
+    void deleteBatch(Long[] subjectIds);
 
     void updateState(Long[] ids, String stateValue);
 }

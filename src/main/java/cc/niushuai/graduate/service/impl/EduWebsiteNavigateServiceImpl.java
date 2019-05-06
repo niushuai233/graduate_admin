@@ -15,55 +15,55 @@ import java.util.Map;
 @Service("eduWebsiteNavigateService")
 @Transactional
 public class EduWebsiteNavigateServiceImpl extends BaseServiceImpl<EduWebsiteNavigate> implements EduWebsiteNavigateService {
-	@Autowired
-	private EduWebsiteNavigateMapper eduWebsiteNavigateMapper;
-	
-	@Override
-	public EduWebsiteNavigate get(Integer id){
-		return eduWebsiteNavigateMapper.get(id);
-	}
-
-	@Override
-	public List<EduWebsiteNavigate> getList(Map<String, Object> map){
-		return eduWebsiteNavigateMapper.getList(map);
-	}
-
-	@Override
-	public int getCount(Map<String, Object> map){
-		return eduWebsiteNavigateMapper.getCount(map);
-	}
-
-	@Override
-	public void save(EduWebsiteNavigate eduWebsiteNavigate){
-		super.addValue(eduWebsiteNavigate,false,0);
-		eduWebsiteNavigateMapper.save(eduWebsiteNavigate);
-	}
-
-	@Override
-	public void update(EduWebsiteNavigate eduWebsiteNavigate){
-		super.addValue(eduWebsiteNavigate,false,1);
-		eduWebsiteNavigate.setUpdateDate(new Date());
-		eduWebsiteNavigateMapper.update(eduWebsiteNavigate);
-	}
-
-	@Override
-	public void delete(Integer id){
-		eduWebsiteNavigateMapper.delete(id);
-	}
-
-	@Override
-	public void deleteBatch(Integer[] ids){
-		eduWebsiteNavigateMapper.deleteBatch(ids);
-	}
+    @Autowired
+    private EduWebsiteNavigateMapper eduWebsiteNavigateMapper;
 
     @Override
-    public void updateState(Integer[] ids,String stateValue) {
-        for (Integer id:ids){
-			EduWebsiteNavigate eduWebsiteNavigate=get(id);
-			eduWebsiteNavigate.setStatus(Integer.valueOf(stateValue));
-			eduWebsiteNavigate.setUpdateDate(new Date());
+    public EduWebsiteNavigate get(Integer id) {
+        return eduWebsiteNavigateMapper.get(id);
+    }
+
+    @Override
+    public List<EduWebsiteNavigate> getList(Map<String, Object> map) {
+        return eduWebsiteNavigateMapper.getList(map);
+    }
+
+    @Override
+    public int getCount(Map<String, Object> map) {
+        return eduWebsiteNavigateMapper.getCount(map);
+    }
+
+    @Override
+    public void save(EduWebsiteNavigate eduWebsiteNavigate) {
+        super.addValue(eduWebsiteNavigate, false, 0);
+        eduWebsiteNavigateMapper.save(eduWebsiteNavigate);
+    }
+
+    @Override
+    public void update(EduWebsiteNavigate eduWebsiteNavigate) {
+        super.addValue(eduWebsiteNavigate, false, 1);
+        eduWebsiteNavigate.setUpdateDate(new Date());
+        eduWebsiteNavigateMapper.update(eduWebsiteNavigate);
+    }
+
+    @Override
+    public void delete(Integer id) {
+        eduWebsiteNavigateMapper.delete(id);
+    }
+
+    @Override
+    public void deleteBatch(Integer[] ids) {
+        eduWebsiteNavigateMapper.deleteBatch(ids);
+    }
+
+    @Override
+    public void updateState(Integer[] ids, String stateValue) {
+        for (Integer id : ids) {
+            EduWebsiteNavigate eduWebsiteNavigate = get(id);
+            eduWebsiteNavigate.setStatus(Integer.valueOf(stateValue));
+            eduWebsiteNavigate.setUpdateDate(new Date());
             update(eduWebsiteNavigate);
         }
     }
-	
+
 }

@@ -37,7 +37,7 @@ public class SysSubject implements Serializable {
 
     /**
      * @description: `父级菜单
-     * @params:  `
+     * @params: `
      * @author: ns `
      * @date: 2019/5/6 12:59 `
      */
