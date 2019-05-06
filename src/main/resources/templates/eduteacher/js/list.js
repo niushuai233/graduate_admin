@@ -24,7 +24,7 @@ var Render = {
         return value;
     },
     career: function(rowdata, renderData, index, value) {
-      if (value.length > 10) {
+      if (!isEmpty(value) && value.length > 10) {
           return value.substring(0, 10) +"...";
       }
       return value;
