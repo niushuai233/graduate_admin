@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cc.niushuai.graduate.mapper.EduArticleMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="cc.niushuai.graduate.entity.EduArticle" id="eduArticleMap">
+        <result property="articleId" column="ARTICLE_ID"/>
+        <result property="title" column="TITLE"/>
+        <result property="summary" column="SUMMARY"/>
+        <result property="keyWord" column="KEY_WORD"/>
+        <result property="imageUrl" column="IMAGE_URL"/>
+        <result property="source" column="SOURCE"/>
+        <result property="author" column="AUTHOR"/>
+        <result property="publishTime" column="PUBLISH_TIME"/>
+        <result property="link" column="LINK"/>
+        <result property="articleType" column="ARTICLE_TYPE"/>
+        <result property="clickNum" column="CLICK_NUM"/>
+        <result property="praiseCount" column="PRAISE_COUNT"/>
+        <result property="commentNum" column="COMMENT_NUM"/>
+        <result property="sort" column="SORT"/>
+        <result property="state" column="STATE"/>
+        <result property="createBy" column="CREATE_BY"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="updateBy" column="UPDATE_BY"/>
+        <result property="updateDate" column="UPDATE_DATE"/>
+    </resultMap>
+
+	<select id="get" resultType="cc.niushuai.graduate.entity.EduArticle">
+		select * from edu_article where ARTICLE_ID = #{value}
+	</select>
+
+	<select id="getList" resultType="cc.niushuai.graduate.entity.EduArticle">
+		select * from edu_article t <include refid="where_clause" />
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by ARTICLE_ID desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="getCount" resultType="int">
+		select count(*) from edu_article t  <include refid="where_clause" />
+	</select>
+
+    <!-- 搜索数据区域 -->
+    <sql id="where_clause">
+        <where>
+            1=1
+            <if test="articleId != null and articleId != ''"> and t.ARTICLE_ID = #{articleId} </if>
+    		<if test="articleIdVague != null and articleIdVague != ''"> and t.ARTICLE_ID like concat('%',#{articleIdVague},'%') </if>
+            <if test="title != null and title != ''"> and t.TITLE = #{title} </if>
+    		<if test="titleVague != null and titleVague != ''"> and t.TITLE like concat('%',#{titleVague},'%') </if>
+            <if test="summary != null and summary != ''"> and t.SUMMARY = #{summary} </if>
+    		<if test="summaryVague != null and summaryVague != ''"> and t.SUMMARY like concat('%',#{summaryVague},'%') </if>
+            <if test="keyWord != null and keyWord != ''"> and t.KEY_WORD = #{keyWord} </if>
+    		<if test="keyWordVague != null and keyWordVague != ''"> and t.KEY_WORD like concat('%',#{keyWordVague},'%') </if>
+            <if test="imageUrl != null and imageUrl != ''"> and t.IMAGE_URL = #{imageUrl} </if>
+    		<if test="imageUrlVague != null and imageUrlVague != ''"> and t.IMAGE_URL like concat('%',#{imageUrlVague},'%') </if>
+            <if test="source != null and source != ''"> and t.SOURCE = #{source} </if>
+    		<if test="sourceVague != null and sourceVague != ''"> and t.SOURCE like concat('%',#{sourceVague},'%') </if>
+            <if test="author != null and author != ''"> and t.AUTHOR = #{author} </if>
+    		<if test="authorVague != null and authorVague != ''"> and t.AUTHOR like concat('%',#{authorVague},'%') </if>
+            <if test="publishTime != null and publishTime != ''"> and t.PUBLISH_TIME = #{publishTime} </if>
+    		<if test="publishTimeVague != null and publishTimeVague != ''"> and t.PUBLISH_TIME like concat('%',#{publishTimeVague},'%') </if>
+            <if test="link != null and link != ''"> and t.LINK = #{link} </if>
+    		<if test="linkVague != null and linkVague != ''"> and t.LINK like concat('%',#{linkVague},'%') </if>
+            <if test="articleType != null and articleType != ''"> and t.ARTICLE_TYPE = #{articleType} </if>
+    		<if test="articleTypeVague != null and articleTypeVague != ''"> and t.ARTICLE_TYPE like concat('%',#{articleTypeVague},'%') </if>
+            <if test="clickNum != null and clickNum != ''"> and t.CLICK_NUM = #{clickNum} </if>
+    		<if test="clickNumVague != null and clickNumVague != ''"> and t.CLICK_NUM like concat('%',#{clickNumVague},'%') </if>
+            <if test="praiseCount != null and praiseCount != ''"> and t.PRAISE_COUNT = #{praiseCount} </if>
+    		<if test="praiseCountVague != null and praiseCountVague != ''"> and t.PRAISE_COUNT like concat('%',#{praiseCountVague},'%') </if>
+            <if test="commentNum != null and commentNum != ''"> and t.COMMENT_NUM = #{commentNum} </if>
+    		<if test="commentNumVague != null and commentNumVague != ''"> and t.COMMENT_NUM like concat('%',#{commentNumVague},'%') </if>
+            <if test="sort != null and sort != ''"> and t.SORT = #{sort} </if>
+    		<if test="sortVague != null and sortVague != ''"> and t.SORT like concat('%',#{sortVague},'%') </if>
+            <if test="state != null and state != ''"> and t.STATE = #{state} </if>
+    		<if test="stateVague != null and stateVague != ''"> and t.STATE like concat('%',#{stateVague},'%') </if>
+            <if test="createBy != null and createBy != ''"> and t.CREATE_BY = #{createBy} </if>
+    		<if test="createByVague != null and createByVague != ''"> and t.CREATE_BY like concat('%',#{createByVague},'%') </if>
+            <if test="createTime != null and createTime != ''"> and t.CREATE_TIME = #{createTime} </if>
+    		<if test="createTimeVague != null and createTimeVague != ''"> and t.CREATE_TIME like concat('%',#{createTimeVague},'%') </if>
+            <if test="updateBy != null and updateBy != ''"> and t.UPDATE_BY = #{updateBy} </if>
+    		<if test="updateByVague != null and updateByVague != ''"> and t.UPDATE_BY like concat('%',#{updateByVague},'%') </if>
+            <if test="updateDate != null and updateDate != ''"> and t.UPDATE_DATE = #{updateDate} </if>
+    		<if test="updateDateVague != null and updateDateVague != ''"> and t.UPDATE_DATE like concat('%',#{updateDateVague},'%') </if>
+        </where>
+    </sql>
+	 
+	<insert id="save" parameterType="cc.niushuai.graduate.entity.EduArticle" useGeneratedKeys="true" keyProperty="articleId">
+		insert into edu_article
+		(
+			`TITLE`, 
+			`SUMMARY`, 
+			`KEY_WORD`, 
+			`IMAGE_URL`, 
+			`SOURCE`, 
+			`AUTHOR`, 
+			`PUBLISH_TIME`, 
+			`LINK`, 
+			`ARTICLE_TYPE`, 
+			`CLICK_NUM`, 
+			`PRAISE_COUNT`, 
+			`COMMENT_NUM`, 
+			`SORT`, 
+			`STATE`, 
+			`CREATE_BY`, 
+			`CREATE_TIME`, 
+			`UPDATE_BY`, 
+			`UPDATE_DATE`
+		)
+		values
+		(
+			#{title}, 
+			#{summary}, 
+			#{keyWord}, 
+			#{imageUrl}, 
+			#{source}, 
+			#{author}, 
+			#{publishTime}, 
+			#{link}, 
+			#{articleType}, 
+			#{clickNum}, 
+			#{praiseCount}, 
+			#{commentNum}, 
+			#{sort}, 
+			#{state}, 
+			#{createBy}, 
+			#{createTime}, 
+			#{updateBy}, 
+			#{updateDate}
+		)
+	</insert>
+
+	<update id="update" parameterType="cc.niushuai.graduate.entity.EduArticle">
+		update edu_article 
+		<set>
+			<if test="title != null">`TITLE` = #{title}, </if>
+			<if test="summary != null">`SUMMARY` = #{summary}, </if>
+			<if test="keyWord != null">`KEY_WORD` = #{keyWord}, </if>
+			<if test="imageUrl != null">`IMAGE_URL` = #{imageUrl}, </if>
+			<if test="source != null">`SOURCE` = #{source}, </if>
+			<if test="author != null">`AUTHOR` = #{author}, </if>
+			<if test="publishTime != null">`PUBLISH_TIME` = #{publishTime}, </if>
+			<if test="link != null">`LINK` = #{link}, </if>
+			<if test="articleType != null">`ARTICLE_TYPE` = #{articleType}, </if>
+			<if test="clickNum != null">`CLICK_NUM` = #{clickNum}, </if>
+			<if test="praiseCount != null">`PRAISE_COUNT` = #{praiseCount}, </if>
+			<if test="commentNum != null">`COMMENT_NUM` = #{commentNum}, </if>
+			<if test="sort != null">`SORT` = #{sort}, </if>
+			<if test="state != null">`STATE` = #{state}, </if>
+			<if test="createBy != null">`CREATE_BY` = #{createBy}, </if>
+			<if test="createTime != null">`CREATE_TIME` = #{createTime}, </if>
+			<if test="updateBy != null">`UPDATE_BY` = #{updateBy}, </if>
+			<if test="updateDate != null">`UPDATE_DATE` = #{updateDate}</if>
+		</set>
+		where ARTICLE_ID = #{articleId}
+	</update>
+	
+	<delete id="delete">
+		delete from edu_article where ARTICLE_ID = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from edu_article where ARTICLE_ID in 
+		<foreach item="articleId" collection="array" open="(" separator="," close=")">
+			#{articleId}
+		</foreach>
+	</delete>
+
+</mapper>
