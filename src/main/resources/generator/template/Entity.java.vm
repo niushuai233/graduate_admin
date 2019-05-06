@@ -26,19 +26,15 @@ public class ${className} implements Serializable {
 	
 #foreach ($column in $columns)
 
-	#if ($column.attrType=='Date')
-	/**
-	 *
-	 * $column.comments
-	 */
-	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	private $column.attrType $column.attrname;
-	#end
+
 
 	/**
 	 *
 	 * $column.comments
 	 */
+	#if ($column.attrType=='Date')
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+	#end
 	private $column.attrType $column.attrname;
 #end
 
