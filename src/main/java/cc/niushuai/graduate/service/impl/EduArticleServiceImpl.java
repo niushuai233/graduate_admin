@@ -40,6 +40,7 @@ public class EduArticleServiceImpl extends BaseServiceImpl<EduArticle> implement
     @Override
     public void save(EduArticle eduArticle) {
         super.addValue(eduArticle, false, 0);
+        eduArticle.setPublishTime(new Date());
         eduArticleMapper.save(eduArticle);
     }
 

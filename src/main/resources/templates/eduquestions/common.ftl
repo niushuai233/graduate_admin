@@ -44,7 +44,7 @@
 </div>
 
 <div class="layui-form-item">
-    <label class="layui-form-label"><内></内>容<span class="span_must">*</span></label>
+    <label class="layui-form-label">内容<span class="span_must">*</span></label>
     <textarea id="md" style="display: none;">${(model.markdown)!""}</textarea>
     <div id="editormdDiv">
         <textarea style="display:none;" name="markdown" class="editormd-markdown-textarea"></textarea>
