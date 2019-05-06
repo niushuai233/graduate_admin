@@ -9,6 +9,8 @@
         <result property="title" column="TITLE"/>
         <result property="summary" column="SUMMARY"/>
         <result property="keyWord" column="KEY_WORD"/>
+		<result property="markdown" column="markdown"/>
+		<result property="html" column="html"/>
         <result property="imageUrl" column="IMAGE_URL"/>
         <result property="source" column="SOURCE"/>
         <result property="author" column="AUTHOR"/>
@@ -61,6 +63,10 @@
     		<if test="summaryVague != null and summaryVague != ''"> and t.SUMMARY like concat('%',#{summaryVague},'%') </if>
             <if test="keyWord != null and keyWord != ''"> and t.KEY_WORD = #{keyWord} </if>
     		<if test="keyWordVague != null and keyWordVague != ''"> and t.KEY_WORD like concat('%',#{keyWordVague},'%') </if>
+			<if test="markdown != null and markdown != ''"> and t.markdown = #{markdown} </if>
+			<if test="markdownVague != null and markdownVague != ''"> and t.markdown like concat('%',#{markdownVague},'%') </if>
+			<if test="html != null and html != ''"> and t.html = #{html} </if>
+			<if test="htmlVague != null and htmlVague != ''"> and t.html like concat('%',#{htmlVague},'%') </if>
             <if test="imageUrl != null and imageUrl != ''"> and t.IMAGE_URL = #{imageUrl} </if>
     		<if test="imageUrlVague != null and imageUrlVague != ''"> and t.IMAGE_URL like concat('%',#{imageUrlVague},'%') </if>
             <if test="source != null and source != ''"> and t.SOURCE = #{source} </if>
@@ -99,7 +105,9 @@
 		(
 			`TITLE`, 
 			`SUMMARY`, 
-			`KEY_WORD`, 
+			`KEY_WORD`,
+			`markdown`,
+			`html`,
 			`IMAGE_URL`, 
 			`SOURCE`, 
 			`AUTHOR`, 
@@ -120,8 +128,10 @@
 		(
 			#{title}, 
 			#{summary}, 
-			#{keyWord}, 
-			#{imageUrl}, 
+			#{keyWord},
+			#{markdown},
+			#{html},
+			#{imageUrl},
 			#{source}, 
 			#{author}, 
 			#{publishTime}, 
@@ -145,6 +155,8 @@
 			<if test="title != null">`TITLE` = #{title}, </if>
 			<if test="summary != null">`SUMMARY` = #{summary}, </if>
 			<if test="keyWord != null">`KEY_WORD` = #{keyWord}, </if>
+			<if test="markdown != null">`markdown` = #{markdown}, </if>
+			<if test="html != null">`html` = #{html}, </if>
 			<if test="imageUrl != null">`IMAGE_URL` = #{imageUrl}, </if>
 			<if test="source != null">`SOURCE` = #{source}, </if>
 			<if test="author != null">`AUTHOR` = #{author}, </if>
