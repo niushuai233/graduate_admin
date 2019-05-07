@@ -1,5 +1,6 @@
 package cc.niushuai.graduate.service.impl;
 
+import cc.niushuai.graduate.commons.enumresource.TopMenuEnum;
 import cc.niushuai.graduate.entity.SysSubject;
 import cc.niushuai.graduate.mapper.SysSubjectMapper;
 import cc.niushuai.graduate.service.SysSubjectService;
@@ -46,9 +47,14 @@ public class SysSubjectServiceImpl extends BaseServiceImpl<SysSubject> implement
 
         // 添加父级菜单做冗余
         Long parentId = sysSubject.getParentId();
-        SysSubject parent = get(parentId);
-        sysSubject.setParentName(parent.getSubjectName());
-
+        if (0 == parentId) {
+            sysSubject.setParentName(TopMenuEnum.TopMenu.name());
+        }else {
+            SysSubject parent = get(parentId);
+            if (null != parent) {
+                sysSubject.setParentName(parent.getSubjectName());
+            }
+        }
         sysSubject.setUpdateTime(new Date());
         sysSubjectMapper.update(sysSubject);
     }
