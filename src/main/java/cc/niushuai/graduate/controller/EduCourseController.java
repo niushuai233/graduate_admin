@@ -154,4 +154,23 @@ public class EduCourseController {
         return ResultUtil.ok();
     }
 
+
+    /**
+     * 列表数据
+     */
+    @ResponseBody
+    @RequestMapping("/listEWCDData")
+    @RequiresPermissions("educourse:list")
+    public ResultUtil listEWCDData(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+
+        List<EduCourse> eduCourseList = eduCourseService.getEWCDList(query);
+        int total = eduCourseService.getEWCDCount(query);
+
+        PageUtils pageUtil = new PageUtils(eduCourseList, total, query.getLimit(), query.getPage());
+
+        return ResultUtil.ok().put("page", pageUtil);
+    }
+
 }

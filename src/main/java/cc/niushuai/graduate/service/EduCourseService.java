@@ -29,4 +29,8 @@ public interface EduCourseService extends BaseService<EduCourse>{
 	void deleteBatch(Long[] courseIds);
 
     void updateState(Long[] ids, String stateValue);
+
+    List<EduCourse> getEWCDList(Map<String, Object> map);
+
+    int getEWCDCount(Map<String, Object> map);
 }
