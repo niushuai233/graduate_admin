@@ -4,11 +4,11 @@ import ${package}.entity.${className};
 
 /**
  * ${comments}
- * 
+ *
  * @author ${author}
  * @email ${email}
  * @date ${datetime}
  */
 public interface ${className}Mapper extends BaseMapper<${className}> {
-	
+
 }

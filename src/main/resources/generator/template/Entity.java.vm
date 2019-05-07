@@ -14,28 +14,28 @@ import java.math.BigDecimal;
 
 /**
  * ${comments}
- * 
+ *
  * @author ${author}
  * @email ${email}
  * @date ${datetime}
  */
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ${className} implements Serializable {
-	private static final long serialVersionUID = 1L;
-	
+public class ${className} implements Serializable{
+private static final long serialVersionUID=1L;
+
 #foreach ($column in $columns)
 
 
 
-	/**
-	 *
-	 * $column.comments
-	 */
-	#if ($column.attrType=='Date')
-	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	#end
-	private $column.attrType $column.attrname;
+/**
+ *
+ * $column.comments
+ */
+    #if ($column.attrType=='Date')
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    #end
+private $column.attrType $column.attrname;
 #end
 
 

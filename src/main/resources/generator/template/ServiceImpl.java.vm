@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.Date;
 import java.util.Map;
@@ -12,59 +13,67 @@ import ${package}.mapper.${className}Mapper;
 import ${package}.entity.${className};
 import ${package}.service.${className}Service;
 
+/**
+ * ${comments}
+ *
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
 @Slf4j
 @Service("${classname}Service")
-@Transactional
+@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 public class ${className}ServiceImpl extends BaseServiceImpl<${className}> implements ${className}Service {
-	@Autowired
-	private ${className}Mapper ${classname}Mapper;
-	
-	@Override
-	public ${className} get(${pk.attrType} ${pk.attrname}){
-		return ${classname}Mapper.get(${pk.attrname});
-	}
-
-	@Override
-	public List<${className}> getList(Map<String, Object> map){
-		return ${classname}Mapper.getList(map);
-	}
-
-	@Override
-	public int getCount(Map<String, Object> map){
-		return ${classname}Mapper.getCount(map);
-	}
-
-	@Override
-	public void save(${className} ${classname}){
-		super.addValue(${classname},false,0);
-		${classname}Mapper.save(${classname});
-	}
-
-	@Override
-	public void update(${className} ${classname}){
-		super.addValue(${classname},false,1);
-		${classname}.setUpdateDate(new Date());
-		${classname}Mapper.update(${classname});
-	}
-
-	@Override
-	public void delete(${pk.attrType} ${pk.attrname}){
-		${classname}Mapper.delete(${pk.attrname});
-	}
-
-	@Override
-	public void deleteBatch(${pk.attrType}[] ${pk.attrname}s){
-		${classname}Mapper.deleteBatch(${pk.attrname}s);
-	}
+    @Autowired
+    private ${className}Mapper ${classname}Mapper;
 
     @Override
-    public void updateState(${pk.attrType}[] ids,String stateValue) {
-        for (${pk.attrType} id:ids){
-			${className} ${classname}=get(id);
-			${classname}.setState(stateValue);
-			${classname}.setUpdateDate(new Date());
+    public ${className} get(${pk.attrType} ${pk.attrname}) {
+        return ${classname}Mapper.get(${pk.attrname});
+    }
+
+    @Override
+    public List<${className}> getList(Map<String, Object> map) {
+        return ${classname}Mapper.getList(map);
+    }
+
+    @Override
+    public int getCount(Map<String, Object> map) {
+        return ${classname}Mapper.getCount(map);
+    }
+
+    @Override
+    public void save(${className} ${classname}) {
+        super.addValue(${classname}, false, 0);
+            ${classname}Mapper.save(${classname});
+    }
+
+    @Override
+    public void update(${className} ${classname}) {
+        super.addValue(${classname}, false, 1);
+        ${classname}.setUpdateDate(new Date());
+            ${classname}Mapper.update(${classname});
+    }
+
+    @Override
+    public void delete(${pk.attrType} ${pk.attrname}) {
+            ${classname}Mapper.delete(${pk.attrname});
+    }
+
+    @Override
+    public void deleteBatch(${pk.attrType}[] ${pk.attrname}s) {
+            ${classname}Mapper.deleteBatch(${pk.attrname}s);
+    }
+
+    @Override
+    public void updateState(${pk.attrType}[]ids, String stateValue) {
+        for (${pk.attrType} id:
+                            ids) {
+            ${className} ${classname}=get(id);
+            ${classname}.setState(stateValue);
+            ${classname}.setUpdateDate(new Date());
             update(${classname});
         }
     }
-	
+
 }

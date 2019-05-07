@@ -2,6 +2,7 @@ package ${package}.controller;
 
 import java.util.List;
 import java.util.Map;
+
 import ${package}.commons.enumresource.StateEnum;
 import ${package}.config.log.Log;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -20,7 +21,7 @@ import ${package}.commons.utils.ResultUtil;
 
 /**
  * ${comments}
- * 
+ *
  * @author ${author}
  * @email ${email}
  * @date ${datetime}
@@ -29,9 +30,9 @@ import ${package}.commons.utils.ResultUtil;
 @Controller
 @RequestMapping("${pathName}")
 public class ${className}Controller {
-	@Autowired
-	private ${className}Service ${classname}Service;
-	
+    @Autowired
+    private ${className}Service ${classname}Service;
+
     /**
      * 跳转到列表页
      */
@@ -40,31 +41,31 @@ public class ${className}Controller {
     public String list() {
         return "${pathName}/list";
     }
-    
-	/**
-	 * 列表数据
-	 */
+
+    /**
+     * 列表数据
+     */
     @ResponseBody
-	@RequestMapping("/listData")
-	@RequiresPermissions("${pathName}:list")
-	public ResultUtil listData(@RequestParam Map<String, Object> params){
-		//查询列表数据
+    @RequestMapping("/listData")
+    @RequiresPermissions("${pathName}:list")
+    public ResultUtil listData(@RequestParam Map<String, Object> params) {
+        //查询列表数据
         Query query = new Query(params);
 
-		List<${className}> ${classname}List = ${classname}Service.getList(query);
-		int total = ${classname}Service.getCount(query);
-		
-		PageUtils pageUtil = new PageUtils(${classname}List, total, query.getLimit(), query.getPage());
-		
-		return ResultUtil.ok().put("page", pageUtil);
-	}
+        List<${className}> ${classname}List = ${classname}Service.getList(query);
+        int total = ${classname}Service.getCount(query);
+
+        PageUtils pageUtil = new PageUtils(${classname}List, total, query.getLimit(), query.getPage());
+
+        return ResultUtil.ok().put("page", pageUtil);
+    }
 
     /**
      * 跳转到新增页面
      **/
     @RequestMapping("/add")
     @RequiresPermissions("${pathName}:save")
-    public String add(){
+    public String add() {
         return "${pathName}/add";
     }
 
@@ -73,20 +74,20 @@ public class ${className}Controller {
      **/
     @RequestMapping("/edit/{id}")
     @RequiresPermissions("${pathName}:update")
-    public String edit(Model model, @PathVariable("id") ${pk.attrType} id){
-		${className} ${classname} = ${classname}Service.get(id);
+    public String edit(Model model, @PathVariable("id") ${pk.attrType} id) {
+        ${className} ${classname} =${classname}Service.get(id);
         model.addAttribute("model",${classname});
         return "${pathName}/edit";
     }
 
-	/**
-	 * 信息
-	 */
+    /**
+     * 信息
+     */
     @ResponseBody
     @RequestMapping("/info/{${pk.attrname}}")
     @RequiresPermissions("${pathName}:info")
-    public ResultUtil info(@PathVariable("${pk.attrname}") ${pk.attrType} ${pk.attrname}){
-        ${className} ${classname} = ${classname}Service.get(${pk.attrname});
+    public ResultUtil info(@PathVariable("${pk.attrname}") ${pk.attrType} ${pk.attrname}) {
+        ${className} ${classname} =${classname}Service.get(${pk.attrname});
         return ResultUtil.ok().put("${classname}", ${classname});
     }
 
@@ -95,26 +96,26 @@ public class ${className}Controller {
 	 */
     @ResponseBody
     @Log("保存${comments}")
-	@RequestMapping("/save")
-	@RequiresPermissions("${pathName}:save")
-	public ResultUtil save(@RequestBody ${className} ${classname}){
-		${classname}Service.save(${classname});
-		
-		return ResultUtil.ok();
-	}
-	
-	/**
-	 * 修改
-	 */
+    @RequestMapping("/save")
+    @RequiresPermissions("${pathName}:save")
+    public ResultUtil save(@RequestBody ${className} ${classname}) {
+            ${classname}Service.save(${classname});
+
+        return ResultUtil.ok();
+    }
+
+    /**
+     * 修改
+     */
     @ResponseBody
     @Log("修改${comments}")
-	@RequestMapping("/update")
-	@RequiresPermissions("${pathName}:update")
-	public ResultUtil update(@RequestBody ${className} ${classname}){
-		${classname}Service.update(${classname});
-		
-		return ResultUtil.ok();
-	}
+    @RequestMapping("/update")
+    @RequiresPermissions("${pathName}:update")
+    public ResultUtil update(@RequestBody ${className} ${classname}) {
+            ${classname}Service.update(${classname});
+
+        return ResultUtil.ok();
+    }
 
     /**
      * 启用
@@ -123,11 +124,12 @@ public class ${className}Controller {
     @Log("启用${comments}")
     @RequestMapping("/enable")
     @RequiresPermissions("${pathName}:update")
-    public ResultUtil enable(@RequestBody ${pk.attrType}[] ids){
-        String stateValue=StateEnum.ENABLE.getCode();
-		${classname}Service.updateState(ids,stateValue);
+    public ResultUtil enable(@RequestBody ${pk.attrType}[]ids) {
+        String stateValue = StateEnum.ENABLE.getCode();
+            ${classname}Service.updateState(ids, stateValue);
         return ResultUtil.ok();
     }
+
     /**
      * 禁用
      */
@@ -135,23 +137,23 @@ public class ${className}Controller {
     @Log("禁用${comments}")
     @RequestMapping("/disable")
     @RequiresPermissions("${pathName}:update")
-    public ResultUtil disable(@RequestBody ${pk.attrType}[] ids){
-        String stateValue=StateEnum.DIASABLE.getCode();
-		${classname}Service.updateState(ids,stateValue);
+    public ResultUtil disable(@RequestBody ${pk.attrType}[]ids) {
+        String stateValue = StateEnum.DIASABLE.getCode();
+            ${classname}Service.updateState(ids, stateValue);
         return ResultUtil.ok();
     }
-	
-	/**
-	 * 删除
-	 */
+
+    /**
+     * 删除
+     */
     @ResponseBody
     @Log("删除${comments}")
-	@RequestMapping("/delete")
-	@RequiresPermissions("${pathName}:delete")
-	public ResultUtil delete(@RequestBody ${pk.attrType}[] ${pk.attrname}s){
-		${classname}Service.deleteBatch(${pk.attrname}s);
-		
-		return ResultUtil.ok();
-	}
-	
+    @RequestMapping("/delete")
+    @RequiresPermissions("${pathName}:delete")
+    public ResultUtil delete(@RequestBody ${pk.attrType}[] ${pk.attrname}s) {
+            ${classname}Service.deleteBatch(${pk.attrname}s);
+
+        return ResultUtil.ok();
+    }
+
 }

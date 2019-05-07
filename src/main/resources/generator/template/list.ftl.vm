@@ -62,15 +62,15 @@
                 <input type="checkbox" lay-skin="primary" lay-filter="allChoose">
             </th>
             #foreach ($column in $columns)
-			#if($column.columnName == $pk.columnName)
+    #if($column.columnName == $pk.columnName)
             <!--isPrimary：是否是主键-->
             <th width="10%" param="{name:'${column.attrname}',isPrimary:'true',hide:'true'}">${column.comments}</th>
             #end
 
-		    #if($column.columnName != $pk.columnName)
+    #if($column.columnName != $pk.columnName)
       <th width="10%" param="{name:'${column.attrname}'}">${column.comments}</th>
 			#end
-            #end
+#end
             <!--isPrimary：渲染列-->
             <th width="10%" param="{name:'state',enumName:'StateEnum',render:'Render.customState'}">状态</th>
             <th width="10%" param="{operate:'true',buttons:'Render.state,Render.edit,Render.delete'}">操作</th>
