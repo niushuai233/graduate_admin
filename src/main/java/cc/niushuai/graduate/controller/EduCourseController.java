@@ -1,5 +1,9 @@
 package cc.niushuai.graduate.controller;
 
+import cc.niushuai.graduate.commons.utils.PageUtils;
+import cc.niushuai.graduate.commons.utils.PathUtil;
+import cc.niushuai.graduate.commons.utils.Query;
+import cc.niushuai.graduate.commons.utils.ResultUtil;
 import cc.niushuai.graduate.commons.constant.Constant;
 import cc.niushuai.graduate.commons.utils.*;
 import cc.niushuai.graduate.config.log.Log;
@@ -202,6 +206,25 @@ public class EduCourseController {
         eduCourseService.deleteBatch(courseIds);
 
         return ResultUtil.ok();
+    }
+
+
+    /**
+     * 列表数据
+     */
+    @ResponseBody
+    @RequestMapping("/listEWCDData")
+    @RequiresPermissions("educourse:list")
+    public ResultUtil listEWCDData(@RequestParam Map<String, Object> params) {
+        //查询列表数据
+        Query query = new Query(params);
+
+        List<EduCourse> eduCourseList = eduCourseService.getEWCDList(query);
+        int total = eduCourseService.getEWCDCount(query);
+
+        PageUtils pageUtil = new PageUtils(eduCourseList, total, query.getLimit(), query.getPage());
+
+        return ResultUtil.ok().put("page", pageUtil);
     }
 
     @ResponseBody

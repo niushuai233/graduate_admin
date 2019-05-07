@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cc.niushuai.graduate.mapper.EduWebsiteCourseDetailMapper">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="cc.niushuai.graduate.entity.EduWebsiteCourseDetail" id="eduWebsiteCourseDetailMap">
+                    <result property="id" column="ID"/>
+                    <result property="recommendId" column="RECOMMEND_ID"/>
+                    <result property="courseId" column="COURSE_ID"/>
+                    <result property="orderNum" column="ORDER_NUM"/>
+                    <result property="createTime" column="CREATE_TIME"/>
+                    <result property="updateTime" column="UPDATE_TIME"/>
+                    <result property="createBy" column="CREATE_BY"/>
+                    <result property="updateBy" column="UPDATE_BY"/>
+                    <result property="courseName" column="courseName" jdbcType="VARCHAR" />
+            </resultMap>
+
+    <select id="get" resultType="cc.niushuai.graduate.entity.EduWebsiteCourseDetail">
+		select
+            ewcd.*,
+            ec.COURSE_NAME as courseName
+		from edu_website_course_detail ewcd
+		left join edu_course ec on ec.COURSE_ID = ewcd.COURSE_ID
+		where ID = #{value}
+	</select>
+
+    <select id="getList" resultType="cc.niushuai.graduate.entity.EduWebsiteCourseDetail">
+        select
+            ewcd.*,
+            ec.COURSE_NAME as courseName
+        from edu_website_course_detail ewcd
+        left join edu_course ec on ec.COURSE_ID = ewcd.COURSE_ID
+        <include refid="where_clause"/>
+        <if test="courseName != null and courseName != ''">
+            and ec.COURSE_NAME like concat('%',#{courseName},'%')
+        </if>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+            <otherwise>
+                order by ewcd.ID desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="getCount" resultType="int">
+        select count(*) from edu_website_course_detail t
+        <include refid="where_clause"/>
+    </select>
+
+    <!-- 搜索数据区域 -->
+    <sql id="where_clause">
+        <where>
+            1=1
+                            <if test="id != null and id != ''">and t.ID =
+                    #{id}
+                </if>
+                <if test="idVague != null and idVague != ''">and t.ID
+                    like concat('%',#{idVague},'%')
+                </if>
+                            <if test="recommendId != null and recommendId != ''">and t.RECOMMEND_ID =
+                    #{recommendId}
+                </if>
+                <if test="recommendIdVague != null and recommendIdVague != ''">and t.RECOMMEND_ID
+                    like concat('%',#{recommendIdVague},'%')
+                </if>
+                            <if test="courseId != null and courseId != ''">and t.COURSE_ID =
+                    #{courseId}
+                </if>
+                <if test="courseIdVague != null and courseIdVague != ''">and t.COURSE_ID
+                    like concat('%',#{courseIdVague},'%')
+                </if>
+                            <if test="orderNum != null and orderNum != ''">and t.ORDER_NUM =
+                    #{orderNum}
+                </if>
+                <if test="orderNumVague != null and orderNumVague != ''">and t.ORDER_NUM
+                    like concat('%',#{orderNumVague},'%')
+                </if>
+                            <if test="createTime != null and createTime != ''">and t.CREATE_TIME =
+                    #{createTime}
+                </if>
+                <if test="createTimeVague != null and createTimeVague != ''">and t.CREATE_TIME
+                    like concat('%',#{createTimeVague},'%')
+                </if>
+                            <if test="updateTime != null and updateTime != ''">and t.UPDATE_TIME =
+                    #{updateTime}
+                </if>
+                <if test="updateTimeVague != null and updateTimeVague != ''">and t.UPDATE_TIME
+                    like concat('%',#{updateTimeVague},'%')
+                </if>
+                            <if test="createBy != null and createBy != ''">and t.CREATE_BY =
+                    #{createBy}
+                </if>
+                <if test="createByVague != null and createByVague != ''">and t.CREATE_BY
+                    like concat('%',#{createByVague},'%')
+                </if>
+                            <if test="updateBy != null and updateBy != ''">and t.UPDATE_BY =
+                    #{updateBy}
+                </if>
+                <if test="updateByVague != null and updateByVague != ''">and t.UPDATE_BY
+                    like concat('%',#{updateByVague},'%')
+                </if>
+                    </where>
+    </sql>
+
+    <insert id="save" parameterType="cc.niushuai.graduate.entity.EduWebsiteCourseDetail"            useGeneratedKeys="true" keyProperty="id">
+		insert into edu_website_course_detail
+		(
+                    			`RECOMMEND_ID`, 
+                    			`COURSE_ID`, 
+                    			`ORDER_NUM`, 
+                    			`CREATE_TIME`, 
+                    			`UPDATE_TIME`, 
+                    			`CREATE_BY`, 
+                    			`UPDATE_BY`
+            		)
+		values
+		(
+                    			#{recommendId}, 
+                    			#{courseId}, 
+                    			#{orderNum}, 
+                    			#{createTime}, 
+                    			#{updateTime}, 
+                    			#{createBy}, 
+                    			#{updateBy}
+            		)
+	</insert>
+
+    <update id="update" parameterType="cc.niushuai.graduate.entity.EduWebsiteCourseDetail">
+        update edu_website_course_detail
+        <set>
+                                                                            <if test="recommendId != null">`RECOMMEND_ID` = #{recommendId
+                        }, </if>
+                                                                <if test="courseId != null">`COURSE_ID` = #{courseId
+                        }, </if>
+                                                                <if test="orderNum != null">`ORDER_NUM` = #{orderNum
+                        }, </if>
+                                                                <if test="createTime != null">`CREATE_TIME` = #{createTime
+                        }, </if>
+                                                                <if test="updateTime != null">`UPDATE_TIME` = #{updateTime
+                        }, </if>
+                                                                <if test="createBy != null">`CREATE_BY` = #{createBy
+                        }, </if>
+                                                                <if test="updateBy != null">`UPDATE_BY` = #{updateBy
+                        }</if>
+                                    </set>
+        where ID = #{id}
+    </update>
+
+    <delete id="delete">
+		delete from edu_website_course_detail where ID = #{value}
+	</delete>
+
+    <delete id="deleteBatch">
+        delete from edu_website_course_detail where ID in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>
