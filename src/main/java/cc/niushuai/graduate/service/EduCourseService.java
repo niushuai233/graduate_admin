@@ -33,4 +33,6 @@ public interface EduCourseService extends BaseService<EduCourse>{
     List<EduCourse> getEWCDList(Map<String, Object> map);
 
     int getEWCDCount(Map<String, Object> map);
+
+	String getTeacherIds(Long id);
 }
