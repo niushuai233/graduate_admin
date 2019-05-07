@@ -1,10 +1,7 @@
 package cc.niushuai.graduate.controller;
 
 import cc.niushuai.graduate.commons.constant.Constant;
-import cc.niushuai.graduate.commons.utils.PageUtils;
-import cc.niushuai.graduate.commons.utils.PathUtil;
-import cc.niushuai.graduate.commons.utils.Query;
-import cc.niushuai.graduate.commons.utils.ResultUtil;
+import cc.niushuai.graduate.commons.utils.*;
 import cc.niushuai.graduate.config.log.Log;
 import cc.niushuai.graduate.entity.EduCourse;
 import cc.niushuai.graduate.entity.SysSubject;
@@ -205,6 +202,24 @@ public class EduCourseController {
         eduCourseService.deleteBatch(courseIds);
 
         return ResultUtil.ok();
+    }
+
+    @ResponseBody
+    @RequestMapping("/findAllCourseSelectTool")
+    public ResultUtil findAll() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("status", 1);
+        List<EduCourse> list = eduCourseService.getList(map);
+
+        List<EnumBean> values = new ArrayList<>();
+        for (EduCourse course : list) {
+            EnumBean enumBean = new EnumBean();
+            enumBean.setCode(String.valueOf(course.getCourseId()));
+            enumBean.setValue(course.getCourseName());
+            values.add(enumBean);
+        }
+
+        return ResultUtil.ok().put("data", values);
     }
 
 }

@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cc.niushuai.graduate.mapper.EduCourseKpointMapper">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="cc.niushuai.graduate.entity.EduCourseKpoint" id="eduCourseKpointMap">
+                    <result property="kpointId" column="KPOINT_ID"/>
+                    <result property="courseId" column="COURSE_ID"/>
+                    <result property="name" column="NAME"/>
+                    <result property="parentId" column="PARENT_ID"/>
+                    <result property="addTime" column="ADD_TIME"/>
+                    <result property="sort" column="SORT"/>
+                    <result property="playCount" column="PLAY_COUNT"/>
+                    <result property="isFree" column="IS_FREE"/>
+                    <result property="videoUrl" column="VIDEO_URL"/>
+                    <result property="teacherId" column="TEACHER_ID"/>
+                    <result property="playTime" column="play_time"/>
+                    <result property="kpointType" column="KPOINT_TYPE"/>
+                    <result property="videoType" column="VIDEO_TYPE"/>
+                    <result property="fileType" column="FILE_TYPE"/>
+                    <result property="content" column="CONTENT"/>
+                    <result property="updateTime" column="UPDATE_TIME"/>
+                    <result property="createBy" column="CREATE_BY"/>
+                    <result property="updateBy" column="UPDATE_BY"/>
+            </resultMap>
+
+    <select id="get" resultType="cc.niushuai.graduate.entity.EduCourseKpoint">
+		select * from edu_course_kpoint where KPOINT_ID = #{value}
+	</select>
+
+    <select id="getList" resultType="cc.niushuai.graduate.entity.EduCourseKpoint">
+        select * from edu_course_kpoint t
+        <include refid="where_clause"/>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+            <otherwise>
+                order by KPOINT_ID desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="getCount" resultType="int">
+        select count(*) from edu_course_kpoint t
+        <include refid="where_clause"/>
+    </select>
+
+    <!-- 搜索数据区域 -->
+    <sql id="where_clause">
+        <where>
+            1=1
+                            <if test="kpointId != null and kpointId != ''">and t.KPOINT_ID =
+                    #{kpointId}
+                </if>
+                <if test="kpointIdVague != null and kpointIdVague != ''">and t.KPOINT_ID
+                    like concat('%',#{kpointIdVague},'%')
+                </if>
+                            <if test="courseId != null and courseId != ''">and t.COURSE_ID =
+                    #{courseId}
+                </if>
+                <if test="courseIdVague != null and courseIdVague != ''">and t.COURSE_ID
+                    like concat('%',#{courseIdVague},'%')
+                </if>
+                            <if test="name != null and name != ''">and t.NAME =
+                    #{name}
+                </if>
+                <if test="nameVague != null and nameVague != ''">and t.NAME
+                    like concat('%',#{nameVague},'%')
+                </if>
+                            <if test="parentId != null and parentId != ''">and t.PARENT_ID =
+                    #{parentId}
+                </if>
+                <if test="parentIdVague != null and parentIdVague != ''">and t.PARENT_ID
+                    like concat('%',#{parentIdVague},'%')
+                </if>
+                            <if test="addTime != null and addTime != ''">and t.ADD_TIME =
+                    #{addTime}
+                </if>
+                <if test="addTimeVague != null and addTimeVague != ''">and t.ADD_TIME
+                    like concat('%',#{addTimeVague},'%')
+                </if>
+                            <if test="sort != null and sort != ''">and t.SORT =
+                    #{sort}
+                </if>
+                <if test="sortVague != null and sortVague != ''">and t.SORT
+                    like concat('%',#{sortVague},'%')
+                </if>
+                            <if test="playCount != null and playCount != ''">and t.PLAY_COUNT =
+                    #{playCount}
+                </if>
+                <if test="playCountVague != null and playCountVague != ''">and t.PLAY_COUNT
+                    like concat('%',#{playCountVague},'%')
+                </if>
+                            <if test="isFree != null and isFree != ''">and t.IS_FREE =
+                    #{isFree}
+                </if>
+                <if test="isFreeVague != null and isFreeVague != ''">and t.IS_FREE
+                    like concat('%',#{isFreeVague},'%')
+                </if>
+                            <if test="videoUrl != null and videoUrl != ''">and t.VIDEO_URL =
+                    #{videoUrl}
+                </if>
+                <if test="videoUrlVague != null and videoUrlVague != ''">and t.VIDEO_URL
+                    like concat('%',#{videoUrlVague},'%')
+                </if>
+                            <if test="teacherId != null and teacherId != ''">and t.TEACHER_ID =
+                    #{teacherId}
+                </if>
+                <if test="teacherIdVague != null and teacherIdVague != ''">and t.TEACHER_ID
+                    like concat('%',#{teacherIdVague},'%')
+                </if>
+                            <if test="playTime != null and playTime != ''">and t.play_time =
+                    #{playTime}
+                </if>
+                <if test="playTimeVague != null and playTimeVague != ''">and t.play_time
+                    like concat('%',#{playTimeVague},'%')
+                </if>
+                            <if test="kpointType != null and kpointType != ''">and t.KPOINT_TYPE =
+                    #{kpointType}
+                </if>
+                <if test="kpointTypeVague != null and kpointTypeVague != ''">and t.KPOINT_TYPE
+                    like concat('%',#{kpointTypeVague},'%')
+                </if>
+                            <if test="videoType != null and videoType != ''">and t.VIDEO_TYPE =
+                    #{videoType}
+                </if>
+                <if test="videoTypeVague != null and videoTypeVague != ''">and t.VIDEO_TYPE
+                    like concat('%',#{videoTypeVague},'%')
+                </if>
+                            <if test="fileType != null and fileType != ''">and t.FILE_TYPE =
+                    #{fileType}
+                </if>
+                <if test="fileTypeVague != null and fileTypeVague != ''">and t.FILE_TYPE
+                    like concat('%',#{fileTypeVague},'%')
+                </if>
+                            <if test="content != null and content != ''">and t.CONTENT =
+                    #{content}
+                </if>
+                <if test="contentVague != null and contentVague != ''">and t.CONTENT
+                    like concat('%',#{contentVague},'%')
+                </if>
+                            <if test="updateTime != null and updateTime != ''">and t.UPDATE_TIME =
+                    #{updateTime}
+                </if>
+                <if test="updateTimeVague != null and updateTimeVague != ''">and t.UPDATE_TIME
+                    like concat('%',#{updateTimeVague},'%')
+                </if>
+                            <if test="createBy != null and createBy != ''">and t.CREATE_BY =
+                    #{createBy}
+                </if>
+                <if test="createByVague != null and createByVague != ''">and t.CREATE_BY
+                    like concat('%',#{createByVague},'%')
+                </if>
+                            <if test="updateBy != null and updateBy != ''">and t.UPDATE_BY =
+                    #{updateBy}
+                </if>
+                <if test="updateByVague != null and updateByVague != ''">and t.UPDATE_BY
+                    like concat('%',#{updateByVague},'%')
+                </if>
+                    </where>
+    </sql>
+
+    <insert id="save" parameterType="cc.niushuai.graduate.entity.EduCourseKpoint"            useGeneratedKeys="true" keyProperty="kpointId">
+		insert into edu_course_kpoint
+		(
+                    			`COURSE_ID`, 
+                    			`NAME`, 
+                    			`PARENT_ID`, 
+                    			`ADD_TIME`, 
+                    			`SORT`, 
+                    			`PLAY_COUNT`, 
+                    			`IS_FREE`, 
+                    			`VIDEO_URL`, 
+                    			`TEACHER_ID`, 
+                    			`play_time`, 
+                    			`KPOINT_TYPE`, 
+                    			`VIDEO_TYPE`, 
+                    			`FILE_TYPE`, 
+                    			`CONTENT`, 
+                    			`UPDATE_TIME`, 
+                    			`CREATE_BY`, 
+                    			`UPDATE_BY`
+            		)
+		values
+		(
+                    			#{courseId}, 
+                    			#{name}, 
+                    			#{parentId}, 
+                    			#{addTime}, 
+                    			#{sort}, 
+                    			#{playCount}, 
+                    			#{isFree}, 
+                    			#{videoUrl}, 
+                    			#{teacherId}, 
+                    			#{playTime}, 
+                    			#{kpointType}, 
+                    			#{videoType}, 
+                    			#{fileType}, 
+                    			#{content}, 
+                    			#{updateTime}, 
+                    			#{createBy}, 
+                    			#{updateBy}
+            		)
+	</insert>
+
+    <update id="update" parameterType="cc.niushuai.graduate.entity.EduCourseKpoint">
+        update edu_course_kpoint
+        <set>
+                                                                            <if test="courseId != null">`COURSE_ID` = #{courseId
+                        }, </if>
+                                                                <if test="name != null">`NAME` = #{name
+                        }, </if>
+                                                                <if test="parentId != null">`PARENT_ID` = #{parentId
+                        }, </if>
+                                                                <if test="addTime != null">`ADD_TIME` = #{addTime
+                        }, </if>
+                                                                <if test="sort != null">`SORT` = #{sort
+                        }, </if>
+                                                                <if test="playCount != null">`PLAY_COUNT` = #{playCount
+                        }, </if>
+                                                                <if test="isFree != null">`IS_FREE` = #{isFree
+                        }, </if>
+                                                                <if test="videoUrl != null">`VIDEO_URL` = #{videoUrl
+                        }, </if>
+                                                                <if test="teacherId != null">`TEACHER_ID` = #{teacherId
+                        }, </if>
+                                                                <if test="playTime != null">`play_time` = #{playTime
+                        }, </if>
+                                                                <if test="kpointType != null">`KPOINT_TYPE` = #{kpointType
+                        }, </if>
+                                                                <if test="videoType != null">`VIDEO_TYPE` = #{videoType
+                        }, </if>
+                                                                <if test="fileType != null">`FILE_TYPE` = #{fileType
+                        }, </if>
+                                                                <if test="content != null">`CONTENT` = #{content
+                        }, </if>
+                                                                <if test="updateTime != null">`UPDATE_TIME` = #{updateTime
+                        }, </if>
+                                                                <if test="createBy != null">`CREATE_BY` = #{createBy
+                        }, </if>
+                                                                <if test="updateBy != null">`UPDATE_BY` = #{updateBy
+                        }</if>
+                                    </set>
+        where KPOINT_ID = #{kpointId}
+    </update>
+
+    <delete id="delete">
+		delete from edu_course_kpoint where KPOINT_ID = #{value}
+	</delete>
+
+    <delete id="deleteBatch">
+        delete from edu_course_kpoint where KPOINT_ID in
+        <foreach item="kpointId" collection="array" open="(" separator="," close=")">
+            #{kpointId}
+        </foreach>
+    </delete>
+
+</mapper>
