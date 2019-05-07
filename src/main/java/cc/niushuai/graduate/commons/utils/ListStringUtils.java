@@ -129,4 +129,37 @@ public class ListStringUtils {
         }
         return strs;
     }
+
+    /**
+     * str 数组 转 str
+     *
+     * @param arr
+     * @param flag 是否要带引号
+     * @return
+     */
+    public static String array2String(String[] arr, boolean flag) {
+        return array2String(arr, defaultSeparator, flag);
+    }
+
+    /**
+     * str 数组 转 str
+     *
+     * @param arr
+     * @param separator
+     * @param flag      是否要带引号
+     * @return
+     */
+    public static String array2String(String[] arr, String separator, boolean flag) {
+        StringBuffer bfr = new StringBuffer();
+        String flagStr = "";
+        if (flag) {
+            flagStr = "'";
+        }
+        for (String tmp : arr) {
+            bfr.append(flagStr);
+            bfr.append(tmp);
+            bfr.append(flagStr + separator);
+        }
+        return bfr.toString().substring(0, bfr.length() - 1);
+    }
 }

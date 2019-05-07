@@ -3,7 +3,7 @@
 
 <mapper namespace="cc.niushuai.graduate.mapper.EduWebsiteImagesTypeMapper">
 
-	<!-- 可根据自己的需求，是否要使用 -->
+    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="cc.niushuai.graduate.entity.EduWebsiteImagesType" id="eduWebsiteImagesTypeMap">
         <result property="typeId" column="TYPE_ID"/>
         <result property="typeName" column="TYPE_NAME"/>
@@ -12,47 +12,56 @@
         <result property="updateDate" column="UPDATE_DATE"/>
     </resultMap>
 
-	<select id="get" resultType="cc.niushuai.graduate.entity.EduWebsiteImagesType">
+    <select id="get" resultType="cc.niushuai.graduate.entity.EduWebsiteImagesType">
 		select * from edu_website_images_type where TYPE_ID = #{value}
 	</select>
 
-	<select id="getList" resultType="cc.niushuai.graduate.entity.EduWebsiteImagesType">
-		select * from edu_website_images_type t <include refid="where_clause" />
+    <select id="getList" resultType="cc.niushuai.graduate.entity.EduWebsiteImagesType">
+        select * from edu_website_images_type t
+        <include refid="where_clause"/>
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
                 order by ${sidx} ${order}
             </when>
-			<otherwise>
+            <otherwise>
                 order by TYPE_ID desc
-			</otherwise>
+            </otherwise>
         </choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
-	
- 	<select id="getCount" resultType="int">
-		select count(*) from edu_website_images_type t  <include refid="where_clause" />
-	</select>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="getCount" resultType="int">
+        select count(*) from edu_website_images_type t
+        <include refid="where_clause"/>
+    </select>
 
     <!-- 搜索数据区域 -->
     <sql id="where_clause">
         <where>
             1=1
-            <if test="typeId != null and typeId != ''"> and t.TYPE_ID = #{typeId} </if>
-    		<if test="typeIdVague != null and typeIdVague != ''"> and t.TYPE_ID like concat('%',#{typeIdVague},'%') </if>
-            <if test="typeName != null and typeName != ''"> and t.TYPE_NAME = #{typeName} </if>
-    		<if test="typeNameVague != null and typeNameVague != ''"> and t.TYPE_NAME like concat('%',#{typeNameVague},'%') </if>
-            <if test="state != null and state != ''"> and t.STATE = #{state} </if>
-    		<if test="stateVague != null and stateVague != ''"> and t.STATE like concat('%',#{stateVague},'%') </if>
-            <if test="createDate != null and createDate != ''"> and t.CREATE_DATE = #{createDate} </if>
-    		<if test="createDateVague != null and createDateVague != ''"> and t.CREATE_DATE like concat('%',#{createDateVague},'%') </if>
-            <if test="updateDate != null and updateDate != ''"> and t.UPDATE_DATE = #{updateDate} </if>
-    		<if test="updateDateVague != null and updateDateVague != ''"> and t.UPDATE_DATE like concat('%',#{updateDateVague},'%') </if>
+            <if test="typeId != null and typeId != ''">and t.TYPE_ID = #{typeId}</if>
+            <if test="typeIdVague != null and typeIdVague != ''">and t.TYPE_ID like concat('%',#{typeIdVague},'%')</if>
+            <if test="typeName != null and typeName != ''">and t.TYPE_NAME = #{typeName}</if>
+            <if test="typeNameVague != null and typeNameVague != ''">and t.TYPE_NAME like
+                concat('%',#{typeNameVague},'%')
+            </if>
+            <if test="state != null and state != ''">and t.STATE = #{state}</if>
+            <if test="stateVague != null and stateVague != ''">and t.STATE like concat('%',#{stateVague},'%')</if>
+            <if test="createDate != null and createDate != ''">and t.CREATE_DATE = #{createDate}</if>
+            <if test="createDateVague != null and createDateVague != ''">and t.CREATE_DATE like
+                concat('%',#{createDateVague},'%')
+            </if>
+            <if test="updateDate != null and updateDate != ''">and t.UPDATE_DATE = #{updateDate}</if>
+            <if test="updateDateVague != null and updateDateVague != ''">and t.UPDATE_DATE like
+                concat('%',#{updateDateVague},'%')
+            </if>
         </where>
     </sql>
-	 
-	<insert id="save" parameterType="cc.niushuai.graduate.entity.EduWebsiteImagesType" useGeneratedKeys="true" keyProperty="typeId">
+
+    <insert id="save" parameterType="cc.niushuai.graduate.entity.EduWebsiteImagesType" useGeneratedKeys="true"
+            keyProperty="typeId">
 		insert into edu_website_images_type
 		(
 			`TYPE_NAME`, 
@@ -69,26 +78,26 @@
 		)
 	</insert>
 
-	<update id="update" parameterType="cc.niushuai.graduate.entity.EduWebsiteImagesType">
-		update edu_website_images_type 
-		<set>
-			<if test="typeName != null">`TYPE_NAME` = #{typeName}, </if>
-			<if test="state != null">`STATE` = #{state}, </if>
-			<if test="createDate != null">`CREATE_DATE` = #{createDate}, </if>
-			<if test="updateDate != null">`UPDATE_DATE` = #{updateDate}</if>
-		</set>
-		where TYPE_ID = #{typeId}
-	</update>
-	
-	<delete id="delete">
+    <update id="update" parameterType="cc.niushuai.graduate.entity.EduWebsiteImagesType">
+        update edu_website_images_type
+        <set>
+            <if test="typeName != null">`TYPE_NAME` = #{typeName},</if>
+            <if test="state != null">`STATE` = #{state},</if>
+            <if test="createDate != null">`CREATE_DATE` = #{createDate},</if>
+            <if test="updateDate != null">`UPDATE_DATE` = #{updateDate}</if>
+        </set>
+        where TYPE_ID = #{typeId}
+    </update>
+
+    <delete id="delete">
 		delete from edu_website_images_type where TYPE_ID = #{value}
 	</delete>
-	
-	<delete id="deleteBatch">
-		delete from edu_website_images_type where TYPE_ID in 
-		<foreach item="typeId" collection="array" open="(" separator="," close=")">
-			#{typeId}
-		</foreach>
-	</delete>
+
+    <delete id="deleteBatch">
+        delete from edu_website_images_type where TYPE_ID in
+        <foreach item="typeId" collection="array" open="(" separator="," close=")">
+            #{typeId}
+        </foreach>
+    </delete>
 
 </mapper>

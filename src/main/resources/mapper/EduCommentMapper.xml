@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cc.niushuai.graduate.mapper.EduCommentMapper">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="cc.niushuai.graduate.entity.EduComment" id="eduCommentMap">
+                    <result property="commentId" column="COMMENT_ID"/>
+                    <result property="userId" column="USER_ID"/>
+                    <result property="pCommentId" column="P_COMMENT_ID"/>
+                    <result property="content" column="CONTENT"/>
+                    <result property="addtime" column="ADDTIME"/>
+                    <result property="otherId" column="OTHER_ID"/>
+                    <result property="praiseCount" column="PRAISE_COUNT"/>
+                    <result property="replyCount" column="REPLY_COUNT"/>
+                    <result property="type" column="TYPE"/>
+                    <result property="updateTime" column="UPDATE_TIME"/>
+                    <result property="createBy" column="CREATE_BY"/>
+                    <result property="updateBy" column="UPDATE_BY"/>
+            </resultMap>
+
+    <select id="get" resultType="cc.niushuai.graduate.entity.EduComment">
+		select * from edu_comment where COMMENT_ID = #{value}
+	</select>
+
+    <select id="getList" resultType="cc.niushuai.graduate.entity.EduComment">
+        select * from edu_comment t
+        <include refid="where_clause"/>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+            <otherwise>
+                order by COMMENT_ID desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="getCount" resultType="int">
+        select count(*) from edu_comment t
+        <include refid="where_clause"/>
+    </select>
+
+    <!-- 搜索数据区域 -->
+    <sql id="where_clause">
+        <where>
+            1=1
+                            <if test="commentId != null and commentId != ''">and t.COMMENT_ID =
+                    #{commentId}
+                </if>
+                <if test="commentIdVague != null and commentIdVague != ''">and t.COMMENT_ID
+                    like concat('%',#{commentIdVague},'%')
+                </if>
+                            <if test="userId != null and userId != ''">and t.USER_ID =
+                    #{userId}
+                </if>
+                <if test="userIdVague != null and userIdVague != ''">and t.USER_ID
+                    like concat('%',#{userIdVague},'%')
+                </if>
+                            <if test="pCommentId != null and pCommentId != ''">and t.P_COMMENT_ID =
+                    #{pCommentId}
+                </if>
+                <if test="pCommentIdVague != null and pCommentIdVague != ''">and t.P_COMMENT_ID
+                    like concat('%',#{pCommentIdVague},'%')
+                </if>
+                            <if test="content != null and content != ''">and t.CONTENT =
+                    #{content}
+                </if>
+                <if test="contentVague != null and contentVague != ''">and t.CONTENT
+                    like concat('%',#{contentVague},'%')
+                </if>
+                            <if test="addtime != null and addtime != ''">and t.ADDTIME =
+                    #{addtime}
+                </if>
+                <if test="addtimeVague != null and addtimeVague != ''">and t.ADDTIME
+                    like concat('%',#{addtimeVague},'%')
+                </if>
+                            <if test="otherId != null and otherId != ''">and t.OTHER_ID =
+                    #{otherId}
+                </if>
+                <if test="otherIdVague != null and otherIdVague != ''">and t.OTHER_ID
+                    like concat('%',#{otherIdVague},'%')
+                </if>
+                            <if test="praiseCount != null and praiseCount != ''">and t.PRAISE_COUNT =
+                    #{praiseCount}
+                </if>
+                <if test="praiseCountVague != null and praiseCountVague != ''">and t.PRAISE_COUNT
+                    like concat('%',#{praiseCountVague},'%')
+                </if>
+                            <if test="replyCount != null and replyCount != ''">and t.REPLY_COUNT =
+                    #{replyCount}
+                </if>
+                <if test="replyCountVague != null and replyCountVague != ''">and t.REPLY_COUNT
+                    like concat('%',#{replyCountVague},'%')
+                </if>
+                            <if test="type != null and type != ''">and t.TYPE =
+                    #{type}
+                </if>
+                <if test="typeVague != null and typeVague != ''">and t.TYPE
+                    like concat('%',#{typeVague},'%')
+                </if>
+                            <if test="updateTime != null and updateTime != ''">and t.UPDATE_TIME =
+                    #{updateTime}
+                </if>
+                <if test="updateTimeVague != null and updateTimeVague != ''">and t.UPDATE_TIME
+                    like concat('%',#{updateTimeVague},'%')
+                </if>
+                            <if test="createBy != null and createBy != ''">and t.CREATE_BY =
+                    #{createBy}
+                </if>
+                <if test="createByVague != null and createByVague != ''">and t.CREATE_BY
+                    like concat('%',#{createByVague},'%')
+                </if>
+                            <if test="updateBy != null and updateBy != ''">and t.UPDATE_BY =
+                    #{updateBy}
+                </if>
+                <if test="updateByVague != null and updateByVague != ''">and t.UPDATE_BY
+                    like concat('%',#{updateByVague},'%')
+                </if>
+                    </where>
+    </sql>
+
+    <insert id="save" parameterType="cc.niushuai.graduate.entity.EduComment"            useGeneratedKeys="true" keyProperty="commentId">
+		insert into edu_comment
+		(
+                    			`USER_ID`, 
+                    			`P_COMMENT_ID`, 
+                    			`CONTENT`, 
+                    			`ADDTIME`, 
+                    			`OTHER_ID`, 
+                    			`PRAISE_COUNT`, 
+                    			`REPLY_COUNT`, 
+                    			`TYPE`, 
+                    			`UPDATE_TIME`, 
+                    			`CREATE_BY`, 
+                    			`UPDATE_BY`
+            		)
+		values
+		(
+                    			#{userId}, 
+                    			#{pCommentId}, 
+                    			#{content}, 
+                    			#{addtime}, 
+                    			#{otherId}, 
+                    			#{praiseCount}, 
+                    			#{replyCount}, 
+                    			#{type}, 
+                    			#{updateTime}, 
+                    			#{createBy}, 
+                    			#{updateBy}
+            		)
+	</insert>
+
+    <update id="update" parameterType="cc.niushuai.graduate.entity.EduComment">
+        update edu_comment
+        <set>
+                                                                            <if test="userId != null">`USER_ID` = #{userId
+                        }, </if>
+                                                                <if test="pCommentId != null">`P_COMMENT_ID` = #{pCommentId
+                        }, </if>
+                                                                <if test="content != null">`CONTENT` = #{content
+                        }, </if>
+                                                                <if test="addtime != null">`ADDTIME` = #{addtime
+                        }, </if>
+                                                                <if test="otherId != null">`OTHER_ID` = #{otherId
+                        }, </if>
+                                                                <if test="praiseCount != null">`PRAISE_COUNT` = #{praiseCount
+                        }, </if>
+                                                                <if test="replyCount != null">`REPLY_COUNT` = #{replyCount
+                        }, </if>
+                                                                <if test="type != null">`TYPE` = #{type
+                        }, </if>
+                                                                <if test="updateTime != null">`UPDATE_TIME` = #{updateTime
+                        }, </if>
+                                                                <if test="createBy != null">`CREATE_BY` = #{createBy
+                        }, </if>
+                                                                <if test="updateBy != null">`UPDATE_BY` = #{updateBy
+                        }</if>
+                                    </set>
+        where COMMENT_ID = #{commentId}
+    </update>
+
+    <delete id="delete">
+		delete from edu_comment where COMMENT_ID = #{value}
+	</delete>
+
+    <delete id="deleteBatch">
+        delete from edu_comment where COMMENT_ID in
+        <foreach item="commentId" collection="array" open="(" separator="," close=")">
+            #{commentId}
+        </foreach>
+    </delete>
+
+</mapper>

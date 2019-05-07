@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cc.niushuai.graduate.mapper.EduCourseSubjectMapper">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="cc.niushuai.graduate.entity.EduCourseSubject" id="eduCourseSubjectMap">
+        <result property="id" column="ID"/>
+        <result property="courseId" column="COURSE_ID"/>
+        <result property="subjectId" column="SUBJECT_ID"/>
+    </resultMap>
+
+    <select id="get" resultType="cc.niushuai.graduate.entity.EduCourseSubject">
+		select * from edu_course_subject where ID = #{value}
+	</select>
+
+    <select id="getList" resultType="cc.niushuai.graduate.entity.EduCourseSubject">
+        select * from edu_course_subject t
+        <include refid="where_clause"/>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+            <otherwise>
+                order by ID desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="getCount" resultType="int">
+        select count(*) from edu_course_subject t
+        <include refid="where_clause"/>
+    </select>
+
+    <!-- 搜索数据区域 -->
+    <sql id="where_clause">
+        <where>
+            1=1
+            <if test="id != null and id != ''">and t.ID = #{id}</if>
+            <if test="idVague != null and idVague != ''">and t.ID like concat('%',#{idVague},'%')</if>
+            <if test="courseId != null and courseId != ''">and t.COURSE_ID = #{courseId}</if>
+            <if test="courseIdVague != null and courseIdVague != ''">and t.COURSE_ID like
+                concat('%',#{courseIdVague},'%')
+            </if>
+            <if test="subjectId != null and subjectId != ''">and t.SUBJECT_ID = #{subjectId}</if>
+            <if test="subjectIdVague != null and subjectIdVague != ''">and t.SUBJECT_ID like
+                concat('%',#{subjectIdVague},'%')
+            </if>
+        </where>
+    </sql>
+
+    <insert id="save" parameterType="cc.niushuai.graduate.entity.EduCourseSubject" useGeneratedKeys="true"
+            keyProperty="id">
+		insert into edu_course_subject
+		(
+			`COURSE_ID`, 
+			`SUBJECT_ID`
+		)
+		values
+		(
+			#{courseId}, 
+			#{subjectId}
+		)
+	</insert>
+
+    <update id="update" parameterType="cc.niushuai.graduate.entity.EduCourseSubject">
+        update edu_course_subject
+        <set>
+            <if test="courseId != null">`COURSE_ID` = #{courseId},</if>
+            <if test="subjectId != null">`SUBJECT_ID` = #{subjectId}</if>
+        </set>
+        where ID = #{id}
+    </update>
+
+    <delete id="delete">
+		delete from edu_course_subject where ID = #{value}
+	</delete>
+
+    <delete id="deleteBatch">
+        delete from edu_course_subject where ID in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

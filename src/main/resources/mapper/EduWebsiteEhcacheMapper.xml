@@ -3,50 +3,57 @@
 
 <mapper namespace="cc.niushuai.graduate.mapper.EduWebsiteEhcacheMapper">
 
-	<!-- 可根据自己的需求，是否要使用 -->
+    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="cc.niushuai.graduate.entity.EduWebsiteEhcache" id="eduWebsiteEhcacheMap">
         <result property="id" column="id"/>
         <result property="ehcacheKey" column="ehcache_key"/>
         <result property="ehcacheDesc" column="ehcache_desc"/>
     </resultMap>
 
-	<select id="get" resultType="cc.niushuai.graduate.entity.EduWebsiteEhcache">
+    <select id="get" resultType="cc.niushuai.graduate.entity.EduWebsiteEhcache">
 		select * from edu_website_ehcache where id = #{value}
 	</select>
 
-	<select id="getList" resultType="cc.niushuai.graduate.entity.EduWebsiteEhcache">
-		select * from edu_website_ehcache t <include refid="where_clause" />
+    <select id="getList" resultType="cc.niushuai.graduate.entity.EduWebsiteEhcache">
+        select * from edu_website_ehcache t
+        <include refid="where_clause"/>
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
                 order by ${sidx} ${order}
             </when>
-			<otherwise>
+            <otherwise>
                 order by id desc
-			</otherwise>
+            </otherwise>
         </choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
-	
- 	<select id="getCount" resultType="int">
-		select count(*) from edu_website_ehcache t  <include refid="where_clause" />
-	</select>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="getCount" resultType="int">
+        select count(*) from edu_website_ehcache t
+        <include refid="where_clause"/>
+    </select>
 
     <!-- 搜索数据区域 -->
     <sql id="where_clause">
         <where>
             1=1
-            <if test="id != null and id != ''"> and t.id = #{id} </if>
-    		<if test="idVague != null and idVague != ''"> and t.id like concat('%',#{idVague},'%') </if>
-            <if test="ehcacheKey != null and ehcacheKey != ''"> and t.ehcache_key = #{ehcacheKey} </if>
-    		<if test="ehcacheKeyVague != null and ehcacheKeyVague != ''"> and t.ehcache_key like concat('%',#{ehcacheKeyVague},'%') </if>
-            <if test="ehcacheDesc != null and ehcacheDesc != ''"> and t.ehcache_desc = #{ehcacheDesc} </if>
-    		<if test="ehcacheDescVague != null and ehcacheDescVague != ''"> and t.ehcache_desc like concat('%',#{ehcacheDescVague},'%') </if>
+            <if test="id != null and id != ''">and t.id = #{id}</if>
+            <if test="idVague != null and idVague != ''">and t.id like concat('%',#{idVague},'%')</if>
+            <if test="ehcacheKey != null and ehcacheKey != ''">and t.ehcache_key = #{ehcacheKey}</if>
+            <if test="ehcacheKeyVague != null and ehcacheKeyVague != ''">and t.ehcache_key like
+                concat('%',#{ehcacheKeyVague},'%')
+            </if>
+            <if test="ehcacheDesc != null and ehcacheDesc != ''">and t.ehcache_desc = #{ehcacheDesc}</if>
+            <if test="ehcacheDescVague != null and ehcacheDescVague != ''">and t.ehcache_desc like
+                concat('%',#{ehcacheDescVague},'%')
+            </if>
         </where>
     </sql>
-	 
-	<insert id="save" parameterType="cc.niushuai.graduate.entity.EduWebsiteEhcache" useGeneratedKeys="true" keyProperty="id">
+
+    <insert id="save" parameterType="cc.niushuai.graduate.entity.EduWebsiteEhcache" useGeneratedKeys="true"
+            keyProperty="id">
 		insert into edu_website_ehcache
 		(
 			`ehcache_key`, 
@@ -59,24 +66,24 @@
 		)
 	</insert>
 
-	<update id="update" parameterType="cc.niushuai.graduate.entity.EduWebsiteEhcache">
-		update edu_website_ehcache 
-		<set>
-			<if test="ehcacheKey != null">`ehcache_key` = #{ehcacheKey}, </if>
-			<if test="ehcacheDesc != null">`ehcache_desc` = #{ehcacheDesc}</if>
-		</set>
-		where id = #{id}
-	</update>
-	
-	<delete id="delete">
+    <update id="update" parameterType="cc.niushuai.graduate.entity.EduWebsiteEhcache">
+        update edu_website_ehcache
+        <set>
+            <if test="ehcacheKey != null">`ehcache_key` = #{ehcacheKey},</if>
+            <if test="ehcacheDesc != null">`ehcache_desc` = #{ehcacheDesc}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="delete">
 		delete from edu_website_ehcache where id = #{value}
 	</delete>
-	
-	<delete id="deleteBatch">
-		delete from edu_website_ehcache where id in 
-		<foreach item="id" collection="array" open="(" separator="," close=")">
-			#{id}
-		</foreach>
-	</delete>
+
+    <delete id="deleteBatch">
+        delete from edu_website_ehcache where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 
 </mapper>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cc.niushuai.graduate.mapper.EduCourseTeacherMapper">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="cc.niushuai.graduate.entity.EduCourseTeacher" id="eduCourseTeacherMap">
+        <result property="courseId" column="COURSE_ID"/>
+        <result property="teacherId" column="TEACHER_ID"/>
+    </resultMap>
+
+    <select id="get" resultType="cc.niushuai.graduate.entity.EduCourseTeacher">
+		select * from edu_course_teacher where COURSE_ID = #{value}
+	</select>
+
+    <select id="getList" resultType="cc.niushuai.graduate.entity.EduCourseTeacher">
+        select * from edu_course_teacher t
+        <include refid="where_clause"/>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+            <otherwise>
+                order by COURSE_ID desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="getCount" resultType="int">
+        select count(*) from edu_course_teacher t
+        <include refid="where_clause"/>
+    </select>
+
+    <!-- 搜索数据区域 -->
+    <sql id="where_clause">
+        <where>
+            1=1
+            <if test="courseId != null and courseId != ''">and t.COURSE_ID = #{courseId}</if>
+            <if test="courseIdVague != null and courseIdVague != ''">and t.COURSE_ID like
+                concat('%',#{courseIdVague},'%')
+            </if>
+            <if test="teacherId != null and teacherId != ''">and t.TEACHER_ID = #{teacherId}</if>
+            <if test="teacherIdVague != null and teacherIdVague != ''">and t.TEACHER_ID like
+                concat('%',#{teacherIdVague},'%')
+            </if>
+        </where>
+    </sql>
+
+    <insert id="save" parameterType="cc.niushuai.graduate.entity.EduCourseTeacher">
+		insert into edu_course_teacher
+		(
+			`COURSE_ID`, 
+			`TEACHER_ID`
+		)
+		values
+		(
+			#{courseId}, 
+			#{teacherId}
+		)
+	</insert>
+
+    <update id="update" parameterType="cc.niushuai.graduate.entity.EduCourseTeacher">
+        update edu_course_teacher
+        <set>
+            <if test="teacherId != null">`TEACHER_ID` = #{teacherId}</if>
+        </set>
+        where COURSE_ID = #{courseId}
+    </update>
+
+    <delete id="delete">
+		delete from edu_course_teacher where COURSE_ID = #{value}
+	</delete>
+
+    <delete id="deleteBatch">
+        delete from edu_course_teacher where COURSE_ID in
+        <foreach item="courseId" collection="array" open="(" separator="," close=")">
+            #{courseId}
+        </foreach>
+    </delete>
+
+</mapper>

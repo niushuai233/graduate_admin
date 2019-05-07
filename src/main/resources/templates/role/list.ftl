@@ -13,21 +13,23 @@
             <input type="text" name="roleName" placeholder="请输入角色名称" class="layui-input">
         </div>
         <div class="layui-input-inline">
-            <button class="layui-btn search-btn" table-id="roleTable" lay-submit="" lay-filter="search"><i class="fa fa-search">&nbsp;</i>查询
+            <button class="layui-btn search-btn" table-id="roleTable" lay-submit="" lay-filter="search"><i
+                        class="fa fa-search">&nbsp;</i>查询
             </button>
             <button type="reset" class="layui-btn layui-btn-primary"><i class="fa fa-refresh">&nbsp;</i>重置</button>
         </div>
     </div>
 </form>
 <div class="layui-btn-group">
-        <button class="layui-btn" onclick="add('/sys/role/add')"><i class="fa fa-plus">&nbsp;</i>增加</button>
-        <button class="layui-btn" onclick="edit('roleTable','/sys/role/edit')" style="margin-left: 5px!important;">
-             <i class="fa fa-pencil-square-o">&nbsp;</i>修改
-        </button>
+    <button class="layui-btn" onclick="add('/sys/role/add')"><i class="fa fa-plus">&nbsp;</i>增加</button>
+    <button class="layui-btn" onclick="edit('roleTable','/sys/role/edit')" style="margin-left: 5px!important;">
+        <i class="fa fa-pencil-square-o">&nbsp;</i>修改
+    </button>
 
-        <button class="layui-btn" onclick="deleteBatch('roleTable','/sys/role/delete');" style="margin-left: 5px!important;">
-            <i class="fa fa-trash-o">&nbsp;</i>删除
-        </button>
+    <button class="layui-btn" onclick="deleteBatch('roleTable','/sys/role/delete');"
+            style="margin-left: 5px!important;">
+        <i class="fa fa-trash-o">&nbsp;</i>删除
+    </button>
 </div>
 <div class="layui-form ">
     <table class="layui-table" id="roleTable" cyType="pageGrid"

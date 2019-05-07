@@ -1,5 +1,6 @@
 package cc.niushuai.graduate.controller;
 
+import cc.niushuai.graduate.commons.constant.Constant;
 import cc.niushuai.graduate.commons.enumresource.StateEnum;
 import cc.niushuai.graduate.commons.utils.PageUtils;
 import cc.niushuai.graduate.commons.utils.PathUtil;
@@ -9,6 +10,7 @@ import cc.niushuai.graduate.config.log.Log;
 import cc.niushuai.graduate.entity.EduArticle;
 import cc.niushuai.graduate.service.EduArticleService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -54,11 +56,29 @@ public class EduArticleController {
         Query query = new Query(params);
 
         List<EduArticle> eduArticleList = eduArticleService.getList(query);
+        addFdfsPerfix(eduArticleList);
         int total = eduArticleService.getCount(query);
 
         PageUtils pageUtil = new PageUtils(eduArticleList, total, query.getLimit(), query.getPage());
 
         return ResultUtil.ok().put("page", pageUtil);
+    }
+
+    /**
+     * 遍历替换图片路径
+     *
+     * @param eduWebsiteImagesList
+     */
+    private void addFdfsPerfix(List<EduArticle> eduWebsiteImagesList) {
+        eduWebsiteImagesList.forEach(item -> {
+            String imageUrl = item.getImageUrl();
+            if (StringUtils.isNotEmpty(imageUrl)) {
+                item.setImageUrl(PathUtil.fillFdfsPath(imageUrl));
+            } else {
+                item.setImageUrl(Constant.DEFAULT_CROPPERJS_IMAGE);
+            }
+        });
+
     }
 
     /**
@@ -78,6 +98,7 @@ public class EduArticleController {
     public String edit(Model model, @PathVariable("id") Integer id) {
         EduArticle eduArticle = eduArticleService.get(id);
         model.addAttribute("model", eduArticle);
+        model.addAttribute("fdfsAccessPrefix", PathUtil.fillFdfsPath(eduArticle.getImageUrl()));
         return "eduarticle/edit";
     }
 

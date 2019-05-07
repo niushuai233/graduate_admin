@@ -11,15 +11,15 @@
     <div class="layui-form-item">
         <label class="layui-form-label">学号:</label>
         <div class="layui-input-inline">
-            <input type="text" name="stuNoVague"  placeholder="请输入学号" class="layui-input">
+            <input type="text" name="stuNoVague" placeholder="请输入学号" class="layui-input">
         </div>
         <label class="layui-form-label">姓名:</label>
         <div class="layui-input-inline">
-            <input type="text" name="userNameVague"  placeholder="请输入姓名" class="layui-input">
+            <input type="text" name="userNameVague" placeholder="请输入姓名" class="layui-input">
         </div>
         <label class="layui-form-label">联系方式:</label>
         <div class="layui-input-inline">
-            <input type="text" name="mobileVague"  placeholder="请输入手机号" class="layui-input">
+            <input type="text" name="mobileVague" placeholder="请输入手机号" class="layui-input">
         </div>
 
         <div class="layui-input-normal">
@@ -33,10 +33,10 @@
         </div>
     </div>
     <div class="layui-form-item more-search">
-       <#-- 更多条件-->
+        <#-- 更多条件-->
         <label class="layui-form-label">邮箱:</label>
         <div class="layui-input-inline">
-            <input type="text" name="emailVague"  placeholder="请输入邮箱" class="layui-input">
+            <input type="text" name="emailVague" placeholder="请输入邮箱" class="layui-input">
         </div>
         <label class="layui-form-label">性别:</label>
         <div class="layui-input-inline">
@@ -58,52 +58,52 @@
     </div>
 </form>
 <div class="layui-btn-group">
-        <@shiro.hasPermission name="eduuser:save">
+    <@shiro.hasPermission name="eduuser:save">
         <button class="layui-btn" onclick="addPage('/eduuser/add')">
             <i class="fa fa-plus">&nbsp;</i>增加
         </button>
-        </@shiro.hasPermission>
-        <@shiro.hasPermission name="eduuser:update">
+    </@shiro.hasPermission>
+    <@shiro.hasPermission name="eduuser:update">
         <button class="layui-btn" onclick="editPage('eduUserTable','/eduuser/edit')">
             <i class="fa fa-pencil-square-o">&nbsp;</i>修改
         </button>
-         <button class="layui-btn layui-btn-green" onclick="updateState('批量启用','eduUserTable','/eduuser/enable')">
+        <button class="layui-btn layui-btn-green" onclick="updateState('批量启用','eduUserTable','/eduuser/enable')">
             <i class="fa fa-check-square-o">&nbsp;</i>启用
         </button>
         <button class="layui-btn  layui-btn-danger" onclick="updateState('批量禁用','eduUserTable','/eduuser/disable')">
             <i class="fa fa-expeditedssl">&nbsp;</i>禁用
         </button>
-        </@shiro.hasPermission>
-        <@shiro.hasPermission name="eduuser:delete">
-         <button class="layui-btn layui-btn-delete" onclick="deleteBatch('批量删除','eduUserTable','/eduuser/delete');">
+    </@shiro.hasPermission>
+    <@shiro.hasPermission name="eduuser:delete">
+        <button class="layui-btn layui-btn-delete" onclick="deleteBatch('批量删除','eduUserTable','/eduuser/delete');">
             <i class="fa fa-trash-o">&nbsp;</i>删除
         </button>
-        </@shiro.hasPermission>
+    </@shiro.hasPermission>
 
 </div>
 <div class="layui-form ">
     <table class="layui-table" id="eduUserTable" cyType="pageGrid"
            cyProps="url:'/eduuser/listData',checkbox:'true',pageColor:'#2991d9'">
         <thead>
-            <tr>
-                <!--复选框-->
-              <th width="1%" param="{type:'checkbox'}">
-                  <input type="checkbox" lay-skin="primary" lay-filter="allChoose">
-              </th>
-              <th width="2%" param="{name:'userId',isPrimary:'true',hide:'true'}">id</th>
-              <th width="8%" param="{name:'stuNo'}">学号</th>
-              <th width="8%" param="{name:'userName'}">用户名</th>
-              <th width="8%" param="{name:'picImg',render:'Render.picImg'}">用户头像</th>
-              <th width="7%" param="{name:'mobile'}">手机号</th>
-              <th width="10%" param="{name:'email'}">邮箱号</th>
-              <th width="5%" param="{name:'sex',render:'Render.sex'}">性别</th>
-              <th width="5%" param="{name:'age'}">年龄</th>
-              <th width="10%" param="{name:'createTime'}">注册时间</th>
-              <th width="10%" param="{name:'lastLoginTime'}">上次登录时间</th>
-              <th width="10%" param="{name:'lastLoginIp'}">上次登录IP</th>
-              <th width="5%" param="{name:'isAvalible',enumName:'StateEnum',render:'Render.mmmState'}">状态</th>
-              <th width="10%" param="{operate:'true',buttons:'Render.state,Render.edit,Render.delete'}">操作</th>
-            </tr>
+        <tr>
+            <!--复选框-->
+            <th width="1%" param="{type:'checkbox'}">
+                <input type="checkbox" lay-skin="primary" lay-filter="allChoose">
+            </th>
+            <th width="2%" param="{name:'userId',isPrimary:'true',hide:'true'}">id</th>
+            <th width="8%" param="{name:'stuNo'}">学号</th>
+            <th width="8%" param="{name:'userName'}">用户名</th>
+            <th width="8%" param="{name:'picImg',render:'Render.picImg'}">用户头像</th>
+            <th width="7%" param="{name:'mobile'}">手机号</th>
+            <th width="10%" param="{name:'email'}">邮箱号</th>
+            <th width="5%" param="{name:'sex',render:'Render.sex'}">性别</th>
+            <th width="5%" param="{name:'age'}">年龄</th>
+            <th width="10%" param="{name:'createTime'}">注册时间</th>
+            <th width="10%" param="{name:'lastLoginTime'}">上次登录时间</th>
+            <th width="10%" param="{name:'lastLoginIp'}">上次登录IP</th>
+            <th width="5%" param="{name:'isAvalible',enumName:'StateEnum',render:'Render.mmmState'}">状态</th>
+            <th width="10%" param="{operate:'true',buttons:'Render.state,Render.edit,Render.delete'}">操作</th>
+        </tr>
         </thead>
     </table>
 </div>

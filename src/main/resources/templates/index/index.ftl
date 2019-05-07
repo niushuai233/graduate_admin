@@ -24,7 +24,7 @@
 <!-- ADD THE CLASS layout-boxed TO GET A BOXED LAYOUT -->
 <body class="hold-transition skin-blue sidebar-mini">
 <!-- Site wrapper -->
-<div class="wrapper" id="rrapp" >
+<div class="wrapper" id="rrapp">
     <header class="main-header">
         <a href="javascript:void(0);" class="logo" style="background-color: #2991d9">
 
@@ -41,11 +41,12 @@
 
             <div style="float:left;color:#fff;">
                 <ul class="nav navbar-nav">
-                    <li >
-                        <a href="javascript:createMenu('sys/menu/user');" ><i class="fa fa-cog"></i> 后台管理</a>
+                    <li>
+                        <a href="javascript:createMenu('sys/menu/user');"><i class="fa fa-cog"></i> 后台管理</a>
                     </li>
 
-                    <li ><a href="javascript:createMenu('frontframe/json/frontMenu.json');"  ><i class="fa fa-cog"></i> 前端框架</a>
+                    <li><a href="javascript:createMenu('frontframe/json/frontMenu.json');"><i class="fa fa-cog"></i>
+                            前端框架</a>
                     </li>
 
                 </ul>
@@ -55,7 +56,7 @@
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <li><a href="javascript:;" onclick="clearStorage()"><i class="fa fa-undo"></i> &nbsp;清除缓存</a></li>
-                    <li><a href="javascript:;" ><i class="fa fa-user"></i>&nbsp;<span class="username"></span></a></li>
+                    <li><a href="javascript:;"><i class="fa fa-user"></i>&nbsp;<span class="username"></span></a></li>
                     <li><a href="javascript:;" onclick="updatePassword()"><i class="fa fa-lock"></i> &nbsp;修改密码</a></li>
                     <li><a href="logout"><i class="fa fa-sign-out"></i> &nbsp;退出系统</a></li>
                 </ul>
@@ -117,14 +118,13 @@
     </div>
 
 
-
     <!-- 修改密码 -->
     <div id="passwordLayer" style="display: none;">
         <form class="form-horizontal">
             <div class="form-group">
                 <div class="form-group">
                     <div class="col-sm-2 control-label">账号</div>
-                    <span class="label label-success username"  style="vertical-align: bottom;"></span>
+                    <span class="label label-success username" style="vertical-align: bottom;"></span>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-2 control-label">原密码</div>

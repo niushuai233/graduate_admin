@@ -18,7 +18,7 @@
 
         <div class="layui-input-inline">
             <button class="layui-btn search-btn" table-id="organizeTable" lay-submit="" lay-filter="search"><i
-                    class="fa fa-search">&nbsp;</i>查询
+                        class="fa fa-search">&nbsp;</i>查询
             </button>
             <button type="reset" class="layui-btn layui-btn-primary"><i class="fa fa-refresh">&nbsp;</i>重置</button>
         </div>
@@ -26,23 +26,23 @@
 </form>
 <div class="layui-btn-group">
 
-<@shiro.hasPermission name="organize:save">
-    <button class="layui-btn" onclick="addPage('/organize/add')">
-        <i class="fa fa-plus">&nbsp;</i>增加
-    </button>
-</@shiro.hasPermission>
+    <@shiro.hasPermission name="organize:save">
+        <button class="layui-btn" onclick="addPage('/organize/add')">
+            <i class="fa fa-plus">&nbsp;</i>增加
+        </button>
+    </@shiro.hasPermission>
 
-<@shiro.hasPermission name="organize:update">
-    <button class="layui-btn" onclick="editPage('organizeTable','/organize/edit')">
-        <i class="fa fa-pencil-square-o">&nbsp;</i>修改
-    </button>
-</@shiro.hasPermission>
+    <@shiro.hasPermission name="organize:update">
+        <button class="layui-btn" onclick="editPage('organizeTable','/organize/edit')">
+            <i class="fa fa-pencil-square-o">&nbsp;</i>修改
+        </button>
+    </@shiro.hasPermission>
 
-<@shiro.hasPermission name="organize:delete">
-    <button class="layui-btn layui-btn-delete" onclick="deleteBatch('批量删除','organizeTable','/organize/delete');">
-        <i class="fa fa-trash-o">&nbsp;</i>删除
-    </button>
-</@shiro.hasPermission>
+    <@shiro.hasPermission name="organize:delete">
+        <button class="layui-btn layui-btn-delete" onclick="deleteBatch('批量删除','organizeTable','/organize/delete');">
+            <i class="fa fa-trash-o">&nbsp;</i>删除
+        </button>
+    </@shiro.hasPermission>
 </div>
 <div class="layui-form ">
     <table class="layui-table" id="organizeTable" cyType="pageGrid"

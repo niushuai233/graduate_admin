@@ -8,12 +8,14 @@
 <body>
 <div class="layui-field-box">
     <form class="layui-form" action="">
-       <#include "common.ftl"/>
+        <#include "common.ftl"/>
         <input type="hidden" name="courseId" value="${model.courseId}">
         <div class="page-footer">
-            <div class="btn-list">
+            <div class="btn-list" style="height: 75px;">
                 <div class="btnlist">
-                    <button class="layui-btn" lay-submit="" lay-filter="submit" data-url="/educourse/update"><i class="fa fa-floppy-o">&nbsp;</i>保存</button>
+                    <button class="layui-btn" lay-submit="" lay-filter="submit" data-url="/educourse/update"><i
+                                class="fa fa-floppy-o">&nbsp;</i>保存
+                    </button>
                     <button class="layui-btn" onclick="$t.closeWindow();"><i class="fa fa-undo">&nbsp;</i>返回</button>
                 </div>
             </div>

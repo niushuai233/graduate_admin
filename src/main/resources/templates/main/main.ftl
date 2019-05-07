@@ -1,7 +1,6 @@
-
 <html>
 <head>
-<#include "../resource.ftl"/>
+    <#include "../resource.ftl"/>
 </head>
 <body>
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
@@ -19,7 +18,8 @@
 </fieldset>
 <blockquote class="layui-elem-quote">
     1.项目主页 <a class="a-link" target="_blank" href="http://fast.cymall.xin">http://fast.cymall.xin</a><br>
-    2.码云地址 <a class="a-link" target="_blank" href="https://gitee.com/leiyuxi/cy-fast">https://gitee.com/leiyuxi/cy-fast</a><br>
+    2.码云地址 <a class="a-link" target="_blank"
+              href="https://gitee.com/leiyuxi/cy-fast">https://gitee.com/leiyuxi/cy-fast</a><br>
     3.qq群 275846351<br>
 </blockquote>
 
@@ -44,7 +44,7 @@
         <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
         <div class="layui-timeline-content layui-text">
             <h3 class="layui-timeline-title">2018-01-06</h3>
-            <p class="a-link"><a  target="_blank" href="http://fast.cymall.xin">cy-fast</a></p>
+            <p class="a-link"><a target="_blank" href="http://fast.cymall.xin">cy-fast</a></p>
             <ul>
                 <li>基于springboot+shiro+freemarker的快速开发框架</li>
                 <li>分页表格增加排序功能</li>
@@ -57,10 +57,11 @@
         <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
         <div class="layui-timeline-content layui-text">
             <h3 class="layui-timeline-title">2017-12-14</h3>
-            <p class="a-link"><a  target="_blank" href="http://admin.cymall.xin">cy-security</a></p>
+            <p class="a-link"><a target="_blank" href="http://admin.cymall.xin">cy-security</a></p>
             <ul>
                 <li>基于ssm+shiro的后台管理系统</li>
-                <li>码云地址 <a class="a-link" target="_blank" href="https://gitee.com/leiyuxi/cy-security">https://gitee.com/leiyuxi/cy-security</a></li>
+                <li>码云地址 <a class="a-link" target="_blank" href="https://gitee.com/leiyuxi/cy-security">https://gitee.com/leiyuxi/cy-security</a>
+                </li>
             </ul>
         </div>
     </li>

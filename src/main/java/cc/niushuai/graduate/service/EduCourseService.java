@@ -29,4 +29,6 @@ public interface EduCourseService extends BaseService<EduCourse>{
 	void deleteBatch(Long[] courseIds);
 
     void updateState(Long[] ids, String stateValue);
+
+	String getTeacherIds(Long id);
 }

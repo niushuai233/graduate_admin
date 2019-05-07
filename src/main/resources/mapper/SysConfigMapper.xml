@@ -3,46 +3,47 @@
 
 <mapper namespace="cc.niushuai.graduate.mapper.SysConfigMapper">
 
-	<!-- 可根据自己的需求，是否要使用 -->
-	<resultMap type="cc.niushuai.graduate.entity.admin.SysConfig" id="sysConfigMap">
-		<result property="id" column="id"/>
-		<result property="code" column="code"/>
-		<result property="value" column="value"/>
-		<result property="status" column="status"/>
-		<result property="remark" column="remark"/>
-	</resultMap>
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="cc.niushuai.graduate.entity.admin.SysConfig" id="sysConfigMap">
+        <result property="id" column="id"/>
+        <result property="code" column="code"/>
+        <result property="value" column="value"/>
+        <result property="status" column="status"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
 
-	<select id="queryObject" resultType="cc.niushuai.graduate.entity.admin.SysConfig">
+    <select id="queryObject" resultType="cc.niushuai.graduate.entity.admin.SysConfig">
 		select * from admin_sys_config where id = #{value}
 	</select>
 
-	<select id="findByCode" resultType="cc.niushuai.graduate.entity.admin.SysConfig">
+    <select id="findByCode" resultType="cc.niushuai.graduate.entity.admin.SysConfig">
 		select * from admin_sys_config where code = #{value}
 	</select>
 
-	<select id="queryList" resultType="cc.niushuai.graduate.entity.admin.SysConfig">
-		select * from admin_sys_config where  1=1
-		<if test="code != null and code.trim() != ''">
-			and `code` like concat('%',#{code},'%')
-		</if>
-		<choose>
-			<when test="sidx != null and sidx.trim() != ''">
-				order by ${sidx} ${order}
-			</when>
-			<otherwise>
-				order by id desc
-			</otherwise>
-		</choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
+    <select id="queryList" resultType="cc.niushuai.graduate.entity.admin.SysConfig">
+        select * from admin_sys_config where 1=1
+        <if test="code != null and code.trim() != ''">
+            and `code` like concat('%',#{code},'%')
+        </if>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
 
-	<select id="queryTotal" resultType="int">
+    <select id="queryTotal" resultType="int">
 		select count(*) from admin_sys_config
 	</select>
 
-	<insert id="save" parameterType="cc.niushuai.graduate.entity.admin.SysConfig" useGeneratedKeys="true" keyProperty="id">
+    <insert id="save" parameterType="cc.niushuai.graduate.entity.admin.SysConfig" useGeneratedKeys="true"
+            keyProperty="id">
 		insert into admin_sys_config
 		(
 		`code`,
@@ -59,52 +60,52 @@
 		)
 	</insert>
 
-	<update id="update" parameterType="cc.niushuai.graduate.entity.admin.SysConfig">
-		update admin_sys_config
-		<set>
-			<if test="code != null">`code` = #{code}, </if>
-			<if test="value != null">`value` = #{value}, </if>
-			<if test="status != null">`status` = #{status}, </if>
-			<if test="remark != null">`remark` = #{remark}</if>
-		</set>
-		where id = #{id}
-	</update>
+    <update id="update" parameterType="cc.niushuai.graduate.entity.admin.SysConfig">
+        update admin_sys_config
+        <set>
+            <if test="code != null">`code` = #{code},</if>
+            <if test="value != null">`value` = #{value},</if>
+            <if test="status != null">`status` = #{status},</if>
+            <if test="remark != null">`remark` = #{remark}</if>
+        </set>
+        where id = #{id}
+    </update>
 
-	<delete id="delete">
+    <delete id="delete">
 		delete from admin_sys_config where id = #{value}
 	</delete>
 
-	<delete id="deleteBatch">
-		delete from admin_sys_config where id in
-		<foreach item="id" collection="array" open="(" separator="," close=")">
-			#{id}
-		</foreach>
-	</delete>
+    <delete id="deleteBatch">
+        delete from admin_sys_config where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 
-	<select id="findRule" resultType="cc.niushuai.graduate.entity.admin.SysConfig">
-		select * from admin_sys_config where
+    <select id="findRule" resultType="cc.niushuai.graduate.entity.admin.SysConfig">
+        select * from admin_sys_config where
 
-		<if test="money != null and money != null">
-			 code=#{money}
-		</if>
-		<if test="img != null and img != null">
-			or code=#{img}
-		</if>
-		<if test="shareImg != null and shareImg != null">
-			or code=#{shareImg}
-		</if>
-		<if test="shareUrl != null and shareUrl != null">
-			or code=#{shareUrl}
-		</if>
-		<if test="shareTitle != null and shareTitle != null">
-			or code=#{shareTitle}
-		</if>
-		<if test="shareDesc != null and shareDesc != null">
-			or code=#{shareDesc}
-		</if>
-	</select>
+        <if test="money != null and money != null">
+            code=#{money}
+        </if>
+        <if test="img != null and img != null">
+            or code=#{img}
+        </if>
+        <if test="shareImg != null and shareImg != null">
+            or code=#{shareImg}
+        </if>
+        <if test="shareUrl != null and shareUrl != null">
+            or code=#{shareUrl}
+        </if>
+        <if test="shareTitle != null and shareTitle != null">
+            or code=#{shareTitle}
+        </if>
+        <if test="shareDesc != null and shareDesc != null">
+            or code=#{shareDesc}
+        </if>
+    </select>
 
-	<update id="setRule" parameterType="cc.niushuai.graduate.entity.admin.SysConfig">
+    <update id="setRule" parameterType="cc.niushuai.graduate.entity.admin.SysConfig">
 		update admin_sys_config set value = #{value}  where code = #{code}
 	</update>
 </mapper>

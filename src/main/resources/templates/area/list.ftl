@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>地区管理</title>
-<#include "../resource.ftl"/>
+    <#include "../resource.ftl"/>
     <script type="text/javascript" src="/area/js/list.js"></script>
 </head>
 <body>
@@ -23,31 +23,31 @@
         </div>
         <div class="layui-input-inline">
             <button class="layui-btn search-btn" table-id="AreaTable" lay-submit="" lay-filter="search"><i
-                    class="fa fa-search">&nbsp;</i>查询
+                        class="fa fa-search">&nbsp;</i>查询
             </button>
             <button type="reset" class="layui-btn layui-btn-primary"><i class="fa fa-refresh">&nbsp;</i>重置</button>
         </div>
     </div>
 </form>
 <div class="layui-btn-group">
-<@shiro.hasPermission name="area:save">
-    <button class="layui-btn" onclick="add('/area/add')">
-        <i class="fa fa-plus">&nbsp;</i>增加
-    </button>
-</@shiro.hasPermission>
+    <@shiro.hasPermission name="area:save">
+        <button class="layui-btn" onclick="add('/area/add')">
+            <i class="fa fa-plus">&nbsp;</i>增加
+        </button>
+    </@shiro.hasPermission>
 
-<@shiro.hasPermission name="area:update">
-    <button class="layui-btn" onclick="edit('AreaTable','/area/edit')">
-        <i class="fa fa-pencil-square-o">&nbsp;</i>修改
-    </button>
-</@shiro.hasPermission>
+    <@shiro.hasPermission name="area:update">
+        <button class="layui-btn" onclick="edit('AreaTable','/area/edit')">
+            <i class="fa fa-pencil-square-o">&nbsp;</i>修改
+        </button>
+    </@shiro.hasPermission>
 
-<@shiro.hasPermission name="area:delete">
+    <@shiro.hasPermission name="area:delete">
 
-    <button class="layui-btn" onclick="deleteBatch('AreaTable','/area/delete');">
-        <i class="fa fa-trash-o">&nbsp;</i>删除
-    </button>
-</@shiro.hasPermission>
+        <button class="layui-btn" onclick="deleteBatch('AreaTable','/area/delete');">
+            <i class="fa fa-trash-o">&nbsp;</i>删除
+        </button>
+    </@shiro.hasPermission>
 
     <button class="layui-btn" onclick="enable('AreaTable','/area/enable')">
         <i class="fa fa-check-square-o">&nbsp;</i>启用

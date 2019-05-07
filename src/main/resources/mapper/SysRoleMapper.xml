@@ -3,62 +3,63 @@
 
 <mapper namespace="cc.niushuai.graduate.mapper.SysRoleMapper">
 
-	<select id="queryObject" resultType="cc.niushuai.graduate.entity.admin.SysRole">
+    <select id="queryObject" resultType="cc.niushuai.graduate.entity.admin.SysRole">
 		select * from admin_sys_role where role_id = #{value}
 	</select>
-	
-	<select id="queryList" resultType="cc.niushuai.graduate.entity.admin.SysRole">
-		select * from admin_sys_role
-		<where>
-			<if test="roleName != null and roleName.trim() != ''">
-				and `role_name` like concat('%',#{roleName},'%') 
-			</if>
-			<if test="createUserId != null">
-				and create_user_id = #{createUserId} 
-			</if>
-			<if test="remark != null">
-				and remark = #{remark}
-			</if>
-		</where>
-		<choose>
-			<when test="sidx != null and sidx.trim() != ''">
-				order by ${sidx} ${order}
-			</when>
-			<otherwise>
-				order by role_id asc
-			</otherwise>
-		</choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
-	<select id="findAll"   resultType="cc.niushuai.graduate.entity.admin.SysRole">
-		select * from admin_sys_role
-		<where>
-			<if test="createUserId != 'null'">
-				and create_user_id = #{createUserId}
-			</if>
-		</where>
-		order by role_id asc
-	</select>
 
-	<select id="queryTotal" resultType="int">
-		select count(*) from admin_sys_role
-		<where>
+    <select id="queryList" resultType="cc.niushuai.graduate.entity.admin.SysRole">
+        select * from admin_sys_role
+        <where>
+            <if test="roleName != null and roleName.trim() != ''">
+                and `role_name` like concat('%',#{roleName},'%')
+            </if>
+            <if test="createUserId != null">
+                and create_user_id = #{createUserId}
+            </if>
+            <if test="remark != null">
+                and remark = #{remark}
+            </if>
+        </where>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+            <otherwise>
+                order by role_id asc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+    <select id="findAll" resultType="cc.niushuai.graduate.entity.admin.SysRole">
+        select * from admin_sys_role
+        <where>
+            <if test="createUserId != 'null'">
+                and create_user_id = #{createUserId}
+            </if>
+        </where>
+        order by role_id asc
+    </select>
 
-			<if test="roleName != null and roleName.trim() != ''">
-				and `role_name` like concat('%',#{roleName},'%') 
-			</if>
-			<if test="createUserId != null">
-				and create_user_id = #{createUserId} 
-			</if>
-			<if test="remark != null">
-				and remark = #{remark}
-			</if>
-		</where>
-	</select>
-	
-	<insert id="save" parameterType="cc.niushuai.graduate.entity.admin.SysRole" useGeneratedKeys="true" keyProperty="roleId">
+    <select id="queryTotal" resultType="int">
+        select count(*) from admin_sys_role
+        <where>
+
+            <if test="roleName != null and roleName.trim() != ''">
+                and `role_name` like concat('%',#{roleName},'%')
+            </if>
+            <if test="createUserId != null">
+                and create_user_id = #{createUserId}
+            </if>
+            <if test="remark != null">
+                and remark = #{remark}
+            </if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="cc.niushuai.graduate.entity.admin.SysRole" useGeneratedKeys="true"
+            keyProperty="roleId">
 		insert into admin_sys_role
 		(
 			`role_id`, 
@@ -79,42 +80,42 @@
 			#{orgId}
 		)
 	</insert>
-	 
-	<update id="update" parameterType="cc.niushuai.graduate.entity.admin.SysRole">
-		update admin_sys_role
-		<set> 
-			<if test="roleName != null">`role_name` = #{roleName}, </if>
-			<if test="remark != null">`remark` = #{remark},</if>
-			<if test="orgId != null">`org_id` = #{orgId}</if>
-		</set>
-		where role_id = #{roleId}
-	</update>
-	
-	<delete id="deleteBatch">
-		delete from admin_sys_role where role_id in
-		<foreach item="roleId" collection="array" open="(" separator="," close=")">
-			#{roleId}
-		</foreach>
-	</delete>
 
-	<delete id="deleteRoleMenu">
-		delete from admin_sys_role_menu where role_id in
-		<foreach item="roleId" collection="array" open="(" separator="," close=")">
-			#{roleId}
-		</foreach>
+    <update id="update" parameterType="cc.niushuai.graduate.entity.admin.SysRole">
+        update admin_sys_role
+        <set>
+            <if test="roleName != null">`role_name` = #{roleName},</if>
+            <if test="remark != null">`remark` = #{remark},</if>
+            <if test="orgId != null">`org_id` = #{orgId}</if>
+        </set>
+        where role_id = #{roleId}
+    </update>
 
-	</delete>
+    <delete id="deleteBatch">
+        delete from admin_sys_role where role_id in
+        <foreach item="roleId" collection="array" open="(" separator="," close=")">
+            #{roleId}
+        </foreach>
+    </delete>
+
+    <delete id="deleteRoleMenu">
+        delete from admin_sys_role_menu where role_id in
+        <foreach item="roleId" collection="array" open="(" separator="," close=")">
+            #{roleId}
+        </foreach>
+
+    </delete>
 
 
-	<delete id="deleteUserRole">
-		delete from admin_sys_user_role where role_id in
-		<foreach item="roleId" collection="array" open="(" separator="," close=")">
-			#{roleId}
-		</foreach>
-	</delete>
+    <delete id="deleteUserRole">
+        delete from admin_sys_user_role where role_id in
+        <foreach item="roleId" collection="array" open="(" separator="," close=")">
+            #{roleId}
+        </foreach>
+    </delete>
 
-	<!-- 查询用户创建的角色ID列表 -->
-	<select id="queryRoleIdList" resultType="long">
+    <!-- 查询用户创建的角色ID列表 -->
+    <select id="queryRoleIdList" resultType="long">
 		select role_id from admin_sys_role where create_user_id = #{createUserId}
-	</select> 
+	</select>
 </mapper>

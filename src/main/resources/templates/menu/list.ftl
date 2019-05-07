@@ -22,32 +22,32 @@
         </div>
         <div class="layui-input-inline">
             <button class="layui-btn search-btn" table-id="menuTable" lay-submit="" lay-filter="search"><i
-                    class="fa fa-search">&nbsp;</i>查询
+                        class="fa fa-search">&nbsp;</i>查询
             </button>
-            <button type="reset"  class="layui-btn layui-btn-primary"><i class="fa fa-refresh">&nbsp;</i>重置</button>
+            <button type="reset" class="layui-btn layui-btn-primary"><i class="fa fa-refresh">&nbsp;</i>重置</button>
         </div>
     </div>
 </form>
 <div class="layui-btn-group">
 
-<@shiro.hasPermission name="sys:menu:save">
-    <button class="layui-btn" onclick="add('/sys/menu/add')">
-        <i class="fa fa-plus">&nbsp;</i>增加
-    </button>
-</@shiro.hasPermission>
+    <@shiro.hasPermission name="sys:menu:save">
+        <button class="layui-btn" onclick="add('/sys/menu/add')">
+            <i class="fa fa-plus">&nbsp;</i>增加
+        </button>
+    </@shiro.hasPermission>
 
-<@shiro.hasPermission name="sys:menu:update">
-    <button class="layui-btn" onclick="edit('menuTable','/sys/menu/edit')" style="margin-left: 5px!important;">
-        <i class="fa fa-pencil-square-o">&nbsp;</i>修改
-    </button>
-</@shiro.hasPermission>
+    <@shiro.hasPermission name="sys:menu:update">
+        <button class="layui-btn" onclick="edit('menuTable','/sys/menu/edit')" style="margin-left: 5px!important;">
+            <i class="fa fa-pencil-square-o">&nbsp;</i>修改
+        </button>
+    </@shiro.hasPermission>
 
-<@shiro.hasPermission name="sys:menu:delete">
-    <button class="layui-btn" onclick="deleteBatch('menuTable','/sys/menu/delete');"
-            style="margin-left: 5px!important;">
-        <i class="fa fa-trash-o">&nbsp;</i>删除
-    </button>
-</@shiro.hasPermission>
+    <@shiro.hasPermission name="sys:menu:delete">
+        <button class="layui-btn" onclick="deleteBatch('menuTable','/sys/menu/delete');"
+                style="margin-left: 5px!important;">
+            <i class="fa fa-trash-o">&nbsp;</i>删除
+        </button>
+    </@shiro.hasPermission>
 
 
 </div>

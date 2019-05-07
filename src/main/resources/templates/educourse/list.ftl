@@ -53,6 +53,7 @@
 
 </div>
 <div class="layui-form ">
+    <input type="hidden" id="courseAccessPath" value="${(courseAccessPath)!""}"/>
     <table class="layui-table" id="eduCourseTable" cyType="pageGrid"
            cyProps="url:'/educourse/listData',checkbox:'true',pageColor:'#2991d9'">
         <thead>
@@ -64,12 +65,11 @@
             <!--isPrimary：是否是主键-->
             <th width="1%" param="{name:'courseId',isPrimary:'true',hide:'true'}">课程编号</th>
 
-
             <th width="10%" param="{name:'courseName'}">课程名称</th>
 
             <th width="10%" param="{name:'logo', render:'Render.pic'}">课程封面</th>
 
-            <th width="10%" param="{name:'subjectId'}">所属专业</th>
+            <th width="10%" param="{name:'subjectLink'}">所属专业</th>
 
             <th width="5%" param="{name:'lessionNum'}">总课时</th>
 
@@ -86,7 +86,8 @@
             <th width="7%" param="{name:'updateTime'}">更新时间</th>
             <!--isPrimary：渲染列-->
             <th width="5%" param="{name:'isAvaliable',enumName:'CourseEnum',render:'Render.customState'}">状态</th>
-            <th width="15%" param="{operate:'true',buttons:'Render.visit,Render.state,Render.edit,Render.delete'}">操作</th>
+            <th width="15%" param="{operate:'true',buttons:'Render.visit,Render.state,Render.edit,Render.delete'}">操作
+            </th>
         </tr>
         </thead>
     </table>

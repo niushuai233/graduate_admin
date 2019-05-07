@@ -21,7 +21,7 @@
         </div>
         <div class="layui-input-inline">
             <button class="layui-btn search-btn" table-id="syslogTable" lay-submit="" lay-filter="search"><i
-                    class="fa fa-search">&nbsp;</i>查询
+                        class="fa fa-search">&nbsp;</i>查询
             </button>
             <button type="reset" class="layui-btn layui-btn-primary"><i class="fa fa-refresh">&nbsp;</i>重置</button>
         </div>

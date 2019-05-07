@@ -1,4 +1,3 @@
-
 <html>
 <head>
     <title>代码生成器</title>
@@ -10,7 +9,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">表名:</label>
         <div class="layui-input-inline">
-            <input type="text" name="tableName"  placeholder="请输入表名" class="layui-input">
+            <input type="text" name="tableName" placeholder="请输入表名" class="layui-input">
         </div>
         <div class="layui-input-inline">
             <button class="layui-btn search-btn" table-id="genTable" lay-submit="" lay-filter="search">
@@ -21,7 +20,7 @@
     </div>
 </form>
 <div class="layui-btn-group">
-    <button class="layui-btn" onclick="generator('genTable')">  <i class="fa fa-rocket">&nbsp;</i>生成代码</button>
+    <button class="layui-btn" onclick="generator('genTable')"><i class="fa fa-rocket">&nbsp;</i>生成代码</button>
 </div>
 <div class="layui-form ">
     <table class="layui-table" id="genTable" cyType="pageGrid"

@@ -3,71 +3,72 @@
 
 <mapper namespace="cc.niushuai.graduate.mapper.SysUserMapper">
 
-	<select id="queryObject" resultType="cc.niushuai.graduate.entity.admin.SysUser">
+    <select id="queryObject" resultType="cc.niushuai.graduate.entity.admin.SysUser">
 		select * from admin_sys_user where user_id = #{value}
 	</select>
-	
-	<select id="queryList" resultType="cc.niushuai.graduate.entity.admin.SysUser">
-		select * from admin_sys_user
-		<where>
-			<if test="createUserId != null">
-				and `create_user_id` = #{createUserId} 
-			</if>
-			<if test="username != null and username.trim() != ''">
-				and `username` like concat('%',#{username},'%') 
-			</if>
-			<if test="mobile != null and mobile.trim() != ''">
-				and `mobile` like concat('%',#{mobile},'%')
-			</if>
-		</where>
-		<choose>
-			<when test="sidx != null and sidx.trim() != ''">
-				order by ${sidx} ${order}
-			</when>
-			<otherwise>
-				order by user_id desc
-			</otherwise>
-		</choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
-	
-	<select id="queryTotal" resultType="int">
-		select count(*) from admin_sys_user
-		<where>
-			<if test="createUserId != null">
-				and `create_user_id` = #{createUserId} 
-			</if>
-			<if test="username != null and username.trim() != ''">
-				and `username` like concat('%',#{username},'%') 
-			</if>
-			<if test="mobile != null and mobile.trim() != ''">
-				and `mobile` like concat('%',#{mobile},'%')
-			</if>
-		</where>
-	</select>
-	
-	<!-- 查询用户的所有权限 -->
-	<select id="queryAllPerms" resultType="string">
+
+    <select id="queryList" resultType="cc.niushuai.graduate.entity.admin.SysUser">
+        select * from admin_sys_user
+        <where>
+            <if test="createUserId != null">
+                and `create_user_id` = #{createUserId}
+            </if>
+            <if test="username != null and username.trim() != ''">
+                and `username` like concat('%',#{username},'%')
+            </if>
+            <if test="mobile != null and mobile.trim() != ''">
+                and `mobile` like concat('%',#{mobile},'%')
+            </if>
+        </where>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+            <otherwise>
+                order by user_id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="queryTotal" resultType="int">
+        select count(*) from admin_sys_user
+        <where>
+            <if test="createUserId != null">
+                and `create_user_id` = #{createUserId}
+            </if>
+            <if test="username != null and username.trim() != ''">
+                and `username` like concat('%',#{username},'%')
+            </if>
+            <if test="mobile != null and mobile.trim() != ''">
+                and `mobile` like concat('%',#{mobile},'%')
+            </if>
+        </where>
+    </select>
+
+    <!-- 查询用户的所有权限 -->
+    <select id="queryAllPerms" resultType="string">
 		select m.perms from admin_sys_user_role ur
 			LEFT JOIN admin_sys_role_menu rm on ur.role_id = rm.role_id
 			LEFT JOIN admin_sys_menu m on rm.menu_id = m.menu_id
 		where ur.user_id = #{userId}
 	</select>
-	
-	<!-- 查询用户的所有菜单ID --> 
-	<select id="queryAllMenuId" resultType="long">
+
+    <!-- 查询用户的所有菜单ID -->
+    <select id="queryAllMenuId" resultType="long">
 		select distinct rm.menu_id from admin_sys_user_role ur
 			LEFT JOIN admin_sys_role_menu rm on ur.role_id = rm.role_id
 		where ur.user_id = #{userId}
 	</select>
-	
-	<select id="queryByUserName" resultType="cc.niushuai.graduate.entity.admin.SysUser">
+
+    <select id="queryByUserName" resultType="cc.niushuai.graduate.entity.admin.SysUser">
 		select * from admin_sys_user where username = #{username}
 	</select>
 
-	<insert id="save" parameterType="cc.niushuai.graduate.entity.admin.SysUser" useGeneratedKeys="true" keyProperty="userId">
+    <insert id="save" parameterType="cc.niushuai.graduate.entity.admin.SysUser" useGeneratedKeys="true"
+            keyProperty="userId">
 		insert into admin_sys_user
 		(
 			`username`, 
@@ -91,42 +92,42 @@
 			#{orgId}
 		)
 	</insert>
-	 
-	<update id="update" parameterType="cc.niushuai.graduate.entity.admin.SysUser">
-		update admin_sys_user
-		<set> 
-			<if test="username != null">username = #{username}, </if>
-			<if test="password != null">password = #{password}, </if>
-			<if test="email != null">email = #{email}, </if>
-			<if test="mobile != null">mobile = #{mobile}, </if>
-			<if test="status != null ">status = #{status}, </if>
-			<if test="orgId != null">org_id = #{orgId} </if>
-		</set>
-		where user_id = #{userId}
-		<if test="createUserId != null">
-			and `create_user_id` = #{createUserId}
-		</if>
-	</update>
-	
-	<update id="updatePassword" parameterType="map">
+
+    <update id="update" parameterType="cc.niushuai.graduate.entity.admin.SysUser">
+        update admin_sys_user
+        <set>
+            <if test="username != null">username = #{username},</if>
+            <if test="password != null">password = #{password},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="mobile != null">mobile = #{mobile},</if>
+            <if test="status != null ">status = #{status},</if>
+            <if test="orgId != null">org_id = #{orgId}</if>
+        </set>
+        where user_id = #{userId}
+        <if test="createUserId != null">
+            and `create_user_id` = #{createUserId}
+        </if>
+    </update>
+
+    <update id="updatePassword" parameterType="map">
 		update admin_sys_user set `password` = #{newPassword}
 			where user_id = #{userId} and password = #{password}
 	</update>
-	
-	<delete id="deleteBatch">
 
-		delete from admin_sys_user where user_id in
-		<foreach item="userId" collection="array" open="(" separator="," close=")">
-			#{userId}
-		</foreach>
+    <delete id="deleteBatch">
 
-	</delete>
-	<delete id="deleteUserRole">
-		delete from admin_sys_user_role where user_id in
-		<foreach item="userId" collection="array" open="(" separator="," close=")">
-			#{userId}
-		</foreach>
-	</delete>
+        delete from admin_sys_user where user_id in
+        <foreach item="userId" collection="array" open="(" separator="," close=")">
+            #{userId}
+        </foreach>
+
+    </delete>
+    <delete id="deleteUserRole">
+        delete from admin_sys_user_role where user_id in
+        <foreach item="userId" collection="array" open="(" separator="," close=")">
+            #{userId}
+        </foreach>
+    </delete>
 
 
 </mapper>

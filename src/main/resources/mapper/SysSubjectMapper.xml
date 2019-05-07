@@ -3,7 +3,7 @@
 
 <mapper namespace="cc.niushuai.graduate.mapper.SysSubjectMapper">
 
-	<!-- 可根据自己的需求，是否要使用 -->
+    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="cc.niushuai.graduate.entity.SysSubject" id="sysSubjectMap">
         <result property="subjectId" column="SUBJECT_ID"/>
         <result property="subjectName" column="SUBJECT_NAME"/>
@@ -17,57 +17,76 @@
         <result property="updateTime" column="UPDATE_TIME"/>
     </resultMap>
 
-	<select id="get" resultType="cc.niushuai.graduate.entity.SysSubject">
+    <select id="get" resultType="cc.niushuai.graduate.entity.SysSubject">
 		select * from sys_subject where SUBJECT_ID = #{value}
 	</select>
 
-	<select id="getList" resultType="cc.niushuai.graduate.entity.SysSubject">
-		select * from sys_subject t <include refid="where_clause" />
+    <select id="getList" resultType="cc.niushuai.graduate.entity.SysSubject">
+        select * from sys_subject t
+        <include refid="where_clause"/>
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
                 order by ${sidx} ${order}
             </when>
-			<otherwise>
+            <otherwise>
                 order by sort asc
-			</otherwise>
+            </otherwise>
         </choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
-	
- 	<select id="getCount" resultType="int">
-		select count(*) from sys_subject t  <include refid="where_clause" />
-	</select>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="getCount" resultType="int">
+        select count(*) from sys_subject t
+        <include refid="where_clause"/>
+    </select>
 
     <!-- 搜索数据区域 -->
     <sql id="where_clause">
         <where>
             1=1
-            <if test="subjectId != null and subjectId != ''"> and t.SUBJECT_ID = #{subjectId} </if>
-    		<if test="subjectIdVague != null and subjectIdVague != ''"> and t.SUBJECT_ID like concat('%',#{subjectIdVague},'%') </if>
-            <if test="subjectName != null and subjectName != ''"> and t.SUBJECT_NAME = #{subjectName} </if>
-    		<if test="subjectNameVague != null and subjectNameVague != ''"> and t.SUBJECT_NAME like concat('%',#{subjectNameVague},'%') </if>
-            <if test="parentId != null and parentId != ''"> and t.PARENT_ID = #{parentId} </if>
-    		<if test="parentIdVague != null and parentIdVague != ''"> and t.PARENT_ID like concat('%',#{parentIdVague},'%') </if>
-            <if test="parentName != null and parentName != ''"> and t.PARENT_NAME = #{parentName} </if>
-    		<if test="parentNameVague != null and parentNameVague != ''"> and t.PARENT_NAME like concat('%',#{parentNameVague},'%') </if>
-            <if test="sort != null and sort != ''"> and t.sort = #{sort} </if>
-    		<if test="sortVague != null and sortVague != ''"> and t.sort like concat('%',#{sortVague},'%') </if>
-			<if test="status != null and status != ''"> and t.STATUS = #{status} </if>
-			<if test="statusVague != null and statusVague != ''"> and t.STATUS like concat('%',#{statusVague},'%') </if>
-            <if test="createBy != null and createBy != ''"> and t.CREATE_BY = #{createBy} </if>
-    		<if test="createByVague != null and createByVague != ''"> and t.CREATE_BY like concat('%',#{createByVague},'%') </if>
-            <if test="updateBy != null and updateBy != ''"> and t.UPDATE_BY = #{updateBy} </if>
-    		<if test="updateByVague != null and updateByVague != ''"> and t.UPDATE_BY like concat('%',#{updateByVague},'%') </if>
-            <if test="createTime != null and createTime != ''"> and t.CREATE_TIME = #{createTime} </if>
-    		<if test="createTimeVague != null and createTimeVague != ''"> and t.CREATE_TIME like concat('%',#{createTimeVague},'%') </if>
-            <if test="updateTime != null and updateTime != ''"> and t.UPDATE_TIME = #{updateTime} </if>
-    		<if test="updateTimeVague != null and updateTimeVague != ''"> and t.UPDATE_TIME like concat('%',#{updateTimeVague},'%') </if>
+            <if test="subjectId != null and subjectId != ''">and t.SUBJECT_ID = #{subjectId}</if>
+            <if test="subjectIdVague != null and subjectIdVague != ''">and t.SUBJECT_ID like
+                concat('%',#{subjectIdVague},'%')
+            </if>
+            <if test="subjectName != null and subjectName != ''">and t.SUBJECT_NAME = #{subjectName}</if>
+            <if test="subjectNameVague != null and subjectNameVague != ''">and t.SUBJECT_NAME like
+                concat('%',#{subjectNameVague},'%')
+            </if>
+            <if test="parentId != null and parentId != ''">and t.PARENT_ID = #{parentId}</if>
+            <if test="parentIdVague != null and parentIdVague != ''">and t.PARENT_ID like
+                concat('%',#{parentIdVague},'%')
+            </if>
+            <if test="parentName != null and parentName != ''">and t.PARENT_NAME = #{parentName}</if>
+            <if test="parentNameVague != null and parentNameVague != ''">and t.PARENT_NAME like
+                concat('%',#{parentNameVague},'%')
+            </if>
+            <if test="sort != null and sort != ''">and t.sort = #{sort}</if>
+            <if test="sortVague != null and sortVague != ''">and t.sort like concat('%',#{sortVague},'%')</if>
+            <if test="status != null and status != ''">and t.STATUS = #{status}</if>
+            <if test="statusVague != null and statusVague != ''">and t.STATUS like concat('%',#{statusVague},'%')</if>
+            <if test="createBy != null and createBy != ''">and t.CREATE_BY = #{createBy}</if>
+            <if test="createByVague != null and createByVague != ''">and t.CREATE_BY like
+                concat('%',#{createByVague},'%')
+            </if>
+            <if test="updateBy != null and updateBy != ''">and t.UPDATE_BY = #{updateBy}</if>
+            <if test="updateByVague != null and updateByVague != ''">and t.UPDATE_BY like
+                concat('%',#{updateByVague},'%')
+            </if>
+            <if test="createTime != null and createTime != ''">and t.CREATE_TIME = #{createTime}</if>
+            <if test="createTimeVague != null and createTimeVague != ''">and t.CREATE_TIME like
+                concat('%',#{createTimeVague},'%')
+            </if>
+            <if test="updateTime != null and updateTime != ''">and t.UPDATE_TIME = #{updateTime}</if>
+            <if test="updateTimeVague != null and updateTimeVague != ''">and t.UPDATE_TIME like
+                concat('%',#{updateTimeVague},'%')
+            </if>
         </where>
     </sql>
-	 
-	<insert id="save" parameterType="cc.niushuai.graduate.entity.SysSubject" useGeneratedKeys="true" keyProperty="subjectId">
+
+    <insert id="save" parameterType="cc.niushuai.graduate.entity.SysSubject" useGeneratedKeys="true"
+            keyProperty="subjectId">
 		insert into sys_subject
 		(
 			`SUBJECT_NAME`, 
@@ -94,31 +113,31 @@
 		)
 	</insert>
 
-	<update id="update" parameterType="cc.niushuai.graduate.entity.SysSubject">
-		update sys_subject 
-		<set>
-			<if test="subjectName != null">`SUBJECT_NAME` = #{subjectName}, </if>
-			<if test="parentId != null">`PARENT_ID` = #{parentId}, </if>
-			<if test="parentName != null">`PARENT_NAME` = #{parentName}, </if>
-			<if test="sort != null">`sort` = #{sort}, </if>
-			<if test="status != null">`STATUS` = #{status}, </if>
-			<if test="createBy != null">`CREATE_BY` = #{createBy}, </if>
-			<if test="updateBy != null">`UPDATE_BY` = #{updateBy}, </if>
-			<if test="createTime != null">`CREATE_TIME` = #{createTime}, </if>
-			<if test="updateTime != null">`UPDATE_TIME` = #{updateTime}</if>
-		</set>
-		where SUBJECT_ID = #{subjectId}
-	</update>
-	
-	<delete id="delete">
+    <update id="update" parameterType="cc.niushuai.graduate.entity.SysSubject">
+        update sys_subject
+        <set>
+            <if test="subjectName != null">`SUBJECT_NAME` = #{subjectName},</if>
+            <if test="parentId != null">`PARENT_ID` = #{parentId},</if>
+            <if test="parentName != null">`PARENT_NAME` = #{parentName},</if>
+            <if test="sort != null">`sort` = #{sort},</if>
+            <if test="status != null">`STATUS` = #{status},</if>
+            <if test="createBy != null">`CREATE_BY` = #{createBy},</if>
+            <if test="updateBy != null">`UPDATE_BY` = #{updateBy},</if>
+            <if test="createTime != null">`CREATE_TIME` = #{createTime},</if>
+            <if test="updateTime != null">`UPDATE_TIME` = #{updateTime}</if>
+        </set>
+        where SUBJECT_ID = #{subjectId}
+    </update>
+
+    <delete id="delete">
 		delete from sys_subject where SUBJECT_ID = #{value}
 	</delete>
-	
-	<delete id="deleteBatch">
-		delete from sys_subject where SUBJECT_ID in 
-		<foreach item="subjectId" collection="array" open="(" separator="," close=")">
-			#{subjectId}
-		</foreach>
-	</delete>
+
+    <delete id="deleteBatch">
+        delete from sys_subject where SUBJECT_ID in
+        <foreach item="subjectId" collection="array" open="(" separator="," close=")">
+            #{subjectId}
+        </foreach>
+    </delete>
 
 </mapper>

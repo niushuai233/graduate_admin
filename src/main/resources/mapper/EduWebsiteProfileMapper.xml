@@ -3,7 +3,7 @@
 
 <mapper namespace="cc.niushuai.graduate.mapper.EduWebsiteProfileMapper">
 
-	<!-- 可根据自己的需求，是否要使用 -->
+    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="cc.niushuai.graduate.entity.EduWebsiteProfile" id="eduWebsiteProfileMap">
         <result property="id" column="ID"/>
         <result property="type" column="TYPE"/>
@@ -16,55 +16,69 @@
         <result property="updateDate" column="UPDATE_DATE"/>
     </resultMap>
 
-	<select id="get" resultType="cc.niushuai.graduate.entity.EduWebsiteProfile">
+    <select id="get" resultType="cc.niushuai.graduate.entity.EduWebsiteProfile">
 		select * from edu_website_profile where ID = #{value}
 	</select>
 
-	<select id="getList" resultType="cc.niushuai.graduate.entity.EduWebsiteProfile">
-		select * from edu_website_profile t <include refid="where_clause" />
+    <select id="getList" resultType="cc.niushuai.graduate.entity.EduWebsiteProfile">
+        select * from edu_website_profile t
+        <include refid="where_clause"/>
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
                 order by ${sidx} ${order}
             </when>
-			<otherwise>
+            <otherwise>
                 order by ID desc
-			</otherwise>
+            </otherwise>
         </choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
-	
- 	<select id="getCount" resultType="int">
-		select count(*) from edu_website_profile t  <include refid="where_clause" />
-	</select>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="getCount" resultType="int">
+        select count(*) from edu_website_profile t
+        <include refid="where_clause"/>
+    </select>
 
     <!-- 搜索数据区域 -->
     <sql id="where_clause">
         <where>
             1=1
-            <if test="id != null and id != ''"> and t.ID = #{id} </if>
-    		<if test="idVague != null and idVague != ''"> and t.ID like concat('%',#{idVague},'%') </if>
-            <if test="type != null and type != ''"> and t.TYPE = #{type} </if>
-    		<if test="typeVague != null and typeVague != ''"> and t.TYPE like concat('%',#{typeVague},'%') </if>
-            <if test="desciption != null and desciption != ''"> and t.DESCIPTION = #{desciption} </if>
-    		<if test="desciptionVague != null and desciptionVague != ''"> and t.DESCIPTION like concat('%',#{desciptionVague},'%') </if>
-            <if test="explain != null and explain != ''"> and t.EXPLAIN = #{explain} </if>
-    		<if test="explainVague != null and explainVague != ''"> and t.EXPLAIN like concat('%',#{explainVague},'%') </if>
-            <if test="state != null and state != ''"> and t.STATE = #{state} </if>
-    		<if test="stateVague != null and stateVague != ''"> and t.STATE like concat('%',#{stateVague},'%') </if>
-            <if test="createBy != null and createBy != ''"> and t.CREATE_BY = #{createBy} </if>
-    		<if test="createByVague != null and createByVague != ''"> and t.CREATE_BY like concat('%',#{createByVague},'%') </if>
-            <if test="createDate != null and createDate != ''"> and t.CREATE_DATE = #{createDate} </if>
-    		<if test="createDateVague != null and createDateVague != ''"> and t.CREATE_DATE like concat('%',#{createDateVague},'%') </if>
-            <if test="updateBy != null and updateBy != ''"> and t.UPDATE_BY = #{updateBy} </if>
-    		<if test="updateByVague != null and updateByVague != ''"> and t.UPDATE_BY like concat('%',#{updateByVague},'%') </if>
-            <if test="updateDate != null and updateDate != ''"> and t.UPDATE_DATE = #{updateDate} </if>
-    		<if test="updateDateVague != null and updateDateVague != ''"> and t.UPDATE_DATE like concat('%',#{updateDateVague},'%') </if>
+            <if test="id != null and id != ''">and t.ID = #{id}</if>
+            <if test="idVague != null and idVague != ''">and t.ID like concat('%',#{idVague},'%')</if>
+            <if test="type != null and type != ''">and t.TYPE = #{type}</if>
+            <if test="typeVague != null and typeVague != ''">and t.TYPE like concat('%',#{typeVague},'%')</if>
+            <if test="desciption != null and desciption != ''">and t.DESCIPTION = #{desciption}</if>
+            <if test="desciptionVague != null and desciptionVague != ''">and t.DESCIPTION like
+                concat('%',#{desciptionVague},'%')
+            </if>
+            <if test="explain != null and explain != ''">and t.EXPLAIN = #{explain}</if>
+            <if test="explainVague != null and explainVague != ''">and t.EXPLAIN like concat('%',#{explainVague},'%')
+            </if>
+            <if test="state != null and state != ''">and t.STATE = #{state}</if>
+            <if test="stateVague != null and stateVague != ''">and t.STATE like concat('%',#{stateVague},'%')</if>
+            <if test="createBy != null and createBy != ''">and t.CREATE_BY = #{createBy}</if>
+            <if test="createByVague != null and createByVague != ''">and t.CREATE_BY like
+                concat('%',#{createByVague},'%')
+            </if>
+            <if test="createDate != null and createDate != ''">and t.CREATE_DATE = #{createDate}</if>
+            <if test="createDateVague != null and createDateVague != ''">and t.CREATE_DATE like
+                concat('%',#{createDateVague},'%')
+            </if>
+            <if test="updateBy != null and updateBy != ''">and t.UPDATE_BY = #{updateBy}</if>
+            <if test="updateByVague != null and updateByVague != ''">and t.UPDATE_BY like
+                concat('%',#{updateByVague},'%')
+            </if>
+            <if test="updateDate != null and updateDate != ''">and t.UPDATE_DATE = #{updateDate}</if>
+            <if test="updateDateVague != null and updateDateVague != ''">and t.UPDATE_DATE like
+                concat('%',#{updateDateVague},'%')
+            </if>
         </where>
     </sql>
-	 
-	<insert id="save" parameterType="cc.niushuai.graduate.entity.EduWebsiteProfile" useGeneratedKeys="true" keyProperty="id">
+
+    <insert id="save" parameterType="cc.niushuai.graduate.entity.EduWebsiteProfile" useGeneratedKeys="true"
+            keyProperty="id">
 		insert into edu_website_profile
 		(
 			`TYPE`, 
@@ -89,30 +103,30 @@
 		)
 	</insert>
 
-	<update id="update" parameterType="cc.niushuai.graduate.entity.EduWebsiteProfile">
-		update edu_website_profile 
-		<set>
-			<if test="type != null">`TYPE` = #{type}, </if>
-			<if test="desciption != null">`DESCIPTION` = #{desciption}, </if>
-			<if test="explain != null">`EXPLAIN` = #{explain}, </if>
-			<if test="state != null">`STATE` = #{state}, </if>
-			<if test="createBy != null">`CREATE_BY` = #{createBy}, </if>
-			<if test="createDate != null">`CREATE_DATE` = #{createDate}, </if>
-			<if test="updateBy != null">`UPDATE_BY` = #{updateBy}, </if>
-			<if test="updateDate != null">`UPDATE_DATE` = #{updateDate}</if>
-		</set>
-		where ID = #{id}
-	</update>
-	
-	<delete id="delete">
+    <update id="update" parameterType="cc.niushuai.graduate.entity.EduWebsiteProfile">
+        update edu_website_profile
+        <set>
+            <if test="type != null">`TYPE` = #{type},</if>
+            <if test="desciption != null">`DESCIPTION` = #{desciption},</if>
+            <if test="explain != null">`EXPLAIN` = #{explain},</if>
+            <if test="state != null">`STATE` = #{state},</if>
+            <if test="createBy != null">`CREATE_BY` = #{createBy},</if>
+            <if test="createDate != null">`CREATE_DATE` = #{createDate},</if>
+            <if test="updateBy != null">`UPDATE_BY` = #{updateBy},</if>
+            <if test="updateDate != null">`UPDATE_DATE` = #{updateDate}</if>
+        </set>
+        where ID = #{id}
+    </update>
+
+    <delete id="delete">
 		delete from edu_website_profile where ID = #{value}
 	</delete>
-	
-	<delete id="deleteBatch">
-		delete from edu_website_profile where ID in 
-		<foreach item="id" collection="array" open="(" separator="," close=")">
-			#{id}
-		</foreach>
-	</delete>
+
+    <delete id="deleteBatch">
+        delete from edu_website_profile where ID in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 
 </mapper>

@@ -3,26 +3,26 @@
 
 <mapper namespace="cc.niushuai.graduate.mapper.SysRoleMenuMapper">
 
-	<insert id="save">
-		insert into admin_sys_role_menu
-		(
-			`role_id`, 
-			`menu_id`
-		)
-		values
-		<foreach collection="menuIdList" item="item" index="index" separator="," >
-		(
-			#{roleId}, 
-			#{item} 
-		)
-		</foreach>
-	</insert>
-	
-	<delete id="delete">
+    <insert id="save">
+        insert into admin_sys_role_menu
+        (
+        `role_id`,
+        `menu_id`
+        )
+        values
+        <foreach collection="menuIdList" item="item" index="index" separator=",">
+            (
+            #{roleId},
+            #{item}
+            )
+        </foreach>
+    </insert>
+
+    <delete id="delete">
 		delete from admin_sys_role_menu where role_id = #{value}
 	</delete>
-	
-	<select id="queryMenuIdList" resultType="long">
+
+    <select id="queryMenuIdList" resultType="long">
 		select menu_id from admin_sys_role_menu where role_id = #{value}
 	</select>
 

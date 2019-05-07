@@ -27,9 +27,9 @@ var Render = {
         return '<img src="'+value+'"/>';
     },
     visit: function (rowdata, renderData) {
-        var articleAccessPath = $("#articleAccessPath").val();
+        var articleAccessPath = $("#courseAccessPath").val();
 
-        var btn = ' <button  onclick="window.open(\'' + articleAccessPath + rowdata.articleId + '.html\')" class="layui-btn layui-btn-mini">详情</button>';
+        var btn = ' <button  onclick="window.open(\'' + articleAccessPath + rowdata.courseId + '.html\')" class="layui-btn layui-btn-mini">详情</button>';
         return btn;
     },
     /**

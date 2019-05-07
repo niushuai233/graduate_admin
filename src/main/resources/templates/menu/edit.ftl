@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>管理员列表</title>
-<#include "../resource.ftl"/>
+    <#include "../resource.ftl"/>
 </head>
 <body>
 <div class="layui-field-box">
@@ -11,7 +11,8 @@
         <div class="layui-form-item">
             <label class="layui-form-label">类型</label>
             <!--单选框渲染控件-->
-            <div cyType="radioTool" cyProps="codeName:'menuType',filter:'menuType'" name="type" value="${(model.type)!""}"
+            <div cyType="radioTool" cyProps="codeName:'menuType',filter:'menuType'" name="type"
+                 value="${(model.type)!""}"
                  class="layui-input-normal"></div>
         </div>
         <div class="layui-form-item">
@@ -39,14 +40,16 @@
         <div class="layui-form-item">
             <label class="layui-form-label">授权标识</label>
             <div class="layui-input-normal">
-                <input type="text" name="perms" value="${(model.perms)!""}" placeholder="多个用逗号分隔，如：user:list,user:create"
+                <input type="text" name="perms" value="${(model.perms)!""}"
+                       placeholder="多个用逗号分隔，如：user:list,user:create"
                        autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">排序号</label>
             <div class="layui-input-normal">
-                <input type="text" name="orderNum" value="${(model.orderNum)!""}" placeholder="请输入排序号" autocomplete="off"
+                <input type="text" name="orderNum" value="${(model.orderNum)!""}" placeholder="请输入排序号"
+                       autocomplete="off"
                        class="layui-input">
             </div>
         </div>
@@ -65,7 +68,9 @@
         <div class="page-footer">
             <div class="btn-list">
                 <div class="btnlist">
-                    <button class="layui-btn" lay-submit="" lay-filter="submit" data-url="/sys/menu/update"><i class="fa fa-floppy-o">&nbsp;</i>保存</button>
+                    <button class="layui-btn" lay-submit="" lay-filter="submit" data-url="/sys/menu/update"><i
+                                class="fa fa-floppy-o">&nbsp;</i>保存
+                    </button>
                     <button class="layui-btn" onclick="$t.closeWindow();"><i class="fa fa-undo">&nbsp;</i>返回</button>
                 </div>
             </div>
@@ -103,11 +108,11 @@
 
     });
     $(document).ready(function () {
-        if ($($("[lay-filter='menuType']")[0]).attr("checked")  != undefined) {
+        if ($($("[lay-filter='menuType']")[0]).attr("checked") != undefined) {
             $("[name='url']").parents(".layui-form-item").hide();
             $("[name='perms']").parents(".layui-form-item").hide();
         }
-        if ($($("[lay-filter='menuType']")[2]).attr("checked")  != undefined) {
+        if ($($("[lay-filter='menuType']")[2]).attr("checked") != undefined) {
             $("[name='url']").parents(".layui-form-item").hide();
             $("[name='order_num']").parents(".layui-form-item").hide();
             $("[name='icon']").parents(".layui-form-item").hide();

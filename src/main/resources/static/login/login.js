@@ -24,7 +24,8 @@ layui.config({
         return false;
     })
 });
-function refreshCode(){
+
+function refreshCode() {
     var captcha = document.getElementById("captcha");
     captcha.src = "/captcha.jpg?t=" + new Date().getTime();
 }

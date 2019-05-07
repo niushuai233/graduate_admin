@@ -3,7 +3,7 @@
 
 <mapper namespace="cc.niushuai.graduate.mapper.EduQuestionsCommentMapper">
 
-	<!-- 可根据自己的需求，是否要使用 -->
+    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="cc.niushuai.graduate.entity.EduQuestionsComment" id="eduQuestionsCommentMap">
         <result property="id" column="ID"/>
         <result property="cusId" column="CUS_ID"/>
@@ -20,63 +20,81 @@
         <result property="updateBy" column="UPDATE_BY"/>
     </resultMap>
 
-	<select id="get" resultType="cc.niushuai.graduate.entity.EduQuestionsComment">
+    <select id="get" resultType="cc.niushuai.graduate.entity.EduQuestionsComment">
 		select * from edu_questions_comment where ID = #{value}
 	</select>
 
-	<select id="getList" resultType="cc.niushuai.graduate.entity.EduQuestionsComment">
-		select * from edu_questions_comment t <include refid="where_clause" />
+    <select id="getList" resultType="cc.niushuai.graduate.entity.EduQuestionsComment">
+        select * from edu_questions_comment t
+        <include refid="where_clause"/>
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
                 order by ${sidx} ${order}
             </when>
-			<otherwise>
+            <otherwise>
                 order by ID desc
-			</otherwise>
+            </otherwise>
         </choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
-	
- 	<select id="getCount" resultType="int">
-		select count(*) from edu_questions_comment t  <include refid="where_clause" />
-	</select>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="getCount" resultType="int">
+        select count(*) from edu_questions_comment t
+        <include refid="where_clause"/>
+    </select>
 
     <!-- 搜索数据区域 -->
     <sql id="where_clause">
         <where>
             1=1
-            <if test="id != null and id != ''"> and t.ID = #{id} </if>
-    		<if test="idVague != null and idVague != ''"> and t.ID like concat('%',#{idVague},'%') </if>
-            <if test="cusId != null and cusId != ''"> and t.CUS_ID = #{cusId} </if>
-    		<if test="cusIdVague != null and cusIdVague != ''"> and t.CUS_ID like concat('%',#{cusIdVague},'%') </if>
-            <if test="cusName != null and cusName != ''"> and t.CUS_NAME = #{cusName} </if>
-    		<if test="cusNameVague != null and cusNameVague != ''"> and t.CUS_NAME like concat('%',#{cusNameVague},'%') </if>
-            <if test="questionId != null and questionId != ''"> and t.QUESTION_ID = #{questionId} </if>
-    		<if test="questionIdVague != null and questionIdVague != ''"> and t.QUESTION_ID like concat('%',#{questionIdVague},'%') </if>
-            <if test="content != null and content != ''"> and t.CONTENT = #{content} </if>
-    		<if test="contentVague != null and contentVague != ''"> and t.CONTENT like concat('%',#{contentVague},'%') </if>
-            <if test="isBest != null and isBest != ''"> and t.IS_BEST = #{isBest} </if>
-    		<if test="isBestVague != null and isBestVague != ''"> and t.IS_BEST like concat('%',#{isBestVague},'%') </if>
-            <if test="replyCount != null and replyCount != ''"> and t.REPLY_COUNT = #{replyCount} </if>
-    		<if test="replyCountVague != null and replyCountVague != ''"> and t.REPLY_COUNT like concat('%',#{replyCountVague},'%') </if>
-            <if test="praiseCount != null and praiseCount != ''"> and t.PRAISE_COUNT = #{praiseCount} </if>
-    		<if test="praiseCountVague != null and praiseCountVague != ''"> and t.PRAISE_COUNT like concat('%',#{praiseCountVague},'%') </if>
-            <if test="addTime != null and addTime != ''"> and t.ADD_TIME = #{addTime} </if>
-    		<if test="addTimeVague != null and addTimeVague != ''"> and t.ADD_TIME like concat('%',#{addTimeVague},'%') </if>
-            <if test="commentId != null and commentId != ''"> and t.COMMENT_ID = #{commentId} </if>
-    		<if test="commentIdVague != null and commentIdVague != ''"> and t.COMMENT_ID like concat('%',#{commentIdVague},'%') </if>
-            <if test="state != null and state != ''"> and t.state = #{state} </if>
-    		<if test="stateVague != null and stateVague != ''"> and t.state like concat('%',#{stateVague},'%') </if>
-            <if test="updateTime != null and updateTime != ''"> and t.UPDATE_TIME = #{updateTime} </if>
-    		<if test="updateTimeVague != null and updateTimeVague != ''"> and t.UPDATE_TIME like concat('%',#{updateTimeVague},'%') </if>
-            <if test="updateBy != null and updateBy != ''"> and t.UPDATE_BY = #{updateBy} </if>
-    		<if test="updateByVague != null and updateByVague != ''"> and t.UPDATE_BY like concat('%',#{updateByVague},'%') </if>
+            <if test="id != null and id != ''">and t.ID = #{id}</if>
+            <if test="idVague != null and idVague != ''">and t.ID like concat('%',#{idVague},'%')</if>
+            <if test="cusId != null and cusId != ''">and t.CUS_ID = #{cusId}</if>
+            <if test="cusIdVague != null and cusIdVague != ''">and t.CUS_ID like concat('%',#{cusIdVague},'%')</if>
+            <if test="cusName != null and cusName != ''">and t.CUS_NAME = #{cusName}</if>
+            <if test="cusNameVague != null and cusNameVague != ''">and t.CUS_NAME like concat('%',#{cusNameVague},'%')
+            </if>
+            <if test="questionId != null and questionId != ''">and t.QUESTION_ID = #{questionId}</if>
+            <if test="questionIdVague != null and questionIdVague != ''">and t.QUESTION_ID like
+                concat('%',#{questionIdVague},'%')
+            </if>
+            <if test="content != null and content != ''">and t.CONTENT = #{content}</if>
+            <if test="contentVague != null and contentVague != ''">and t.CONTENT like concat('%',#{contentVague},'%')
+            </if>
+            <if test="isBest != null and isBest != ''">and t.IS_BEST = #{isBest}</if>
+            <if test="isBestVague != null and isBestVague != ''">and t.IS_BEST like concat('%',#{isBestVague},'%')</if>
+            <if test="replyCount != null and replyCount != ''">and t.REPLY_COUNT = #{replyCount}</if>
+            <if test="replyCountVague != null and replyCountVague != ''">and t.REPLY_COUNT like
+                concat('%',#{replyCountVague},'%')
+            </if>
+            <if test="praiseCount != null and praiseCount != ''">and t.PRAISE_COUNT = #{praiseCount}</if>
+            <if test="praiseCountVague != null and praiseCountVague != ''">and t.PRAISE_COUNT like
+                concat('%',#{praiseCountVague},'%')
+            </if>
+            <if test="addTime != null and addTime != ''">and t.ADD_TIME = #{addTime}</if>
+            <if test="addTimeVague != null and addTimeVague != ''">and t.ADD_TIME like concat('%',#{addTimeVague},'%')
+            </if>
+            <if test="commentId != null and commentId != ''">and t.COMMENT_ID = #{commentId}</if>
+            <if test="commentIdVague != null and commentIdVague != ''">and t.COMMENT_ID like
+                concat('%',#{commentIdVague},'%')
+            </if>
+            <if test="state != null and state != ''">and t.state = #{state}</if>
+            <if test="stateVague != null and stateVague != ''">and t.state like concat('%',#{stateVague},'%')</if>
+            <if test="updateTime != null and updateTime != ''">and t.UPDATE_TIME = #{updateTime}</if>
+            <if test="updateTimeVague != null and updateTimeVague != ''">and t.UPDATE_TIME like
+                concat('%',#{updateTimeVague},'%')
+            </if>
+            <if test="updateBy != null and updateBy != ''">and t.UPDATE_BY = #{updateBy}</if>
+            <if test="updateByVague != null and updateByVague != ''">and t.UPDATE_BY like
+                concat('%',#{updateByVague},'%')
+            </if>
         </where>
     </sql>
-	 
-	<insert id="save" parameterType="cc.niushuai.graduate.entity.EduQuestionsComment" useGeneratedKeys="true" keyProperty="id">
+
+    <insert id="save" parameterType="cc.niushuai.graduate.entity.EduQuestionsComment" useGeneratedKeys="true"
+            keyProperty="id">
 		insert into edu_questions_comment
 		(
 			`CUS_ID`, 
@@ -109,34 +127,34 @@
 		)
 	</insert>
 
-	<update id="update" parameterType="cc.niushuai.graduate.entity.EduQuestionsComment">
-		update edu_questions_comment 
-		<set>
-			<if test="cusId != null">`CUS_ID` = #{cusId}, </if>
-			<if test="cusName != null">`CUS_NAME` = #{cusName}, </if>
-			<if test="questionId != null">`QUESTION_ID` = #{questionId}, </if>
-			<if test="content != null">`CONTENT` = #{content}, </if>
-			<if test="isBest != null">`IS_BEST` = #{isBest}, </if>
-			<if test="replyCount != null">`REPLY_COUNT` = #{replyCount}, </if>
-			<if test="praiseCount != null">`PRAISE_COUNT` = #{praiseCount}, </if>
-			<if test="addTime != null">`ADD_TIME` = #{addTime}, </if>
-			<if test="commentId != null">`COMMENT_ID` = #{commentId}, </if>
-			<if test="state != null">`state` = #{state}, </if>
-			<if test="updateTime != null">`UPDATE_TIME` = #{updateTime}, </if>
-			<if test="updateBy != null">`UPDATE_BY` = #{updateBy}</if>
-		</set>
-		where ID = #{id}
-	</update>
-	
-	<delete id="delete">
+    <update id="update" parameterType="cc.niushuai.graduate.entity.EduQuestionsComment">
+        update edu_questions_comment
+        <set>
+            <if test="cusId != null">`CUS_ID` = #{cusId},</if>
+            <if test="cusName != null">`CUS_NAME` = #{cusName},</if>
+            <if test="questionId != null">`QUESTION_ID` = #{questionId},</if>
+            <if test="content != null">`CONTENT` = #{content},</if>
+            <if test="isBest != null">`IS_BEST` = #{isBest},</if>
+            <if test="replyCount != null">`REPLY_COUNT` = #{replyCount},</if>
+            <if test="praiseCount != null">`PRAISE_COUNT` = #{praiseCount},</if>
+            <if test="addTime != null">`ADD_TIME` = #{addTime},</if>
+            <if test="commentId != null">`COMMENT_ID` = #{commentId},</if>
+            <if test="state != null">`state` = #{state},</if>
+            <if test="updateTime != null">`UPDATE_TIME` = #{updateTime},</if>
+            <if test="updateBy != null">`UPDATE_BY` = #{updateBy}</if>
+        </set>
+        where ID = #{id}
+    </update>
+
+    <delete id="delete">
 		delete from edu_questions_comment where ID = #{value}
 	</delete>
-	
-	<delete id="deleteBatch">
-		delete from edu_questions_comment where ID in 
-		<foreach item="id" collection="array" open="(" separator="," close=")">
-			#{id}
-		</foreach>
-	</delete>
+
+    <delete id="deleteBatch">
+        delete from edu_questions_comment where ID in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 
 </mapper>

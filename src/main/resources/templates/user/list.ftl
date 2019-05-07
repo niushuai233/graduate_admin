@@ -17,27 +17,30 @@
             <input type="text" name="mobile" placeholder="请输入手机号" class="layui-input">
         </div>
         <div class="layui-input-inline">
-            <button class="layui-btn search-btn" table-id="userTable" lay-submit="" lay-filter="search"><i class="fa fa-search">&nbsp;</i>查询
+            <button class="layui-btn search-btn" table-id="userTable" lay-submit="" lay-filter="search"><i
+                        class="fa fa-search">&nbsp;</i>查询
             </button>
             <button type="reset" class="layui-btn layui-btn-primary"><i class="fa fa-refresh">&nbsp;</i>重置</button>
         </div>
     </div>
 </form>
 <div class="layui-btn-group">
-<@shiro.hasPermission name="sys:user:save">
-    <button class="layui-btn" onclick="add('/sys/user/add')"><i class="fa fa-plus">&nbsp;</i>增加</button>
-</@shiro.hasPermission>
-<@shiro.hasPermission name="sys:user:update">
-    <button class="layui-btn" onclick="edit('userTable','/sys/user/edit')" style="margin-left: 5px!important;">
-        <i class="fa fa-pencil-square-o">&nbsp;</i>修改
-    </button>
-</@shiro.hasPermission>
-<@shiro.hasPermission name="sys:user:delete">
-    <button class="layui-btn" onclick="deleteBatch('userTable','/sys/user/delete');" style="margin-left: 5px!important;">
-        <i class="fa fa-trash-o">&nbsp;</i>删除
-    </button>
-</@shiro.hasPermission>
-    <button class="layui-btn" onclick="initPassword('userTable','/sys/user/initPassword');" style="margin-left: 5px!important;">
+    <@shiro.hasPermission name="sys:user:save">
+        <button class="layui-btn" onclick="add('/sys/user/add')"><i class="fa fa-plus">&nbsp;</i>增加</button>
+    </@shiro.hasPermission>
+    <@shiro.hasPermission name="sys:user:update">
+        <button class="layui-btn" onclick="edit('userTable','/sys/user/edit')" style="margin-left: 5px!important;">
+            <i class="fa fa-pencil-square-o">&nbsp;</i>修改
+        </button>
+    </@shiro.hasPermission>
+    <@shiro.hasPermission name="sys:user:delete">
+        <button class="layui-btn" onclick="deleteBatch('userTable','/sys/user/delete');"
+                style="margin-left: 5px!important;">
+            <i class="fa fa-trash-o">&nbsp;</i>删除
+        </button>
+    </@shiro.hasPermission>
+    <button class="layui-btn" onclick="initPassword('userTable','/sys/user/initPassword');"
+            style="margin-left: 5px!important;">
         <i class="fa fa-refresh">&nbsp;</i>初始化密码 123456
     </button>
 

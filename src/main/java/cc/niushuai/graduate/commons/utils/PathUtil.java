@@ -1,5 +1,7 @@
 package cc.niushuai.graduate.commons.utils;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * 存储各种路径
  */
@@ -25,6 +27,9 @@ public class PathUtil {
      * @return
      */
     public static String fillFdfsPath(String fullPath) {
+        if (StringUtils.isEmpty(fullPath)) {
+            return "";
+        }
         return fdfsAccessPrefix + fullPath;
     }
 

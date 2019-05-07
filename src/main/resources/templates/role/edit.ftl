@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>菜单列表</title>
-<#include "../resource.ftl"/>
+    <#include "../resource.ftl"/>
 </head>
 <body>
 <div class="layui-field-box">
@@ -18,7 +18,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">角色编码<span class="label_span">:</span></label>
             <label class="layui-label-right">
-            ${model.remark}
+                ${model.remark}
             </label>
         </div>
 
@@ -31,8 +31,8 @@
         <div class="page-footer">
             <div class="btn-list">
                 <div class="btnlist">
-                    <button class="layui-btn" lay-submit="" lay-filter="roleSubmit" ><i
-                            class="fa fa-floppy-o">&nbsp;</i>保存
+                    <button class="layui-btn" lay-submit="" lay-filter="roleSubmit"><i
+                                class="fa fa-floppy-o">&nbsp;</i>保存
                     </button>
                     <button class="layui-btn" onclick="$t.closeWindow();"><i class="fa fa-undo">&nbsp;</i>返回</button>
                 </div>

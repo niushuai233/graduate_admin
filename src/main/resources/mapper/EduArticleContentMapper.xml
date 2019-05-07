@@ -3,47 +3,52 @@
 
 <mapper namespace="cc.niushuai.graduate.mapper.EduArticleContentMapper">
 
-	<!-- 可根据自己的需求，是否要使用 -->
+    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="cc.niushuai.graduate.entity.EduArticleContent" id="eduArticleContentMap">
         <result property="articleId" column="ARTICLE_ID"/>
         <result property="content" column="CONTENT"/>
     </resultMap>
 
-	<select id="get" resultType="cc.niushuai.graduate.entity.EduArticleContent">
+    <select id="get" resultType="cc.niushuai.graduate.entity.EduArticleContent">
 		select * from edu_article_content where ARTICLE_ID = #{value}
 	</select>
 
-	<select id="getList" resultType="cc.niushuai.graduate.entity.EduArticleContent">
-		select * from edu_article_content t <include refid="where_clause" />
+    <select id="getList" resultType="cc.niushuai.graduate.entity.EduArticleContent">
+        select * from edu_article_content t
+        <include refid="where_clause"/>
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
                 order by ${sidx} ${order}
             </when>
-			<otherwise>
+            <otherwise>
                 order by ARTICLE_ID desc
-			</otherwise>
+            </otherwise>
         </choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
-	
- 	<select id="getCount" resultType="int">
-		select count(*) from edu_article_content t  <include refid="where_clause" />
-	</select>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="getCount" resultType="int">
+        select count(*) from edu_article_content t
+        <include refid="where_clause"/>
+    </select>
 
     <!-- 搜索数据区域 -->
     <sql id="where_clause">
         <where>
             1=1
-            <if test="articleId != null and articleId != ''"> and t.ARTICLE_ID = #{articleId} </if>
-    		<if test="articleIdVague != null and articleIdVague != ''"> and t.ARTICLE_ID like concat('%',#{articleIdVague},'%') </if>
-            <if test="content != null and content != ''"> and t.CONTENT = #{content} </if>
-    		<if test="contentVague != null and contentVague != ''"> and t.CONTENT like concat('%',#{contentVague},'%') </if>
+            <if test="articleId != null and articleId != ''">and t.ARTICLE_ID = #{articleId}</if>
+            <if test="articleIdVague != null and articleIdVague != ''">and t.ARTICLE_ID like
+                concat('%',#{articleIdVague},'%')
+            </if>
+            <if test="content != null and content != ''">and t.CONTENT = #{content}</if>
+            <if test="contentVague != null and contentVague != ''">and t.CONTENT like concat('%',#{contentVague},'%')
+            </if>
         </where>
     </sql>
-	 
-	<insert id="save" parameterType="cc.niushuai.graduate.entity.EduArticleContent">
+
+    <insert id="save" parameterType="cc.niushuai.graduate.entity.EduArticleContent">
 		insert into edu_article_content
 		(
 			`ARTICLE_ID`, 
@@ -56,23 +61,23 @@
 		)
 	</insert>
 
-	<update id="update" parameterType="cc.niushuai.graduate.entity.EduArticleContent">
-		update edu_article_content 
-		<set>
-			<if test="content != null">`CONTENT` = #{content}</if>
-		</set>
-		where ARTICLE_ID = #{articleId}
-	</update>
-	
-	<delete id="delete">
+    <update id="update" parameterType="cc.niushuai.graduate.entity.EduArticleContent">
+        update edu_article_content
+        <set>
+            <if test="content != null">`CONTENT` = #{content}</if>
+        </set>
+        where ARTICLE_ID = #{articleId}
+    </update>
+
+    <delete id="delete">
 		delete from edu_article_content where ARTICLE_ID = #{value}
 	</delete>
-	
-	<delete id="deleteBatch">
-		delete from edu_article_content where ARTICLE_ID in 
-		<foreach item="articleId" collection="array" open="(" separator="," close=")">
-			#{articleId}
-		</foreach>
-	</delete>
+
+    <delete id="deleteBatch">
+        delete from edu_article_content where ARTICLE_ID in
+        <foreach item="articleId" collection="array" open="(" separator="," close=")">
+            #{articleId}
+        </foreach>
+    </delete>
 
 </mapper>

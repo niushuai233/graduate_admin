@@ -3,39 +3,39 @@
 
 <mapper namespace="cc.niushuai.graduate.mapper.SysLogMapper">
 
-	<select id="queryObject" resultType="cc.niushuai.graduate.entity.admin.SysLog">
+    <select id="queryObject" resultType="cc.niushuai.graduate.entity.admin.SysLog">
 		select * from admin_sys_log where id = #{value}
 	</select>
 
-	<select id="queryList" resultType="cc.niushuai.graduate.entity.admin.SysLog">
-		select * from admin_sys_log
-		where 1=1
+    <select id="queryList" resultType="cc.niushuai.graduate.entity.admin.SysLog">
+        select * from admin_sys_log
+        where 1=1
 
-			<if test="startDate != null and startDate.trim() != ''">
-				and DATE_FORMAT(create_date,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startDate},'%Y-%m-%d')
-			</if>
-			<if test="endDate != null and endDate.trim() != ''">
-				and DATE_FORMAT(create_date,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate},'%Y-%m-%d')
-			</if>
+        <if test="startDate != null and startDate.trim() != ''">
+            and DATE_FORMAT(create_date,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startDate},'%Y-%m-%d')
+        </if>
+        <if test="endDate != null and endDate.trim() != ''">
+            and DATE_FORMAT(create_date,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate},'%Y-%m-%d')
+        </if>
 
-		order by id desc 
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
-	
- 	<select id="queryTotal" resultType="int">
-		select count(*) from admin_sys_log  where 1=1
+        order by id desc
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
 
-		<if test="createDate != null and createDate.trim() != ''">
-			and DATE_FORMAT(create_date,'%Y-%m-%d') &gt;= DATE_FORMAT(#{createDate},'%Y-%m-%d')
-		</if>
-		<if test="endDate != null and endDate.trim() != ''">
-			and DATE_FORMAT(create_date,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate},'%Y-%m-%d')
-		</if>
-	</select>
-	 
-	<insert id="save" parameterType="cc.niushuai.graduate.entity.admin.SysLog" useGeneratedKeys="true" keyProperty="id">
+    <select id="queryTotal" resultType="int">
+        select count(*) from admin_sys_log where 1=1
+
+        <if test="createDate != null and createDate.trim() != ''">
+            and DATE_FORMAT(create_date,'%Y-%m-%d') &gt;= DATE_FORMAT(#{createDate},'%Y-%m-%d')
+        </if>
+        <if test="endDate != null and endDate.trim() != ''">
+            and DATE_FORMAT(create_date,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate},'%Y-%m-%d')
+        </if>
+    </select>
+
+    <insert id="save" parameterType="cc.niushuai.graduate.entity.admin.SysLog" useGeneratedKeys="true" keyProperty="id">
 		insert into admin_sys_log
 		(
 			`username`, 
@@ -55,28 +55,28 @@
 			#{createDate}
 		)
 	</insert>
-	 
-	<update id="update" parameterType="cc.niushuai.graduate.entity.admin.SysLog">
-		update admin_sys_log
-		<set>
-			<if test="username != null">`username` = #{username}, </if>
-			<if test="operation != null">`operation` = #{operation}, </if>
-			<if test="method != null">`method` = #{method}, </if>
-			<if test="params != null">`params` = #{params}, </if>
-			<if test="ip != null">`ip` = #{ip} </if>
-		</set>
-		where id = #{id}
-	</update>
-	
-	<delete id="delete">
+
+    <update id="update" parameterType="cc.niushuai.graduate.entity.admin.SysLog">
+        update admin_sys_log
+        <set>
+            <if test="username != null">`username` = #{username},</if>
+            <if test="operation != null">`operation` = #{operation},</if>
+            <if test="method != null">`method` = #{method},</if>
+            <if test="params != null">`params` = #{params},</if>
+            <if test="ip != null">`ip` = #{ip}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="delete">
 		delete from admin_sys_log where id = #{value}
 	</delete>
-	
-	<delete id="deleteBatch">
-		delete from admin_sys_log where id in
-		<foreach item="id" collection="array" open="(" separator="," close=")">
-			#{id}
-		</foreach>
-	</delete>
+
+    <delete id="deleteBatch">
+        delete from admin_sys_log where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 
 </mapper>

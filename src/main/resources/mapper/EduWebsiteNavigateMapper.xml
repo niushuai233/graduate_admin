@@ -3,7 +3,7 @@
 
 <mapper namespace="cc.niushuai.graduate.mapper.EduWebsiteNavigateMapper">
 
-	<!-- 可根据自己的需求，是否要使用 -->
+    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="cc.niushuai.graduate.entity.EduWebsiteNavigate" id="eduWebsiteNavigateMap">
         <result property="id" column="ID"/>
         <result property="name" column="NAME"/>
@@ -18,59 +18,73 @@
         <result property="updateBy" column="UPDATE_BY"/>
     </resultMap>
 
-	<select id="get" resultType="cc.niushuai.graduate.entity.EduWebsiteNavigate">
+    <select id="get" resultType="cc.niushuai.graduate.entity.EduWebsiteNavigate">
 		select * from edu_website_navigate where ID = #{value}
 	</select>
 
-	<select id="getList" resultType="cc.niushuai.graduate.entity.EduWebsiteNavigate">
-		select * from edu_website_navigate t <include refid="where_clause" />
+    <select id="getList" resultType="cc.niushuai.graduate.entity.EduWebsiteNavigate">
+        select * from edu_website_navigate t
+        <include refid="where_clause"/>
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
                 order by ${sidx} ${order}
             </when>
-			<otherwise>
+            <otherwise>
                 order by ID desc
-			</otherwise>
+            </otherwise>
         </choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
-	
- 	<select id="getCount" resultType="int">
-		select count(*) from edu_website_navigate t  <include refid="where_clause" />
-	</select>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="getCount" resultType="int">
+        select count(*) from edu_website_navigate t
+        <include refid="where_clause"/>
+    </select>
 
     <!-- 搜索数据区域 -->
     <sql id="where_clause">
         <where>
             1=1
-            <if test="id != null and id != ''"> and t.ID = #{id} </if>
-    		<if test="idVague != null and idVague != ''"> and t.ID like concat('%',#{idVague},'%') </if>
-            <if test="name != null and name != ''"> and t.NAME = #{name} </if>
-    		<if test="nameVague != null and nameVague != ''"> and t.NAME like concat('%',#{nameVague},'%') </if>
-            <if test="url != null and url != ''"> and t.URL = #{url} </if>
-    		<if test="urlVague != null and urlVague != ''"> and t.URL like concat('%',#{urlVague},'%') </if>
-            <if test="newpage != null and newpage != ''"> and t.NEWPAGE = #{newpage} </if>
-    		<if test="newpageVague != null and newpageVague != ''"> and t.NEWPAGE like concat('%',#{newpageVague},'%') </if>
-            <if test="type != null and type != ''"> and t.TYPE = #{type} </if>
-    		<if test="typeVague != null and typeVague != ''"> and t.TYPE like concat('%',#{typeVague},'%') </if>
-            <if test="ordernum != null and ordernum != ''"> and t.ORDERNUM = #{ordernum} </if>
-    		<if test="ordernumVague != null and ordernumVague != ''"> and t.ORDERNUM like concat('%',#{ordernumVague},'%') </if>
-            <if test="status != null and status != ''"> and t.STATUS = #{status} </if>
-    		<if test="statusVague != null and statusVague != ''"> and t.STATUS like concat('%',#{statusVague},'%') </if>
-            <if test="createDate != null and createDate != ''"> and t.CREATE_DATE = #{createDate} </if>
-    		<if test="createDateVague != null and createDateVague != ''"> and t.CREATE_DATE like concat('%',#{createDateVague},'%') </if>
-            <if test="updateDate != null and updateDate != ''"> and t.UPDATE_DATE = #{updateDate} </if>
-    		<if test="updateDateVague != null and updateDateVague != ''"> and t.UPDATE_DATE like concat('%',#{updateDateVague},'%') </if>
-            <if test="createBy != null and createBy != ''"> and t.CREATE_BY = #{createBy} </if>
-    		<if test="createByVague != null and createByVague != ''"> and t.CREATE_BY like concat('%',#{createByVague},'%') </if>
-            <if test="updateBy != null and updateBy != ''"> and t.UPDATE_BY = #{updateBy} </if>
-    		<if test="updateByVague != null and updateByVague != ''"> and t.UPDATE_BY like concat('%',#{updateByVague},'%') </if>
+            <if test="id != null and id != ''">and t.ID = #{id}</if>
+            <if test="idVague != null and idVague != ''">and t.ID like concat('%',#{idVague},'%')</if>
+            <if test="name != null and name != ''">and t.NAME = #{name}</if>
+            <if test="nameVague != null and nameVague != ''">and t.NAME like concat('%',#{nameVague},'%')</if>
+            <if test="url != null and url != ''">and t.URL = #{url}</if>
+            <if test="urlVague != null and urlVague != ''">and t.URL like concat('%',#{urlVague},'%')</if>
+            <if test="newpage != null and newpage != ''">and t.NEWPAGE = #{newpage}</if>
+            <if test="newpageVague != null and newpageVague != ''">and t.NEWPAGE like concat('%',#{newpageVague},'%')
+            </if>
+            <if test="type != null and type != ''">and t.TYPE = #{type}</if>
+            <if test="typeVague != null and typeVague != ''">and t.TYPE like concat('%',#{typeVague},'%')</if>
+            <if test="ordernum != null and ordernum != ''">and t.ORDERNUM = #{ordernum}</if>
+            <if test="ordernumVague != null and ordernumVague != ''">and t.ORDERNUM like
+                concat('%',#{ordernumVague},'%')
+            </if>
+            <if test="status != null and status != ''">and t.STATUS = #{status}</if>
+            <if test="statusVague != null and statusVague != ''">and t.STATUS like concat('%',#{statusVague},'%')</if>
+            <if test="createDate != null and createDate != ''">and t.CREATE_DATE = #{createDate}</if>
+            <if test="createDateVague != null and createDateVague != ''">and t.CREATE_DATE like
+                concat('%',#{createDateVague},'%')
+            </if>
+            <if test="updateDate != null and updateDate != ''">and t.UPDATE_DATE = #{updateDate}</if>
+            <if test="updateDateVague != null and updateDateVague != ''">and t.UPDATE_DATE like
+                concat('%',#{updateDateVague},'%')
+            </if>
+            <if test="createBy != null and createBy != ''">and t.CREATE_BY = #{createBy}</if>
+            <if test="createByVague != null and createByVague != ''">and t.CREATE_BY like
+                concat('%',#{createByVague},'%')
+            </if>
+            <if test="updateBy != null and updateBy != ''">and t.UPDATE_BY = #{updateBy}</if>
+            <if test="updateByVague != null and updateByVague != ''">and t.UPDATE_BY like
+                concat('%',#{updateByVague},'%')
+            </if>
         </where>
     </sql>
-	 
-	<insert id="save" parameterType="cc.niushuai.graduate.entity.EduWebsiteNavigate" useGeneratedKeys="true" keyProperty="id">
+
+    <insert id="save" parameterType="cc.niushuai.graduate.entity.EduWebsiteNavigate" useGeneratedKeys="true"
+            keyProperty="id">
 		insert into edu_website_navigate
 		(
 			`NAME`, 
@@ -99,32 +113,32 @@
 		)
 	</insert>
 
-	<update id="update" parameterType="cc.niushuai.graduate.entity.EduWebsiteNavigate">
-		update edu_website_navigate 
-		<set>
-			<if test="name != null">`NAME` = #{name}, </if>
-			<if test="url != null">`URL` = #{url}, </if>
-			<if test="newpage != null">`NEWPAGE` = #{newpage}, </if>
-			<if test="type != null">`TYPE` = #{type}, </if>
-			<if test="ordernum != null">`ORDERNUM` = #{ordernum}, </if>
-			<if test="status != null">`STATUS` = #{status}, </if>
-			<if test="createDate != null">`CREATE_DATE` = #{createDate}, </if>
-			<if test="updateDate != null">`UPDATE_DATE` = #{updateDate}, </if>
-			<if test="createBy != null">`CREATE_BY` = #{createBy}, </if>
-			<if test="updateBy != null">`UPDATE_BY` = #{updateBy}</if>
-		</set>
-		where ID = #{id}
-	</update>
-	
-	<delete id="delete">
+    <update id="update" parameterType="cc.niushuai.graduate.entity.EduWebsiteNavigate">
+        update edu_website_navigate
+        <set>
+            <if test="name != null">`NAME` = #{name},</if>
+            <if test="url != null">`URL` = #{url},</if>
+            <if test="newpage != null">`NEWPAGE` = #{newpage},</if>
+            <if test="type != null">`TYPE` = #{type},</if>
+            <if test="ordernum != null">`ORDERNUM` = #{ordernum},</if>
+            <if test="status != null">`STATUS` = #{status},</if>
+            <if test="createDate != null">`CREATE_DATE` = #{createDate},</if>
+            <if test="updateDate != null">`UPDATE_DATE` = #{updateDate},</if>
+            <if test="createBy != null">`CREATE_BY` = #{createBy},</if>
+            <if test="updateBy != null">`UPDATE_BY` = #{updateBy}</if>
+        </set>
+        where ID = #{id}
+    </update>
+
+    <delete id="delete">
 		delete from edu_website_navigate where ID = #{value}
 	</delete>
-	
-	<delete id="deleteBatch">
-		delete from edu_website_navigate where ID in 
-		<foreach item="id" collection="array" open="(" separator="," close=")">
-			#{id}
-		</foreach>
-	</delete>
+
+    <delete id="deleteBatch">
+        delete from edu_website_navigate where ID in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 
 </mapper>

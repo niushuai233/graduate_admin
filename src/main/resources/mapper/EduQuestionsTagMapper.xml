@@ -3,7 +3,7 @@
 
 <mapper namespace="cc.niushuai.graduate.mapper.EduQuestionsTagMapper">
 
-	<!-- 可根据自己的需求，是否要使用 -->
+    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="cc.niushuai.graduate.entity.EduQuestionsTag" id="eduQuestionsTagMap">
         <result property="questionsTagId" column="QUESTIONS_TAG_ID"/>
         <result property="questionsTagName" column="QUESTIONS_TAG_NAME"/>
@@ -16,55 +16,76 @@
         <result property="updateBy" column="UPDATE_BY"/>
     </resultMap>
 
-	<select id="get" resultType="cc.niushuai.graduate.entity.EduQuestionsTag">
+    <select id="get" resultType="cc.niushuai.graduate.entity.EduQuestionsTag">
 		select * from edu_questions_tag where QUESTIONS_TAG_ID = #{value}
 	</select>
 
-	<select id="getList" resultType="cc.niushuai.graduate.entity.EduQuestionsTag">
-		select * from edu_questions_tag t <include refid="where_clause" />
+    <select id="getList" resultType="cc.niushuai.graduate.entity.EduQuestionsTag">
+        select * from edu_questions_tag t
+        <include refid="where_clause"/>
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
                 order by ${sidx} ${order}
             </when>
-			<otherwise>
+            <otherwise>
                 order by QUESTIONS_TAG_ID desc
-			</otherwise>
+            </otherwise>
         </choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
-	
- 	<select id="getCount" resultType="int">
-		select count(*) from edu_questions_tag t  <include refid="where_clause" />
-	</select>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="getCount" resultType="int">
+        select count(*) from edu_questions_tag t
+        <include refid="where_clause"/>
+    </select>
 
     <!-- 搜索数据区域 -->
     <sql id="where_clause">
         <where>
             1=1
-            <if test="questionsTagId != null and questionsTagId != ''"> and t.QUESTIONS_TAG_ID = #{questionsTagId} </if>
-    		<if test="questionsTagIdVague != null and questionsTagIdVague != ''"> and t.QUESTIONS_TAG_ID like concat('%',#{questionsTagIdVague},'%') </if>
-            <if test="questionsTagName != null and questionsTagName != ''"> and t.QUESTIONS_TAG_NAME = #{questionsTagName} </if>
-    		<if test="questionsTagNameVague != null and questionsTagNameVague != ''"> and t.QUESTIONS_TAG_NAME like concat('%',#{questionsTagNameVague},'%') </if>
-            <if test="parentId != null and parentId != ''"> and t.PARENT_ID = #{parentId} </if>
-    		<if test="parentIdVague != null and parentIdVague != ''"> and t.PARENT_ID like concat('%',#{parentIdVague},'%') </if>
-            <if test="parentName != null and parentName != ''"> and t.PARENT_NAME = #{parentName} </if>
-    		<if test="parentNameVague != null and parentNameVague != ''"> and t.PARENT_NAME like concat('%',#{parentNameVague},'%') </if>
-            <if test="status != null and status != ''"> and t.STATUS = #{status} </if>
-    		<if test="statusVague != null and statusVague != ''"> and t.STATUS like concat('%',#{statusVague},'%') </if>
-            <if test="createTime != null and createTime != ''"> and t.CREATE_TIME = #{createTime} </if>
-    		<if test="createTimeVague != null and createTimeVague != ''"> and t.CREATE_TIME like concat('%',#{createTimeVague},'%') </if>
-            <if test="updateTime != null and updateTime != ''"> and t.UPDATE_TIME = #{updateTime} </if>
-    		<if test="updateTimeVague != null and updateTimeVague != ''"> and t.UPDATE_TIME like concat('%',#{updateTimeVague},'%') </if>
-            <if test="createBy != null and createBy != ''"> and t.CREATE_BY = #{createBy} </if>
-    		<if test="createByVague != null and createByVague != ''"> and t.CREATE_BY like concat('%',#{createByVague},'%') </if>
-            <if test="updateBy != null and updateBy != ''"> and t.UPDATE_BY = #{updateBy} </if>
-    		<if test="updateByVague != null and updateByVague != ''"> and t.UPDATE_BY like concat('%',#{updateByVague},'%') </if>
+            <if test="questionsTagId != null and questionsTagId != ''">and t.QUESTIONS_TAG_ID = #{questionsTagId}</if>
+            <if test="questionsTagIdVague != null and questionsTagIdVague != ''">and t.QUESTIONS_TAG_ID like
+                concat('%',#{questionsTagIdVague},'%')
+            </if>
+            <if test="questionsTagName != null and questionsTagName != ''">and t.QUESTIONS_TAG_NAME =
+                #{questionsTagName}
+            </if>
+            <if test="questionsTagNameVague != null and questionsTagNameVague != ''">and t.QUESTIONS_TAG_NAME like
+                concat('%',#{questionsTagNameVague},'%')
+            </if>
+            <if test="parentId != null and parentId != ''">and t.PARENT_ID = #{parentId}</if>
+            <if test="parentIdVague != null and parentIdVague != ''">and t.PARENT_ID like
+                concat('%',#{parentIdVague},'%')
+            </if>
+            <if test="parentName != null and parentName != ''">and t.PARENT_NAME = #{parentName}</if>
+            <if test="parentNameVague != null and parentNameVague != ''">and t.PARENT_NAME like
+                concat('%',#{parentNameVague},'%')
+            </if>
+            <if test="status != null and status != ''">and t.STATUS = #{status}</if>
+            <if test="statusVague != null and statusVague != ''">and t.STATUS like concat('%',#{statusVague},'%')</if>
+            <if test="createTime != null and createTime != ''">and t.CREATE_TIME = #{createTime}</if>
+            <if test="createTimeVague != null and createTimeVague != ''">and t.CREATE_TIME like
+                concat('%',#{createTimeVague},'%')
+            </if>
+            <if test="updateTime != null and updateTime != ''">and t.UPDATE_TIME = #{updateTime}</if>
+            <if test="updateTimeVague != null and updateTimeVague != ''">and t.UPDATE_TIME like
+                concat('%',#{updateTimeVague},'%')
+            </if>
+            <if test="createBy != null and createBy != ''">and t.CREATE_BY = #{createBy}</if>
+            <if test="createByVague != null and createByVague != ''">and t.CREATE_BY like
+                concat('%',#{createByVague},'%')
+            </if>
+            <if test="updateBy != null and updateBy != ''">and t.UPDATE_BY = #{updateBy}</if>
+            <if test="updateByVague != null and updateByVague != ''">and t.UPDATE_BY like
+                concat('%',#{updateByVague},'%')
+            </if>
         </where>
     </sql>
-	 
-	<insert id="save" parameterType="cc.niushuai.graduate.entity.EduQuestionsTag" useGeneratedKeys="true" keyProperty="questionsTagId">
+
+    <insert id="save" parameterType="cc.niushuai.graduate.entity.EduQuestionsTag" useGeneratedKeys="true"
+            keyProperty="questionsTagId">
 		insert into edu_questions_tag
 		(
 			`QUESTIONS_TAG_NAME`, 
@@ -89,30 +110,30 @@
 		)
 	</insert>
 
-	<update id="update" parameterType="cc.niushuai.graduate.entity.EduQuestionsTag">
-		update edu_questions_tag 
-		<set>
-			<if test="questionsTagName != null">`QUESTIONS_TAG_NAME` = #{questionsTagName}, </if>
-			<if test="parentId != null">`PARENT_ID` = #{parentId}, </if>
-			<if test="parentName != null">`PARENT_NAME` = #{parentName}, </if>
-			<if test="status != null">`STATUS` = #{status}, </if>
-			<if test="createTime != null">`CREATE_TIME` = #{createTime}, </if>
-			<if test="updateTime != null">`UPDATE_TIME` = #{updateTime}, </if>
-			<if test="createBy != null">`CREATE_BY` = #{createBy}, </if>
-			<if test="updateBy != null">`UPDATE_BY` = #{updateBy}</if>
-		</set>
-		where QUESTIONS_TAG_ID = #{questionsTagId}
-	</update>
-	
-	<delete id="delete">
+    <update id="update" parameterType="cc.niushuai.graduate.entity.EduQuestionsTag">
+        update edu_questions_tag
+        <set>
+            <if test="questionsTagName != null">`QUESTIONS_TAG_NAME` = #{questionsTagName},</if>
+            <if test="parentId != null">`PARENT_ID` = #{parentId},</if>
+            <if test="parentName != null">`PARENT_NAME` = #{parentName},</if>
+            <if test="status != null">`STATUS` = #{status},</if>
+            <if test="createTime != null">`CREATE_TIME` = #{createTime},</if>
+            <if test="updateTime != null">`UPDATE_TIME` = #{updateTime},</if>
+            <if test="createBy != null">`CREATE_BY` = #{createBy},</if>
+            <if test="updateBy != null">`UPDATE_BY` = #{updateBy}</if>
+        </set>
+        where QUESTIONS_TAG_ID = #{questionsTagId}
+    </update>
+
+    <delete id="delete">
 		delete from edu_questions_tag where QUESTIONS_TAG_ID = #{value}
 	</delete>
-	
-	<delete id="deleteBatch">
-		delete from edu_questions_tag where QUESTIONS_TAG_ID in 
-		<foreach item="questionsTagId" collection="array" open="(" separator="," close=")">
-			#{questionsTagId}
-		</foreach>
-	</delete>
+
+    <delete id="deleteBatch">
+        delete from edu_questions_tag where QUESTIONS_TAG_ID in
+        <foreach item="questionsTagId" collection="array" open="(" separator="," close=")">
+            #{questionsTagId}
+        </foreach>
+    </delete>
 
 </mapper>
