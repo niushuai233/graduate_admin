@@ -44,8 +44,8 @@ public class PathInit implements ApplicationRunner {
             log.info("PathInit over ...");
         }
 
-        PathUtil.questionInfoPrefix = nsFrontPath;
-        log.info("init questionInfoPath: [{}] success", PathUtil.questionInfoPrefix);
+        PathUtil.frontPath = nsFrontPath;
+        log.info("init frontPath: [{}] success", PathUtil.frontPath);
 
 
         log.info("PathInit over ...");

@@ -1,6 +1,7 @@
 package cc.niushuai.graduate.controller;
 
 import cc.niushuai.graduate.commons.utils.PageUtils;
+import cc.niushuai.graduate.commons.utils.PathUtil;
 import cc.niushuai.graduate.commons.utils.Query;
 import cc.niushuai.graduate.commons.utils.ResultUtil;
 import cc.niushuai.graduate.config.log.Log;
@@ -36,7 +37,8 @@ public class EduCourseController {
      */
     @RequestMapping("/list")
     @RequiresPermissions("educourse:list")
-    public String list() {
+    public String list(Model model) {
+        model.addAttribute("courseAccessPath", PathUtil.getCourseAccessPath());
         return "educourse/list";
     }
 

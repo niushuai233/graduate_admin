@@ -7,6 +7,7 @@ import cc.niushuai.graduate.service.OrganizeService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
@@ -15,7 +16,7 @@ import java.util.Map;
 
 
 @Service("organizeService")
-@Transactional
+@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 public class OrganizeServiceImpl implements OrganizeService {
     @Autowired
     private OrganizeMapper organizeMapper;

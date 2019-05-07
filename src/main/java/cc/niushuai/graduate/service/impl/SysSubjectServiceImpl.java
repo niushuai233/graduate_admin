@@ -7,6 +7,7 @@ import cc.niushuai.graduate.service.SysSubjectService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
@@ -15,7 +16,7 @@ import java.util.Map;
 
 @Slf4j
 @Service("sysSubjectService")
-@Transactional
+@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 public class SysSubjectServiceImpl extends BaseServiceImpl<SysSubject> implements SysSubjectService {
     @Autowired
     private SysSubjectMapper sysSubjectMapper;
@@ -49,7 +50,7 @@ public class SysSubjectServiceImpl extends BaseServiceImpl<SysSubject> implement
         Long parentId = sysSubject.getParentId();
         if (0 == parentId) {
             sysSubject.setParentName(TopMenuEnum.TopMenu.getDesc());
-        }else {
+        } else {
             SysSubject parent = get(parentId);
             if (null != parent) {
                 sysSubject.setParentName(parent.getSubjectName());

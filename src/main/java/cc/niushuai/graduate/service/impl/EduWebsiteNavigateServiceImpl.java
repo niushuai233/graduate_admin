@@ -5,6 +5,7 @@ import cc.niushuai.graduate.mapper.EduWebsiteNavigateMapper;
 import cc.niushuai.graduate.service.EduWebsiteNavigateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
@@ -13,7 +14,7 @@ import java.util.Map;
 
 
 @Service("eduWebsiteNavigateService")
-@Transactional
+@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 public class EduWebsiteNavigateServiceImpl extends BaseServiceImpl<EduWebsiteNavigate> implements EduWebsiteNavigateService {
     @Autowired
     private EduWebsiteNavigateMapper eduWebsiteNavigateMapper;

@@ -10,6 +10,7 @@ import cc.niushuai.graduate.service.SysUserRoleService;
 import cc.niushuai.graduate.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
@@ -51,7 +52,7 @@ public class SysRoleServiceImpl implements SysRoleService {
     }
 
     @Override
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void save(SysRole role) {
         role.setCreateTime(new Date());
         sysRoleMapper.save(role);
@@ -64,7 +65,7 @@ public class SysRoleServiceImpl implements SysRoleService {
     }
 
     @Override
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void update(SysRole role) {
         sysRoleMapper.update(role);
 
@@ -76,7 +77,7 @@ public class SysRoleServiceImpl implements SysRoleService {
     }
 
     @Override
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void deleteBatch(Long[] roleIds) {
         sysRoleMapper.deleteBatch(roleIds);
         sysRoleMapper.deleteRoleMenu(roleIds);

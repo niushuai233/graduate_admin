@@ -5,6 +5,7 @@ import cc.niushuai.graduate.mapper.EduWebsiteImagesTypeMapper;
 import cc.niushuai.graduate.service.EduWebsiteImagesTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
@@ -13,7 +14,7 @@ import java.util.Map;
 
 
 @Service("eduWebsiteImagesTypeService")
-@Transactional
+@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 public class EduWebsiteImagesTypeServiceImpl implements EduWebsiteImagesTypeService {
     @Autowired
     private EduWebsiteImagesTypeMapper eduWebsiteImagesTypeMapper;

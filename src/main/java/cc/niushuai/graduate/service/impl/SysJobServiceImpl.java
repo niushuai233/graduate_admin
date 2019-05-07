@@ -5,6 +5,7 @@ import cc.niushuai.graduate.mapper.SysJobMapper;
 import cc.niushuai.graduate.service.SysJobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
@@ -13,7 +14,7 @@ import java.util.Map;
 
 
 @Service("sysJobService")
-@Transactional
+@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 public class SysJobServiceImpl extends BaseServiceImpl<SysJob> implements SysJobService {
     @Autowired
     private SysJobMapper sysJobMapper;

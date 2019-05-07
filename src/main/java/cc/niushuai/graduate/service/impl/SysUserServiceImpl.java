@@ -12,6 +12,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
@@ -67,7 +68,7 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void save(SysUser user) {
         user.setCreateTime(new Date());
         //sha256加密
@@ -82,7 +83,7 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void update(SysUser user) {
         if (StringUtils.isBlank(user.getPassword())) {
             user.setPassword(null);
@@ -99,7 +100,7 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void deleteBatch(Long[] userId) {
         sysUserMapper.deleteBatch(userId);
         sysUserMapper.deleteUserRole(userId);

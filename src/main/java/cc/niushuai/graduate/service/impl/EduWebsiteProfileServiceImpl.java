@@ -5,6 +5,7 @@ import cc.niushuai.graduate.mapper.EduWebsiteProfileMapper;
 import cc.niushuai.graduate.service.EduWebsiteProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.Map;
 
 
 @Service("eduWebsiteProfileService")
-@Transactional
+@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 public class EduWebsiteProfileServiceImpl extends BaseServiceImpl<EduWebsiteProfile> implements EduWebsiteProfileService {
     @Autowired
     private EduWebsiteProfileMapper eduWebsiteProfileMapper;

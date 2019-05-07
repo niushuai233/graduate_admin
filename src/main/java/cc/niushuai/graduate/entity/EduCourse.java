@@ -145,6 +145,17 @@ public class EduCourse implements Serializable {
 
 
     /**
+     * md正文
+     */
+    private String markdown;
+
+    /**
+     * html正文
+     */
+    private String html;
+
+
+    /**
      * 更新人
      */
     private String updateBy;
@@ -162,6 +173,12 @@ public class EduCourse implements Serializable {
      * @date: 2019/5/7 14:34
      */
     private String teachers;
+
+    /**
+     * 接收参数使用数组 否则发生异常
+     *  Cannot deserialize instance of `java.lang.String` out of START_ARRAY token
+     */
+    private String[] teacherArray;
 
 
 }

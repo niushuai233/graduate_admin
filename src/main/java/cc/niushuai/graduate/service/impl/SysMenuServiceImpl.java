@@ -8,6 +8,7 @@ import cc.niushuai.graduate.service.SysRoleMenuService;
 import cc.niushuai.graduate.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -15,6 +16,9 @@ import java.util.List;
 import java.util.Map;
 
 
+/**
+ * @author niushuai
+ */
 @Service("sysMenuService")
 public class SysMenuServiceImpl implements SysMenuService {
     @Autowired
@@ -83,7 +87,7 @@ public class SysMenuServiceImpl implements SysMenuService {
     }
 
     @Override
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void deleteBatch(Long[] menuIds) {
         sysMenuMapper.deleteBatch(menuIds);
         sysMenuMapper.deleteRoleMenu(menuIds);

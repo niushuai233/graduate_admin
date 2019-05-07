@@ -6,6 +6,7 @@ import cc.niushuai.graduate.service.EduTeacherService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
@@ -19,7 +20,7 @@ import java.util.Map;
  */
 @Slf4j
 @Service("eduTeacherService")
-@Transactional
+@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 public class EduTeacherServiceImpl extends BaseServiceImpl<EduTeacher> implements EduTeacherService {
     @Autowired
     private EduTeacherMapper eduTeacherMapper;

@@ -4,6 +4,7 @@ import cc.niushuai.graduate.mapper.SysRoleMenuMapper;
 import cc.niushuai.graduate.service.SysRoleMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
@@ -24,7 +25,7 @@ public class SysRoleMenuServiceImpl implements SysRoleMenuService {
     private SysRoleMenuMapper sysRoleMenuMapper;
 
     @Override
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void saveOrUpdate(Long roleId, List<Long> menuIdList) {
         if (menuIdList == null || menuIdList.size() == 0) {
             return;

@@ -8,6 +8,7 @@ import com.github.tobato.fastdfs.domain.fdfs.StorePath;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,7 +17,7 @@ import java.util.Map;
 
 @Slf4j
 @Service("eduWebsiteImagesService")
-@Transactional
+@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 public class EduWebsiteImagesServiceImpl extends BaseServiceImpl<EduWebsiteImages> implements EduWebsiteImagesService {
     @Autowired
     private EduWebsiteImagesMapper eduWebsiteImagesMapper;

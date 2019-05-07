@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
@@ -22,7 +23,7 @@ import java.util.*;
  */
 @Slf4j
 @Service("eduEmailsendHistoryService")
-@Transactional(rollbackFor = Exception.class)
+@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 public class EduEmailsendHistoryServiceImpl extends BaseServiceImpl<EduEmailsendHistory> implements EduEmailsendHistoryService {
 
     @Autowired
