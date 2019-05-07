@@ -248,6 +248,54 @@ function updateState(msg,table_id,url){
     }
 
 }
+/**
+ * 批量启用或禁用
+ * @param msg      提示信息(启用或禁用)
+ * @param table_id 表格id
+ * @param url      请求地址
+ */
+function batchAdd(msg,table_id,url){
+    //获取选中的id
+    var ids= getSelectedRows(table_id);
+    if(ids!=null){
+        confirm("确认"+msg+"？",function(){
+
+            $.ajax({
+                type: "post",
+                url: url,
+                contentType: "application/json",
+                data: JSON.stringify(ids),
+                async: false,
+                dataType:"json",
+                beforeSend: function(){
+
+                },
+                success: function (result) {
+                    if (result.code == 0) {
+                        parent.layer.msg(msg+'成功 !', {icon: 1});
+                        $t.Refresh();
+                    } else {
+                        parent.layer.msg(result.info, {icon: 5});
+                    }
+                },
+                error: function () {
+                    parent.layer.msg("系统繁忙", {icon: 5});
+
+                },
+                complte: function () {
+                }
+            });
+        });
+
+
+    }else{
+        parent.layer.msg("至少选择一条记录", {icon: 5});
+        //alert("至少选择一条记录");
+        return ;
+    }
+
+}
+
 
 /**
  * 启用或禁用一条数据

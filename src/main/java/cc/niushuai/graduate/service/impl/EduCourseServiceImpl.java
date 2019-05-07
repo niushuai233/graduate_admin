@@ -206,4 +206,14 @@ public class EduCourseServiceImpl extends BaseServiceImpl<EduCourse> implements 
         }
     }
 
+    @Override
+    public List<EduCourse> getEWCDList(Map<String, Object> map) {
+        return eduCourseMapper.getEWCDList(map);
+    }
+
+    @Override
+    public int getEWCDCount(Map<String, Object> map) {
+        return eduCourseMapper.getEWCDCount(map);
+    }
+
 }

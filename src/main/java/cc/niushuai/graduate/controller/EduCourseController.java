@@ -1,25 +1,19 @@
 package cc.niushuai.graduate.controller;
 
-import cc.niushuai.graduate.commons.constant.Constant;
 import cc.niushuai.graduate.commons.utils.PageUtils;
 import cc.niushuai.graduate.commons.utils.PathUtil;
 import cc.niushuai.graduate.commons.utils.Query;
 import cc.niushuai.graduate.commons.utils.ResultUtil;
 import cc.niushuai.graduate.config.log.Log;
 import cc.niushuai.graduate.entity.EduCourse;
-import cc.niushuai.graduate.entity.SysSubject;
 import cc.niushuai.graduate.service.EduCourseService;
-import cc.niushuai.graduate.service.SysSubjectService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,8 +31,6 @@ import java.util.Map;
 public class EduCourseController {
     @Autowired
     private EduCourseService eduCourseService;
-    @Autowired
-    private SysSubjectService subjectService;
 
     /**
      * 跳转到列表页
@@ -61,36 +53,11 @@ public class EduCourseController {
         Query query = new Query(params);
 
         List<EduCourse> eduCourseList = eduCourseService.getList(query);
-        addFdfsPerfix(eduCourseList);
-
         int total = eduCourseService.getCount(query);
 
-        PageUtils pageUtil = new PageUtils(replaceSubjectId2Name(eduCourseList), total, query.getLimit(), query.getPage());
+        PageUtils pageUtil = new PageUtils(eduCourseList, total, query.getLimit(), query.getPage());
 
         return ResultUtil.ok().put("page", pageUtil);
-    }
-
-    /**
-     * 替换id换成name
-     * @param eduCourseList
-     * @return
-     */
-    private List<EduCourse> replaceSubjectId2Name(List<EduCourse> eduCourseList) {
-        List<SysSubject> list = subjectService.getList(new Query(new HashMap<>(), false));
-        HashMap<Long, String> map = new HashMap<>();
-        for (SysSubject subject : list) {
-            map.put(subject.getSubjectId(), subject.getSubjectName());
-        }
-
-        List<EduCourse> newList = new ArrayList<>();
-        for (EduCourse eduCourse : eduCourseList) {
-            eduCourse.setSubjectLink(map.get(eduCourse.getSubjectId()));
-            newList.add(eduCourse);
-        }
-
-        return newList;
-
-
     }
 
     /**
@@ -103,33 +70,13 @@ public class EduCourseController {
     }
 
     /**
-     * 遍历替换图片路径
-     *
-     * @param eduWebsiteImagesList
-     */
-    private void addFdfsPerfix(List<EduCourse> eduWebsiteImagesList) {
-        eduWebsiteImagesList.forEach(item -> {
-            String imageUrl = item.getLogo();
-            if (StringUtils.isNotEmpty(imageUrl)) {
-                item.setLogo(PathUtil.fillFdfsPath(imageUrl));
-            } else {
-                item.setLogo(Constant.DEFAULT_CROPPERJS_IMAGE);
-            }
-        });
-
-    }
-
-    /**
      * 跳转到修改页面
      **/
     @RequestMapping("/edit/{id}")
     @RequiresPermissions("educourse:update")
     public String edit(Model model, @PathVariable("id") Long id) {
         EduCourse eduCourse = eduCourseService.get(id);
-        eduCourse.setTeachers(eduCourseService.getTeacherIds(id));
         model.addAttribute("model", eduCourse);
-        model.addAttribute("fdfsAccessPrefix", PathUtil.fillFdfsPath(eduCourse.getLogo()));
-
         return "educourse/edit";
     }
 
