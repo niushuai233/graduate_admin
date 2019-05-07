@@ -48,7 +48,7 @@ public class SysSubjectServiceImpl extends BaseServiceImpl<SysSubject> implement
         // 添加父级菜单做冗余
         Long parentId = sysSubject.getParentId();
         if (0 == parentId) {
-            sysSubject.setParentName(TopMenuEnum.TopMenu.name());
+            sysSubject.setParentName(TopMenuEnum.TopMenu.getDesc());
         }else {
             SysSubject parent = get(parentId);
             if (null != parent) {

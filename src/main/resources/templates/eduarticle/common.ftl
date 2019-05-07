@@ -62,7 +62,7 @@
     <label class="layui-form-label mylable">URL<span class="span_must">*</span></label>
     <div class="layui-input-normal">
         <input type="text" name="imageUrl" maxlength="100" lay-verify="required" readonly
-               value="${(model.imageUrl)!""}" placeholder="请输入文章图片URL" class="layui-input">
+               value="${(model.imageUrl)!""}" placeholder="请上传封面图片" class="layui-input">
     </div>
 </div>
 
@@ -136,7 +136,7 @@
 
 <script type="text/javascript" src="/statics/plugins/cropperjs/js/bootstrap/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="/statics/plugins/cropperjs/js/cropper/cropper.js"></script>
-<script type="text/javascript" src="/eduteacher/js/cropper.my.js"></script>
+<script type="text/javascript" src="/eduarticle/js/cropper.my.js"></script>
 <script type="text/javascript" src="/statics/plugins/editor.md/editormd.js"></script>
 <script type="text/javascript" src="/statics/plugins/editor.md/initEditor.js"></script>
 <script type="text/javascript" src="/eduquestions/js/other.js"></script>
