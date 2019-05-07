@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cc.niushuai.graduate.mapper.EduCourseMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="cc.niushuai.graduate.entity.EduCourse" id="eduCourseMap">
+        <result property="courseId" column="COURSE_ID"/>
+        <result property="courseName" column="COURSE_NAME"/>
+        <result property="isAvaliable" column="IS_AVALIABLE"/>
+        <result property="subjectId" column="SUBJECT_ID"/>
+        <result property="subjectLink" column="SUBJECT_LINK"/>
+        <result property="addTime" column="ADD_TIME"/>
+        <result property="sourcePrice" column="SOURCE_PRICE"/>
+        <result property="currentPrice" column="CURRENT_PRICE"/>
+        <result property="title" column="TITLE"/>
+        <result property="context" column="CONTEXT"/>
+        <result property="lessionNum" column="LESSION_NUM"/>
+        <result property="logo" column="LOGO"/>
+        <result property="updateTime" column="UPDATE_TIME"/>
+        <result property="pageBuycount" column="PAGE_BUYCOUNT"/>
+        <result property="pageViewcount" column="PAGE_VIEWCOUNT"/>
+        <result property="endTime" column="END_TIME"/>
+        <result property="losetype" column="LOSETYPE"/>
+        <result property="loseTime" column="LOSE_TIME"/>
+        <result property="sequence" column="SEQUENCE"/>
+        <result property="courseGrossIncome" column="COURSE_GROSS_INCOME"/>
+        <result property="updateBy" column="UPDATE_BY"/>
+        <result property="createBy" column="CREATE_BY"/>
+    </resultMap>
+
+	<select id="get" resultType="cc.niushuai.graduate.entity.EduCourse">
+		select * from edu_course where COURSE_ID = #{value}
+	</select>
+
+	<select id="getList" resultType="cc.niushuai.graduate.entity.EduCourse">
+		select * from edu_course t <include refid="where_clause" />
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by COURSE_ID desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="getCount" resultType="int">
+		select count(*) from edu_course t  <include refid="where_clause" />
+	</select>
+
+    <!-- 搜索数据区域 -->
+    <sql id="where_clause">
+        <where>
+            1=1
+            <if test="courseId != null and courseId != ''"> and t.COURSE_ID = #{courseId} </if>
+    		<if test="courseIdVague != null and courseIdVague != ''"> and t.COURSE_ID like concat('%',#{courseIdVague},'%') </if>
+            <if test="courseName != null and courseName != ''"> and t.COURSE_NAME = #{courseName} </if>
+    		<if test="courseNameVague != null and courseNameVague != ''"> and t.COURSE_NAME like concat('%',#{courseNameVague},'%') </if>
+            <if test="isAvaliable != null and isAvaliable != ''"> and t.IS_AVALIABLE = #{isAvaliable} </if>
+    		<if test="isAvaliableVague != null and isAvaliableVague != ''"> and t.IS_AVALIABLE like concat('%',#{isAvaliableVague},'%') </if>
+            <if test="subjectId != null and subjectId != ''"> and t.SUBJECT_ID = #{subjectId} </if>
+    		<if test="subjectIdVague != null and subjectIdVague != ''"> and t.SUBJECT_ID like concat('%',#{subjectIdVague},'%') </if>
+            <if test="subjectLink != null and subjectLink != ''"> and t.SUBJECT_LINK = #{subjectLink} </if>
+    		<if test="subjectLinkVague != null and subjectLinkVague != ''"> and t.SUBJECT_LINK like concat('%',#{subjectLinkVague},'%') </if>
+            <if test="addTime != null and addTime != ''"> and t.ADD_TIME = #{addTime} </if>
+    		<if test="addTimeVague != null and addTimeVague != ''"> and t.ADD_TIME like concat('%',#{addTimeVague},'%') </if>
+            <if test="sourcePrice != null and sourcePrice != ''"> and t.SOURCE_PRICE = #{sourcePrice} </if>
+    		<if test="sourcePriceVague != null and sourcePriceVague != ''"> and t.SOURCE_PRICE like concat('%',#{sourcePriceVague},'%') </if>
+            <if test="currentPrice != null and currentPrice != ''"> and t.CURRENT_PRICE = #{currentPrice} </if>
+    		<if test="currentPriceVague != null and currentPriceVague != ''"> and t.CURRENT_PRICE like concat('%',#{currentPriceVague},'%') </if>
+            <if test="title != null and title != ''"> and t.TITLE = #{title} </if>
+    		<if test="titleVague != null and titleVague != ''"> and t.TITLE like concat('%',#{titleVague},'%') </if>
+            <if test="context != null and context != ''"> and t.CONTEXT = #{context} </if>
+    		<if test="contextVague != null and contextVague != ''"> and t.CONTEXT like concat('%',#{contextVague},'%') </if>
+            <if test="lessionNum != null and lessionNum != ''"> and t.LESSION_NUM = #{lessionNum} </if>
+    		<if test="lessionNumVague != null and lessionNumVague != ''"> and t.LESSION_NUM like concat('%',#{lessionNumVague},'%') </if>
+            <if test="logo != null and logo != ''"> and t.LOGO = #{logo} </if>
+    		<if test="logoVague != null and logoVague != ''"> and t.LOGO like concat('%',#{logoVague},'%') </if>
+            <if test="updateTime != null and updateTime != ''"> and t.UPDATE_TIME = #{updateTime} </if>
+    		<if test="updateTimeVague != null and updateTimeVague != ''"> and t.UPDATE_TIME like concat('%',#{updateTimeVague},'%') </if>
+            <if test="pageBuycount != null and pageBuycount != ''"> and t.PAGE_BUYCOUNT = #{pageBuycount} </if>
+    		<if test="pageBuycountVague != null and pageBuycountVague != ''"> and t.PAGE_BUYCOUNT like concat('%',#{pageBuycountVague},'%') </if>
+            <if test="pageViewcount != null and pageViewcount != ''"> and t.PAGE_VIEWCOUNT = #{pageViewcount} </if>
+    		<if test="pageViewcountVague != null and pageViewcountVague != ''"> and t.PAGE_VIEWCOUNT like concat('%',#{pageViewcountVague},'%') </if>
+            <if test="endTime != null and endTime != ''"> and t.END_TIME = #{endTime} </if>
+    		<if test="endTimeVague != null and endTimeVague != ''"> and t.END_TIME like concat('%',#{endTimeVague},'%') </if>
+            <if test="losetype != null and losetype != ''"> and t.LOSETYPE = #{losetype} </if>
+    		<if test="losetypeVague != null and losetypeVague != ''"> and t.LOSETYPE like concat('%',#{losetypeVague},'%') </if>
+            <if test="loseTime != null and loseTime != ''"> and t.LOSE_TIME = #{loseTime} </if>
+    		<if test="loseTimeVague != null and loseTimeVague != ''"> and t.LOSE_TIME like concat('%',#{loseTimeVague},'%') </if>
+            <if test="sequence != null and sequence != ''"> and t.SEQUENCE = #{sequence} </if>
+    		<if test="sequenceVague != null and sequenceVague != ''"> and t.SEQUENCE like concat('%',#{sequenceVague},'%') </if>
+            <if test="courseGrossIncome != null and courseGrossIncome != ''"> and t.COURSE_GROSS_INCOME = #{courseGrossIncome} </if>
+    		<if test="courseGrossIncomeVague != null and courseGrossIncomeVague != ''"> and t.COURSE_GROSS_INCOME like concat('%',#{courseGrossIncomeVague},'%') </if>
+            <if test="updateBy != null and updateBy != ''"> and t.UPDATE_BY = #{updateBy} </if>
+    		<if test="updateByVague != null and updateByVague != ''"> and t.UPDATE_BY like concat('%',#{updateByVague},'%') </if>
+            <if test="createBy != null and createBy != ''"> and t.CREATE_BY = #{createBy} </if>
+    		<if test="createByVague != null and createByVague != ''"> and t.CREATE_BY like concat('%',#{createByVague},'%') </if>
+        </where>
+    </sql>
+	 
+	<insert id="save" parameterType="cc.niushuai.graduate.entity.EduCourse" useGeneratedKeys="true" keyProperty="courseId">
+		insert into edu_course
+		(
+			`COURSE_NAME`, 
+			`IS_AVALIABLE`, 
+			`SUBJECT_ID`, 
+			`SUBJECT_LINK`, 
+			`ADD_TIME`, 
+			`SOURCE_PRICE`, 
+			`CURRENT_PRICE`, 
+			`TITLE`, 
+			`CONTEXT`, 
+			`LESSION_NUM`, 
+			`LOGO`, 
+			`UPDATE_TIME`, 
+			`PAGE_BUYCOUNT`, 
+			`PAGE_VIEWCOUNT`, 
+			`END_TIME`, 
+			`LOSETYPE`, 
+			`LOSE_TIME`, 
+			`SEQUENCE`, 
+			`COURSE_GROSS_INCOME`, 
+			`UPDATE_BY`, 
+			`CREATE_BY`
+		)
+		values
+		(
+			#{courseName}, 
+			#{isAvaliable}, 
+			#{subjectId}, 
+			#{subjectLink}, 
+			#{addTime}, 
+			#{sourcePrice}, 
+			#{currentPrice}, 
+			#{title}, 
+			#{context}, 
+			#{lessionNum}, 
+			#{logo}, 
+			#{updateTime}, 
+			#{pageBuycount}, 
+			#{pageViewcount}, 
+			#{endTime}, 
+			#{losetype}, 
+			#{loseTime}, 
+			#{sequence}, 
+			#{courseGrossIncome}, 
+			#{updateBy}, 
+			#{createBy}
+		)
+	</insert>
+
+	<update id="update" parameterType="cc.niushuai.graduate.entity.EduCourse">
+		update edu_course 
+		<set>
+			<if test="courseName != null">`COURSE_NAME` = #{courseName}, </if>
+			<if test="isAvaliable != null">`IS_AVALIABLE` = #{isAvaliable}, </if>
+			<if test="subjectId != null">`SUBJECT_ID` = #{subjectId}, </if>
+			<if test="subjectLink != null">`SUBJECT_LINK` = #{subjectLink}, </if>
+			<if test="addTime != null">`ADD_TIME` = #{addTime}, </if>
+			<if test="sourcePrice != null">`SOURCE_PRICE` = #{sourcePrice}, </if>
+			<if test="currentPrice != null">`CURRENT_PRICE` = #{currentPrice}, </if>
+			<if test="title != null">`TITLE` = #{title}, </if>
+			<if test="context != null">`CONTEXT` = #{context}, </if>
+			<if test="lessionNum != null">`LESSION_NUM` = #{lessionNum}, </if>
+			<if test="logo != null">`LOGO` = #{logo}, </if>
+			<if test="updateTime != null">`UPDATE_TIME` = #{updateTime}, </if>
+			<if test="pageBuycount != null">`PAGE_BUYCOUNT` = #{pageBuycount}, </if>
+			<if test="pageViewcount != null">`PAGE_VIEWCOUNT` = #{pageViewcount}, </if>
+			<if test="endTime != null">`END_TIME` = #{endTime}, </if>
+			<if test="losetype != null">`LOSETYPE` = #{losetype}, </if>
+			<if test="loseTime != null">`LOSE_TIME` = #{loseTime}, </if>
+			<if test="sequence != null">`SEQUENCE` = #{sequence}, </if>
+			<if test="courseGrossIncome != null">`COURSE_GROSS_INCOME` = #{courseGrossIncome}, </if>
+			<if test="updateBy != null">`UPDATE_BY` = #{updateBy}, </if>
+			<if test="createBy != null">`CREATE_BY` = #{createBy}</if>
+		</set>
+		where COURSE_ID = #{courseId}
+	</update>
+	
+	<delete id="delete">
+		delete from edu_course where COURSE_ID = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from edu_course where COURSE_ID in 
+		<foreach item="courseId" collection="array" open="(" separator="," close=")">
+			#{courseId}
+		</foreach>
+	</delete>
+
+</mapper>

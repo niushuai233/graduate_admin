@@ -2,12 +2,10 @@ package cc.niushuai.graduate.controller;
 
 import cc.niushuai.graduate.commons.constant.Constant;
 import cc.niushuai.graduate.commons.enumresource.StateEnum;
-import cc.niushuai.graduate.commons.utils.PageUtils;
-import cc.niushuai.graduate.commons.utils.PathUtil;
-import cc.niushuai.graduate.commons.utils.Query;
-import cc.niushuai.graduate.commons.utils.ResultUtil;
+import cc.niushuai.graduate.commons.utils.*;
 import cc.niushuai.graduate.config.log.Log;
 import cc.niushuai.graduate.entity.EduTeacher;
+import cc.niushuai.graduate.entity.admin.SysUser;
 import cc.niushuai.graduate.service.EduTeacherService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
@@ -17,6 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -184,6 +184,25 @@ public class EduTeacherController {
         eduTeacherService.deleteBatch(ids);
 
         return ResultUtil.ok();
+    }
+
+
+    @ResponseBody
+    @RequestMapping("/findAllTeacherSelectTool")
+    public ResultUtil findAll() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("status", 1);
+        List<EduTeacher> list = eduTeacherService.getList(map);
+
+        List<EnumBean> values = new ArrayList<>();
+        for (EduTeacher teacher : list) {
+            EnumBean enumBean = new EnumBean();
+            enumBean.setCode(String.valueOf(teacher.getId()));
+            enumBean.setValue(teacher.getName());
+            values.add(enumBean);
+        }
+
+        return ResultUtil.ok().put("data", values);
     }
 
 }
