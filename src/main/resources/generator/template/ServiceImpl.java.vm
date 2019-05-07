@@ -51,8 +51,7 @@ public class ${className}ServiceImpl extends BaseServiceImpl<${className}> imple
     @Override
     public void update(${className} ${classname}) {
         super.addValue(${classname}, false, 1);
-        ${classname}.setUpdateDate(new Date());
-            ${classname}Mapper.update(${classname});
+        ${classname}Mapper.update(${classname});
     }
 
     @Override
@@ -67,11 +66,9 @@ public class ${className}ServiceImpl extends BaseServiceImpl<${className}> imple
 
     @Override
     public void updateState(${pk.attrType}[]ids, String stateValue) {
-        for (${pk.attrType} id:
-                            ids) {
+        for (${pk.attrType} id : ids) {
             ${className} ${classname}=get(id);
             ${classname}.setState(stateValue);
-            ${classname}.setUpdateDate(new Date());
             update(${classname});
         }
     }
