@@ -15,6 +15,7 @@
 <script src="/common/js/labelTool.js"></script>
 <script src="/common/js/linkSelectTool.js"></script>
 <script src="/common/js/uploadTool.js"></script>
+<script src="/common/js/fileUploadTool.js"></script>
 <script src="/common/js/HuploadTool.js"></script>
 <script src="/common/js/tplTool.js"></script>
 <script src="/common/js/editGrid.js"></script>

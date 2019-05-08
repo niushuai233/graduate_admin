@@ -13,32 +13,32 @@
     <label class="layui-form-label">选择节点<span class="span_must">*</span></label>
     <div class="layui-input-normal">
 
-        <input value="${(model.name)!""}" id="name" cyType="treeTool" cyProps="url:'/educoursekpoint/selectTreeTool/000',name:'name'" readonly
-               placeholder="请选择节点" class="layui-input"/>
+        <input value="${(model.name)!""}" id="name" name="name" maxlength="20"
+               placeholder="请输入节点名称" class="layui-input"/>
     </div>
 </div>
 
-<div class="layui-form-item" style="display: none;">
-    <label class="layui-form-label">父级ID<span class="span_must">*</span></label>
+<div class="layui-form-item">
+    <label class="layui-form-label">父级节点<span class="span_must">*</span></label>
     <div class="layui-input-normal">
-        <input type="text" name="parentId" maxlength="11" lay-verify="required"
-               value="${(model.parentId)!""}" placeholder="请输入父级ID" class="layui-input">
+        <input type="text" id="parentId" name="parentId" maxlength="11" lay-verify="required" cyType="treeTool" cyProps="url:'/educoursekpoint/selectTreeTool/${(model.courseId)!"000"}',name:'parentId'" readonly
+               value="${(model.parentId)!""}" placeholder="请选择父级节点" class="layui-input">
     </div>
 </div>
 
 <div class="layui-form-item">
     <label class="layui-form-label">排序<span class="span_must">*</span></label>
     <div class="layui-input-normal">
-        <input type="text" name="sort" maxlength="11" lay-verify="required"
-               value="${(model.sort)!""}" placeholder="请输入排序" class="layui-input">
+        <input type="number" name="sort" maxlength="2" lay-verify="required"
+               value="${(model.sort)!"1"}" placeholder="请输入排序" class="layui-input">
     </div>
 </div>
 
 <div class="layui-form-item">
     <label class="layui-form-label">播放次数<span class="span_must">*</span></label>
     <div class="layui-input-normal">
-        <input type="text" name="playCount" maxlength="11" lay-verify="required"
-               value="${(model.playCount)!""}" placeholder="请输入播放次数" class="layui-input">
+        <input type="number" name="playCount" maxlength="11" lay-verify="required"
+               value="${(model.playCount)!"0"}" placeholder="请输入播放次数" class="layui-input">
     </div>
 </div>
 
@@ -50,13 +50,17 @@
     </div>
 </div>
 
-<div class="layui-form-item">
+<div class="layui-form-item" id="videoDiv">
     <label class="layui-form-label">视频地址<span class="span_must">*</span></label>
-    <div class="layui-input-normal">
-        <input type="text" name="videoUrl" maxlength="500" lay-verify="required" readonly
-               value="${(model.videoUrl)!""}" placeholder="请上传视频获取地址" class="layui-input">
+    <div style="float: left;" cyType="fileUploadTool" cyProps="url:'/upload/fileUpload',value:'/statics/img/timg.jpg',name:'file',exts:'mp4|rmvb|rm',type:'video',btnName:'选择视频文件',multiple:'false'"></div>
+    <div class="layui-input-normal" style="margin-left: 30px;">
+        <button id="uploadBtn" class="layui-btn">上传</button>
+        <input type="text" id="videoUrl" name="videoUrl" maxlength="500" readonly style="margin-top: 10px;margin-left: -169px;"
+               value="${(model.videoUrl)!""}" id="" placeholder="请上传视频获取地址" class="layui-input">
     </div>
+
 </div>
+<#--
 
 <div class="layui-form-item">
     <label class="layui-form-label">选择讲师<span class="span_must">*</span></label>
@@ -65,6 +69,7 @@
              value="${(model.teachers)!""}" name="teacherArray" class="layui-input-normal"></div>
     </div>
 </div>
+-->
 
 <#--<div class="layui-form-item">
     <label class="layui-form-label">总计播放时间<span class="span_must">*</span></label>
@@ -77,8 +82,8 @@
 <div class="layui-form-item">
     <label class="layui-form-label">节点类型<span class="span_must">*</span></label>
     <div class="layui-input-normal">
-        <div cyType="selectTool" cyProps="codeName:'kpointType',search:'false',filter:'demo'"
-             name="kpointType" value="${(model.kpointType)!"0"}" class="layui-input-inline"></div>
+        <div cyType="selectTool" cyProps="codeName:'kpointType',search:'false',filter:'kpointType'"
+             name="kpointType" value="${(model.kpointType)!""}" class="layui-input-inline"></div>
     </div>
 </div>
 

@@ -1,7 +1,9 @@
 package cc.niushuai.graduate.service.impl;
 
+import cc.niushuai.graduate.commons.utils.Query;
 import cc.niushuai.graduate.entity.EduCourseKpoint;
 import cc.niushuai.graduate.mapper.EduCourseKpointMapper;
+import cc.niushuai.graduate.mapper.EduCourseTeacherMapper;
 import cc.niushuai.graduate.service.EduCourseKpointService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,10 +28,19 @@ import java.util.Map;
 public class EduCourseKpointServiceImpl extends BaseServiceImpl<EduCourseKpoint> implements EduCourseKpointService {
     @Autowired
     private EduCourseKpointMapper eduCourseKpointMapper;
+    @Autowired
+    private EduCourseTeacherMapper eduCourseTeacherMapper;
 
     @Override
     public EduCourseKpoint get(Integer kpointId) {
-        return eduCourseKpointMapper.get(kpointId);
+
+        EduCourseKpoint eduCourseKpoint = eduCourseKpointMapper.get(kpointId);
+//        // 增加teacher的赋值
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("", eduCourseKpoint.getKpointId());
+//        eduCourseTeacherMapper.getList(new Query(map, false));
+
+        return eduCourseKpoint;
     }
 
     @Override
@@ -71,7 +83,6 @@ public class EduCourseKpointServiceImpl extends BaseServiceImpl<EduCourseKpoint>
             update(eduCourseKpoint);
         }
     }
-
 
 
 }

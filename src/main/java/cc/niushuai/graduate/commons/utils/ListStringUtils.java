@@ -150,6 +150,9 @@ public class ListStringUtils {
      * @return
      */
     public static String array2String(String[] arr, String separator, boolean flag) {
+        if (null == arr) {
+            return null;
+        }
         StringBuffer bfr = new StringBuffer();
         String flagStr = "";
         if (flag) {

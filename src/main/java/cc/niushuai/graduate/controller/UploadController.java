@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+
 /**
  * 上传入口
  *
@@ -62,6 +64,25 @@ public class UploadController {
             log.error("图片上传失败: {}", e.getMessage());
             return ResultUtil.error("图片上传失败");
         }
+    }
+
+    /**
+     * @description: 通用文件上传接口
+     * @params: [file]
+     * @author: ns
+     * @date: 2019/5/8 11:43
+     */
+    @RequestMapping("/fileUpload")
+    public ResultUtil fileUpload(MultipartFile file) {
+
+        try {
+            StorePath storePath = uploadService.fileUpload(file);
+            return ResultUtil.ok(storePath.getFullPath());
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResultUtil.error("文件上传失败");
+        }
+
     }
 
 

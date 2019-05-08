@@ -1,5 +1,9 @@
-var cyProps = $("#name").attr("cyProps");
+var cyProps = $("#parentId").attr("cyProps");
 // url:'/educourse/findAllCourseSelectTool',multiple:'false', filter:'courseIdTool'
+
+$(function () {
+
+})
 
 layui.use(['form'], function () {
     var form = layui.form();
@@ -9,12 +13,17 @@ layui.use(['form'], function () {
         console.log(data.value); //复选框value值，也可以通过data.elem.value得到
         //console.log(data.othis); //得到美化后的DOM对象
         var replaceCyProps = cyProps.replace("000", data.value);
-        console.log($("#name").attr("cyProps"));
-        $("#name").attr("cyProps", replaceCyProps);
+        console.log($("#parentId").attr("cyProps"));
+        $("#parentId").attr("cyProps", replaceCyProps);
     });
-    //监听多选
-    form.on('checkbox(searchChecked)', function (data) {
-        Msg.info("value: " + data.elem.title + "  checked: " + data.elem.checked);
-        return false;
+
+    form.on('select(kpointType)', function (data) {
+        const v = data.value;
+        if (v == 0) {
+            $("#videoDiv").hide();
+        }else if (v == 1) {
+            $("#videoDiv").show();
+        }
     });
+
 });

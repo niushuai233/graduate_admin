@@ -55,6 +55,8 @@ public class EduCourseServiceImpl extends BaseServiceImpl<EduCourse> implements 
         super.addValue(eduCourse, false, 0);
         eduCourse.setAddTime(new Date());
         eduCourse.setContext(eduCourse.getHtml());
+        eduCourse.setSourcePrice("0");
+        eduCourse.setCurrentPrice("0");
         eduCourseMapper.save(eduCourse);
         // 增加课程所属专业映射关系
         mappingCourseSubject(getCourseIdByCondition(eduCourse), eduCourse.getSubjectId());
@@ -162,7 +164,10 @@ public class EduCourseServiceImpl extends BaseServiceImpl<EduCourse> implements 
     @Override
     public void update(EduCourse eduCourse) {
         super.addValue(eduCourse, false, 1);
-        eduCourse.setUpdateTime(new Date());
+        eduCourse.setAddTime(new Date());
+        eduCourse.setContext(eduCourse.getHtml());
+        eduCourse.setSourcePrice("0");
+        eduCourse.setCurrentPrice("0");
         eduCourseMapper.update(eduCourse);
 
         mappingCourseSubject(eduCourse.getCourseId(), eduCourse.getSubjectId());

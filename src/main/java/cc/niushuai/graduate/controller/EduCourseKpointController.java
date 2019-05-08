@@ -8,7 +8,9 @@ import cc.niushuai.graduate.commons.utils.ResultUtil;
 import cc.niushuai.graduate.commons.utils.ZtreeBean;
 import cc.niushuai.graduate.config.log.Log;
 import cc.niushuai.graduate.entity.EduCourseKpoint;
+import cc.niushuai.graduate.entity.EduCourseTeacher;
 import cc.niushuai.graduate.service.EduCourseKpointService;
+import cc.niushuai.graduate.service.EduCourseTeacherService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,8 @@ import java.util.Map;
 public class EduCourseKpointController {
     @Autowired
     private EduCourseKpointService eduCourseKpointService;
+    @Autowired
+    private EduCourseTeacherService eduCourseTeacherService;
 
     /**
      * 跳转到列表页
