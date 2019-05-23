@@ -46,7 +46,7 @@ window.addEventListener('DOMContentLoaded', function () {
     $modal.on('shown.bs.modal', function () {
         cropper = new Cropper(image, {
             // 纵横比率即宽高比 1代表为1:1裁剪
-            aspectRatio: 1,
+            aspectRatio: 0,
             // 0代表无限制
             // 1代表限制裁剪框不超过画布的大小。
             // 2代表裁剪框不能超出图片范围大小 且图片不会填充满容器
@@ -68,8 +68,8 @@ window.addEventListener('DOMContentLoaded', function () {
         if (cropper) {
             canvas = cropper.getCroppedCanvas({
                 // 裁剪之后输出的宽度和高度
-                width: 288,
-                height: 288,
+                //width: 288,
+                //height: 288,
             });
             initialAvatarURL = avatar.src;
             // base64编码的数据 传递到后台时需要将数据转成image图片
