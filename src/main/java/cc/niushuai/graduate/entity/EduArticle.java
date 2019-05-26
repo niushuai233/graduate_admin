@@ -147,5 +147,7 @@ public class EduArticle implements Serializable {
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateDate;
 
+    private String editormdDiv_html_code;
+
 
 }

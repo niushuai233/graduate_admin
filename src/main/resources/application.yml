@@ -58,4 +58,4 @@ fdfs:
 
 # 自定义配置
 ns:
-  front-path: http://106.12.218.104:8080
+  front-path: http://127.0.0.1:9097

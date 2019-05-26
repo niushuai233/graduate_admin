@@ -11,7 +11,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">名称:</label>
         <div class="layui-input-inline">
-            <input type="text" name="" placeholder="请输入名称" class="layui-input">
+            <input type="text" name="titleVague" placeholder="请输入名称" class="layui-input">
         </div>
 
         <div class="layui-input-normal">

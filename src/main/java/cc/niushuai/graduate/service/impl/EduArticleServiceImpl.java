@@ -78,9 +78,20 @@ public class EduArticleServiceImpl extends BaseServiceImpl<EduArticle> implement
     public void update(EduArticle eduArticle) {
         super.addValue(eduArticle, false, 1);
         eduArticle.setUpdateDate(new Date());
+        eduArticle.setHtml(eduArticle.getEditormdDiv_html_code());
         eduArticleMapper.update(eduArticle);
 
         updateContent(eduArticle);
+    }
+
+    public void update(EduArticle eduArticle, boolean flag) {
+        super.addValue(eduArticle, false, 1);
+        eduArticle.setUpdateDate(new Date());
+        eduArticle.setHtml(eduArticle.getEditormdDiv_html_code());
+        eduArticleMapper.update(eduArticle);
+        if (flag) {
+            updateContent(eduArticle);
+        }
     }
 
     private void updateContent(EduArticle eduArticle) {
@@ -111,7 +122,7 @@ public class EduArticleServiceImpl extends BaseServiceImpl<EduArticle> implement
             EduArticle eduArticle = get(id);
             eduArticle.setState(Integer.valueOf(stateValue));
             eduArticle.setUpdateDate(new Date());
-            update(eduArticle);
+            update(eduArticle, false);
         }
     }
 

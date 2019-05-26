@@ -101,8 +101,8 @@
 
 <textarea id="md" style="display: none;">${(model.markdown)!""}</textarea>
 <div id="editormdDiv">
-    <textarea style="display:none;" name="markdown" class="editormd-markdown-textarea"></textarea>
-    <textarea style="display:none;" name="html" class="editormd-html-textarea"></textarea>
+    <textarea style="display:none;" id="markdown" name="markdown" class="editormd-markdown-textarea" oninput="syncHtml()"></textarea>
+    <textarea style="display:none;" name="html" class="editormd-html-textarea">${(model.html)!""}</textarea>
 
 </div>
 
@@ -139,4 +139,4 @@
 <script type="text/javascript" src="/eduarticle/js/cropper.my.js"></script>
 <script type="text/javascript" src="/statics/plugins/editor.md/editormd.js"></script>
 <script type="text/javascript" src="/statics/plugins/editor.md/initEditor.js"></script>
-<script type="text/javascript" src="/eduquestions/js/other.js"></script>
+<script type="text/javascript" src="/eduarticle/js/other.js"></script>
