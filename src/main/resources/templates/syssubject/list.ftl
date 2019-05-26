@@ -84,7 +84,7 @@
 
             <th width="10%" param="{name:'updateTime'}">更新时间</th>
             <!--isPrimary：渲染列-->
-            <th width="5%" param="{name:'status',enumName:'StateEnum',render:'Render.customState'}">状态</th>
+            <th width="5%" param="{name:'status',enumName:'ReverseStateEnum',render:'Render.customState'}">状态</th>
             <th width="10%" param="{operate:'true',buttons:'Render.state,Render.edit,Render.delete'}">操作</th>
         </tr>
         </thead>

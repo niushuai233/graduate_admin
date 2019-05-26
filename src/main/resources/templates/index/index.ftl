@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>cy-fast快速开发框架</title>
+    <title>课程管理系统</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <script src="/statics/libs/jquery-1.10.2.min.js"></script>
     <link rel="shortcut icon" type="image/x-icon" href="/statics/img/favicon.ico" media="screen"/>
@@ -28,15 +28,15 @@
     <header class="main-header">
         <a href="javascript:void(0);" class="logo" style="background-color: #2991d9">
 
-            <span class="logo-mini"><b>cy</b></span>
+            <span class="logo-mini"><b>CM</b></span>
 
-            <span class="logo-lg"><b>cy-fast快速开发框架</b></span>
+            <span class="logo-lg"><b>课程管理系统</b></span>
         </a>
 
         <nav class="navbar navbar-static-top" role="navigation" style="background-color: #2991d9">
 
             <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-                <span class="sr-only">Toggle navigation</span>
+                <span class="sr-only"></span>
             </a>
 
             <div style="float:left;color:#fff;">
@@ -86,7 +86,7 @@
                         <ul class="navTab-tab" style="left: 0px;">
                             <li class="main selected" data-url="/index/main">
                                 <a href="javascript:;">
-                                    <span class="home_icon">我的主页</span>
+                                    <span class="home_icon">主页</span>
                                 </a>
                             </li>
 
@@ -105,7 +105,7 @@
         <!-- 菜单下拉显示 -->
         <ul class="tabsMoreList" style="display: none;">
             <li class="selected" data-url="/page/main/main.jsp">
-                <a href="javascript:;">我的主页</a>
+                <a href="javascript:;">主页</a>
             </li>
 
         </ul>

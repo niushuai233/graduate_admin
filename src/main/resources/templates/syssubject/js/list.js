@@ -60,13 +60,13 @@ var Render = {
      */
     state:function(rowdata,renderData){
         // 表明已禁用 按钮需要变为启用
-        if(rowdata.status=='0'){
+        if(rowdata.status=='1'){
             return' <button onclick="updateStateOne(\''+"启用"+'\',\''+"/syssubject/enable"+'\',\''+rowdata.subjectId+'\')"' +
                 '  class="layui-btn layui-btn-mini layui-btn-green">启用</button>';
         }
 
         // 表明已启用 按钮需要变为禁用
-        if(rowdata.status=='1'){
+        if(rowdata.status=='0'){
             return' <button  onclick="updateStateOne(\''+"禁用"+'\',\''+"/syssubject/disable"+'\',\''+rowdata.subjectId+'\')" ' +
                 'class="layui-btn layui-btn-mini layui-btn-danger">禁用</button>';
         }

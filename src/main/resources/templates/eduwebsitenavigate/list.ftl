@@ -76,7 +76,9 @@
 
             <th width="5%" param="{name:'newpage', render:'Render.customerNewPage'}">新页面</th>
 
+<#--
             <th width="5%" param="{name:'ordernum'}">排序</th>
+-->
 
             <th width="10%" param="{name:'createBy'}">创建人</th>
 

@@ -68,8 +68,8 @@ window.addEventListener('DOMContentLoaded', function () {
         if (cropper) {
             canvas = cropper.getCroppedCanvas({
                 // 裁剪之后输出的宽度和高度
-                //width: 288,
-                //height: 288,
+                width: 288,
+                height: 288,
             });
             initialAvatarURL = avatar.src;
             // base64编码的数据 传递到后台时需要将数据转成image图片

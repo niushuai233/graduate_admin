@@ -32,13 +32,14 @@
     </div>
 </div>
 
-<div class="layui-form-item">
+<#--<div class="layui-form-item">
     <label class="layui-form-label">显示排序<span class="span_must">*</span></label>
     <div class="layui-input-normal">
         <input type="text" name="ordernum" lay-verify="required"
                value="${(model.ordernum)!""}" placeholder="请输入显示排序" class="layui-input" maxlength="2"/>
     </div>
-</div>
+</div>-->
+
 
 <div class="layui-form-item">
     <label class="layui-form-label">状态</label>

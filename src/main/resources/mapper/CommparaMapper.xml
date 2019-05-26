@@ -16,11 +16,11 @@
     </resultMap>
 
     <select id="queryObject" resultType="cc.niushuai.graduate.entity.admin.Commpara">
-		select * from admin_sys_commpara where para_id = #{value}
+		select * from admin_sys_dict where para_id = #{value}
 	</select>
 
     <select id="queryList" resultType="cc.niushuai.graduate.entity.admin.Commpara">
-        select * from admin_sys_commpara t
+        select * from admin_sys_dict t
         <include refid="where_clause"/>
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
@@ -36,7 +36,7 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-        select count(*) from admin_sys_commpara t
+        select count(*) from admin_sys_dict t
         <include refid="where_clause"/>
     </select>
 
@@ -58,7 +58,7 @@
 
     <insert id="save" parameterType="cc.niushuai.graduate.entity.admin.Commpara" useGeneratedKeys="true"
             keyProperty="paraId">
-		insert into admin_sys_commpara
+		insert into admin_sys_dict
 		(
 			`para_code`, 
 			`para_name`, 
@@ -77,7 +77,7 @@
 	</insert>
 
     <update id="update" parameterType="cc.niushuai.graduate.entity.admin.Commpara">
-        update admin_sys_commpara
+        update admin_sys_dict
         <set>
             <if test="paraCode != null">`para_code` = #{paraCode},</if>
             <if test="paraName != null">`para_name` = #{paraName},</if>
@@ -89,11 +89,11 @@
     </update>
 
     <delete id="delete">
-		delete from admin_sys_commpara where para_id = #{value}
+		delete from admin_sys_dict where para_id = #{value}
 	</delete>
 
     <delete id="deleteBatch">
-        delete from admin_sys_commpara where para_id in
+        delete from admin_sys_dict where para_id in
         <foreach item="paraId" collection="array" open="(" separator="," close=")">
             #{paraId}
         </foreach>
@@ -101,11 +101,11 @@
 
 
     <select id="getCodeValues" resultType="cc.niushuai.graduate.entity.admin.Commpara">
-		select para_key as code,para_name as value from admin_sys_commpara where  `para_code` =#{codeName} order by sort_no asc
+		select para_key as code,para_name as value from admin_sys_dict where  `para_code` =#{codeName} order by sort_no asc
 	</select>
 
     <select id="findByVerify" resultType="cc.niushuai.graduate.entity.admin.Commpara">
-		select * from admin_sys_commpara where para_code = #{paraCode} and para_key=#{paraKey}
+		select * from admin_sys_dict where para_code = #{paraCode} and para_key=#{paraKey}
 	</select>
 
 </mapper>

@@ -128,7 +128,7 @@ public class SysSubjectController {
     @RequestMapping("/enable")
     @RequiresPermissions("syssubject:update")
     public ResultUtil enable(@RequestBody Long[] ids) {
-        String stateValue = StateEnum.ENABLE.getCode();
+        String stateValue = StateEnum.DIASABLE.getCode();
         sysSubjectService.updateState(ids, stateValue);
         return ResultUtil.ok();
     }
@@ -141,7 +141,7 @@ public class SysSubjectController {
     @RequestMapping("/disable")
     @RequiresPermissions("syssubject:update")
     public ResultUtil disable(@RequestBody Long[] ids) {
-        String stateValue = StateEnum.DIASABLE.getCode();
+        String stateValue = StateEnum.ENABLE.getCode();
         sysSubjectService.updateState(ids, stateValue);
         return ResultUtil.ok();
     }
@@ -168,7 +168,7 @@ public class SysSubjectController {
     public ResultUtil select() {
         //查询列表数据
         Map<String, Object> queryMap = new HashMap<>();
-        queryMap.put("status", 1);
+        queryMap.put("status", 0);
         List<SysSubject> subjectList = sysSubjectService.getList(queryMap);
 
         //添加顶级菜单

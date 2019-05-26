@@ -54,8 +54,7 @@
     <label class="layui-form-label">视频地址<span class="span_must">*</span></label>
     <div style="float: left;" cyType="fileUploadTool" cyProps="url:'/upload/fileUpload',value:'/statics/img/timg.jpg',name:'file',exts:'mp4|rmvb|rm',type:'video',btnName:'选择视频文件',multiple:'false'"></div>
     <div class="layui-input-normal" style="margin-left: 30px;">
-        <button id="uploadBtn" class="layui-btn">上传</button>
-        <input type="text" id="videoUrl" name="videoUrl" maxlength="500" readonly style="margin-top: 10px;margin-left: -169px;"
+        <input type="text" id="videoUrl" name="videoUrl" maxlength="500" readonly style="margin-top: 50px;margin-left: -169px;"
                value="${(model.videoUrl)!""}" id="" placeholder="请上传视频获取地址" class="layui-input">
     </div>
 
