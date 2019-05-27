@@ -5,7 +5,6 @@ import cc.niushuai.graduate.commons.enumresource.StateEnum;
 import cc.niushuai.graduate.commons.utils.*;
 import cc.niushuai.graduate.config.log.Log;
 import cc.niushuai.graduate.entity.EduTeacher;
-import cc.niushuai.graduate.entity.admin.SysUser;
 import cc.niushuai.graduate.service.EduTeacherService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
@@ -191,7 +190,7 @@ public class EduTeacherController {
     @RequestMapping("/findAllTeacherSelectTool")
     public ResultUtil findAll() {
         Map<String, Object> map = new HashMap<>();
-        map.put("status", 1);
+        map.put("status", 0);
         List<EduTeacher> list = eduTeacherService.getList(map);
 
         List<EnumBean> values = new ArrayList<>();

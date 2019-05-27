@@ -30,4 +30,5 @@ public interface EduUserService {
 
     void updateState(Long[] ids, String stateValue);
 
+    boolean checkStuNoExist(String 学号);
 }

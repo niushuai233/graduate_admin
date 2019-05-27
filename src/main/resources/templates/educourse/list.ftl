@@ -71,8 +71,6 @@
 
             <th width="10%" param="{name:'subjectLink'}">所属专业</th>
 
-            <th width="5%" param="{name:'lessionNum'}">总课时</th>
-
             <th width="5%" param="{name:'pageViewcount'}">浏览量</th>
 
             <th width="5%" param="{name:'sequence'}">排序</th>

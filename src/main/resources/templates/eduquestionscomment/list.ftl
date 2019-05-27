@@ -9,9 +9,9 @@
 <body>
 <form class="layui-form " action="">
     <div class="layui-form-item">
-        <label class="layui-form-label">名称:</label>
+        <label class="layui-form-label">内容:</label>
         <div class="layui-input-inline">
-            <input type="text" name="" placeholder="请输入名称" class="layui-input">
+            <input type="text" name="contentVague" placeholder="请输入内容" class="layui-input">
         </div>
 
         <div class="layui-input-normal">
@@ -38,14 +38,7 @@
         <#--<button class="layui-btn" onclick="editPage('eduQuestionsCommentTable','/eduquestionscomment/edit')">
             <i class="fa fa-pencil-square-o">&nbsp;</i>修改
         </button>-->
-        <button class="layui-btn layui-btn-green"
-                onclick="updateState('批量启用','eduQuestionsCommentTable','/eduquestionscomment/enable')">
-            <i class="fa fa-check-square-o">&nbsp;</i>启用
-        </button>
-        <button class="layui-btn  layui-btn-danger"
-                onclick="updateState('批量禁用','eduQuestionsCommentTable','/eduquestionscomment/disable')">
-            <i class="fa fa-expeditedssl">&nbsp;</i>禁用
-        </button>
+
     </@shiro.hasPermission>
     <@shiro.hasPermission name="eduquestionscomment:delete">
         <button class="layui-btn layui-btn-delete"

@@ -1,6 +1,7 @@
 package cc.niushuai.graduate.service.impl;
 
 import cc.niushuai.graduate.commons.utils.MD5;
+import cc.niushuai.graduate.commons.utils.Query;
 import cc.niushuai.graduate.entity.EduUser;
 import cc.niushuai.graduate.mapper.EduUserMapper;
 import cc.niushuai.graduate.service.EduUserService;
@@ -8,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -69,6 +72,21 @@ public class EduUserServiceImpl extends BaseServiceImpl<EduUser> implements EduU
             eduUser.setIsAvalible(Integer.valueOf(stateValue));
             update(eduUser);
         }
+    }
+
+    /**
+     * 校验学号是否已存在
+     * @param 学号
+     * @return
+     */
+    @Override
+    public boolean checkStuNoExist(String 学号) {
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("stuNo", 学号);
+        List<EduUser> list = eduUserMapper.getList(new Query(map, false));
+
+        return !CollectionUtils.isEmpty(list);
     }
 
 }

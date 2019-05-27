@@ -114,5 +114,6 @@ public class EduQuestions implements Serializable {
      */
     private String updateBy;
 
+    private String editormdDiv_html_code;
 
 }

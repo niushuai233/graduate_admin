@@ -39,7 +39,7 @@
                 <span class="sr-only"></span>
             </a>
 
-            <div style="float:left;color:#fff;">
+            <div style="float:left;color:#fff;display: none">
                 <ul class="nav navbar-nav">
                     <li>
                         <a href="javascript:createMenu('sys/menu/user');"><i class="fa fa-cog"></i> 后台管理</a>

@@ -58,6 +58,13 @@
     </div>
 </form>
 <div class="layui-btn-group">
+    <@shiro.hasPermission name="eduuser:import">
+        <div style="float: left;" cyType="fileUploadTool" cyProps="url:'/eduuser/userImport',value:'/statics/img/timg.jpg',name:'file',exts:'xlsx|xls',type:'file',btnName:'选择模板文件',multiple:'false'"></div>
+
+        <button class="layui-btn layui-btn" onclick="templateDownload('/statics/excel/edu_user_template.xlsx');">
+            模板下载
+        </button>
+    </@shiro.hasPermission>
     <@shiro.hasPermission name="eduuser:save">
         <button class="layui-btn" onclick="addPage('/eduuser/add')">
             <i class="fa fa-plus">&nbsp;</i>增加
@@ -74,19 +81,14 @@
             <i class="fa fa-expeditedssl">&nbsp;</i>禁用
         </button>
     </@shiro.hasPermission>
-    <@shiro.hasPermission name="eduuser:import">
-        <button class="layui-btn layui-btn" onclick="userImport('/eduuser/import');">
-            导入
-        </button>
-        <button class="layui-btn layui-btn" onclick="templateDownload('/statics/excel/edu_user_template.xlsx');">
-            模板下载
-        </button>
-    </@shiro.hasPermission>
+
     <@shiro.hasPermission name="eduuser:delete">
         <button class="layui-btn layui-btn-delete" onclick="deleteBatch('批量删除','eduUserTable','/eduuser/delete');">
             <i class="fa fa-trash-o">&nbsp;</i>删除
         </button>
     </@shiro.hasPermission>
+
+
 
 </div>
 <div class="layui-form ">

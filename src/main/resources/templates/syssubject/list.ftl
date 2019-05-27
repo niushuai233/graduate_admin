@@ -72,8 +72,6 @@
 
             <th width="10%" param="{name:'subjectName'}">专业名称</th>
 
-            <th width="10%" param="{name:'parentName'}">所属专业</th>
-
             <th width="5%" param="{name:'sort'}">排序</th>
 
             <th width="10%" param="{name:'createBy'}">创建人</th>

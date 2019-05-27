@@ -46,6 +46,7 @@ public class EduQuestionsServiceImpl extends BaseServiceImpl<EduQuestions> imple
         super.addValue(eduQuestions, false, 0);
         eduQuestions.setAddTime(new Date());
         eduQuestions.setCusId(ShiroUtils.getUserId());
+        eduQuestions.setContent(eduQuestions.getEditormdDiv_html_code());
         eduQuestionsMapper.save(eduQuestions);
     }
 
@@ -53,6 +54,7 @@ public class EduQuestionsServiceImpl extends BaseServiceImpl<EduQuestions> imple
     public void update(EduQuestions eduQuestions) {
         super.addValue(eduQuestions, false, 1);
         eduQuestions.setUpdateTime(new Date());
+        eduQuestions.setContent(eduQuestions.getEditormdDiv_html_code());
         eduQuestionsMapper.update(eduQuestions);
     }
 

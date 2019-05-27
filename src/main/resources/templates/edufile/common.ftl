@@ -42,7 +42,7 @@
 
                 <div class="layui-form-item" id="videoDiv">
                     <label class="layui-form-label">文件地址<span class="span_must">*</span></label>
-                    <div style="float: left;" cyType="fileUploadTool" cyProps="url:'/upload/fileUpload',value:'/statics/img/timg.jpg',name:'file',exts:'xlsx|docx|pptx|zip|rar|xls|doc|ppt|pdf|txt',type:'video',btnName:'选择文件',multiple:'false'"></div>
+                    <div style="float: left;" cyType="fileUploadTool" cyProps="url:'/upload/fileUpload',value:'/statics/img/timg.jpg',name:'file',exts:'xlsx|docx|pptx|zip|rar|xls|doc|7z|ppt|pdf|txt|mp3',type:'file',btnName:'选择文件',multiple:'false'"></div>
                     <div class="layui-input-normal" style="margin-left: 0px;">
                         <input type="text" id="videoUrl" name="url" maxlength="500" readonly style="margin-top: 50px;margin-left: -110px;"
                                value="${(model.url)!""}" id="url" placeholder="请上传文件获取地址" class="layui-input">

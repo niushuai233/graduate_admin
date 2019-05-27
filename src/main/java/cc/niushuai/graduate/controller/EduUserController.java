@@ -1,18 +1,27 @@
 package cc.niushuai.graduate.controller;
 
 import cc.niushuai.graduate.commons.enumresource.StateEnum;
+import cc.niushuai.graduate.commons.utils.MD5;
 import cc.niushuai.graduate.commons.utils.PageUtils;
 import cc.niushuai.graduate.commons.utils.Query;
 import cc.niushuai.graduate.commons.utils.ResultUtil;
 import cc.niushuai.graduate.config.log.Log;
 import cc.niushuai.graduate.entity.EduUser;
 import cc.niushuai.graduate.service.EduUserService;
+import cc.niushuai.graduate.vo.UserImportVo;
+import cn.hutool.poi.excel.ExcelReader;
+import cn.hutool.poi.excel.ExcelUtil;
+import com.alibaba.fastjson.JSONObject;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -151,6 +160,48 @@ public class EduUserController {
         eduUserService.deleteBatch(userIds);
 
         return ResultUtil.ok();
+    }
+
+
+    /**
+     * 用户导入
+     * @param file
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping("/userImport")
+    @ResponseBody
+    public ResultUtil userImport(MultipartFile file) throws IOException {
+        InputStream inputStream = file.getInputStream();
+
+        ExcelReader reader = ExcelUtil.getReader(inputStream);
+
+        List<UserImportVo> userImportVos = reader.readAll(UserImportVo.class);
+        System.out.println(JSONObject.toJSONString(userImportVos));
+
+        List<String> stuNos = new ArrayList<String>();
+        for (UserImportVo userImportVo : userImportVos) {
+            EduUser user = new EduUser();
+            user.setStuNo(userImportVo.get学号());
+
+            boolean stuNoExistFlag = eduUserService.checkStuNoExist(userImportVo.get学号());
+            if (stuNoExistFlag) {
+                stuNos.add(userImportVo.get学号());
+                continue;
+            }
+
+            user.setUserName(userImportVo.get姓名());
+            user.setShowName(userImportVo.get姓名());
+            user.setEmail(userImportVo.get邮箱());
+            user.setPassword(MD5.getMD5("123456"));
+            user.setMobile(userImportVo.get手机号());
+            user.setSex(userImportVo.get性别().equalsIgnoreCase("男")?1:2);
+            user.setIsAvalible(1);
+
+            eduUserService.save(user);
+        }
+
+        return ResultUtil.ok("导入"+userImportVos.size()+"条数据成功, 其中学号为"+JSONObject.toJSONString(stuNos)+"的学生导入失败");
     }
 
 }

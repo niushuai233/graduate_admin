@@ -9,9 +9,9 @@
 <body>
 <form class="layui-form " action="">
     <div class="layui-form-item">
-        <label class="layui-form-label">名称:</label>
+        <label class="layui-form-label">标题:</label>
         <div class="layui-input-inline">
-            <input type="text" name="" placeholder="请输入名称" class="layui-input">
+            <input type="text" name="titleVague" placeholder="请输入标题" class="layui-input">
         </div>
 
         <div class="layui-input-normal">
@@ -82,11 +82,7 @@
 
             <th width="5%" param="{name:'praiseCount'}">点赞量</th>
 
-            <th width="7%" param="{name:'createBy'}">创建人</th>
-
-            <th width="10%" param="{name:'addTime'}">添加时间</th>
-
-            <th width="7%" param="{name:'updateBy'}">更新人</th>
+            <th width="10%" param="{name:'addTime'}">创建时间</th>
 
             <th width="10%" param="{name:'updateTime'}">更新时间</th>
             <!--isPrimary：渲染列-->
