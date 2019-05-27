@@ -9,9 +9,9 @@
 <body>
 <form class="layui-form " action="">
     <div class="layui-form-item">
-        <label class="layui-form-label">名称:</label>
+        <label class="layui-form-label">邮箱:</label>
         <div class="layui-input-inline">
-            <input type="text" name="" placeholder="请输入名称" class="layui-input">
+            <input type="text" name="emailVague" placeholder="请输入邮箱" class="layui-input">
         </div>
 
         <div class="layui-input-normal">
@@ -49,7 +49,7 @@
 
             <th width="15%" param="{name:'title'}">标题</th>
 
-            <th width="10%" param="{name:'content'}">正文</th>
+            <th width="10%" param="{name:'content', render:'Render.content'}">正文</th>
 
             <th width="5%" param="{name:'status'}">状态</th>
 

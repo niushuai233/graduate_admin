@@ -14,6 +14,11 @@ import java.util.Map;
  */
 public interface EduCourseMapper extends BaseMapper<EduCourse> {
 
+    /**
+     * edu_website_course_detail
+     * @param map
+     * @return
+     */
     List<EduCourse> getEWCDList(Map<String, Object> map);
 
     int getEWCDCount(Map<String, Object> map);

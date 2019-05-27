@@ -176,6 +176,20 @@ public class EduCourseServiceImpl extends BaseServiceImpl<EduCourse> implements 
 
     }
 
+    public void update(EduCourse eduCourse, boolean flag) {
+        super.addValue(eduCourse, false, 1);
+        eduCourse.setAddTime(new Date());
+        eduCourse.setContext(eduCourse.getHtml());
+        eduCourse.setSourcePrice("0");
+        eduCourse.setCurrentPrice("0");
+        eduCourseMapper.update(eduCourse);
+        if (flag) {
+            mappingCourseSubject(eduCourse.getCourseId(), eduCourse.getSubjectId());
+            mappingCourseTeacher(eduCourse.getCourseId(), eduCourse.getTeacherArray());
+            dealCourseTeachers(eduCourse);
+        }
+
+    }
     @Override
     public void delete(Long courseId) {
         eduCourseMapper.delete(courseId);
@@ -207,10 +221,15 @@ public class EduCourseServiceImpl extends BaseServiceImpl<EduCourse> implements 
             EduCourse eduCourse = get(id);
             eduCourse.setIsAvaliable(Long.valueOf(stateValue));
             eduCourse.setUpdateTime(new Date());
-            update(eduCourse);
+            update(eduCourse, false);
         }
     }
 
+    /**
+     * edu_website_course_detail
+     * @param map
+     * @return
+     */
     @Override
     public List<EduCourse> getEWCDList(Map<String, Object> map) {
         return eduCourseMapper.getEWCDList(map);

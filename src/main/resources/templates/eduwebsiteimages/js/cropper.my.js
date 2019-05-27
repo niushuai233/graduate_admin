@@ -68,7 +68,7 @@ window.addEventListener('DOMContentLoaded', function () {
         if (cropper) {
             canvas = cropper.getCroppedCanvas({
                 // 裁剪之后输出的宽度和高度
-                width: 255,
+                width: 1024,
                 height: 255,
             });
             initialAvatarURL = avatar.src;

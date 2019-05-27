@@ -96,10 +96,9 @@
     </div>
 </div>
 
-<div class="layui-form-item">
+<div class="layui-form-item" style="display: none;">
     <label class="layui-form-label mylable">状态</label>
-    <div cyType="radioTool" cyProps="enumName:'StateEnum'" name="status"
-         value="${(model.status)!"1"}" class="layui-input-inline"></div>
+    <input type="hidden" value="0" name="status">
 </div>
 
 

@@ -30,7 +30,12 @@ public interface EduCourseService extends BaseService<EduCourse>{
 
     void updateState(Long[] ids, String stateValue);
 
-    List<EduCourse> getEWCDList(Map<String, Object> map);
+	/**
+	 * edu_website_course_detail
+	 * @param map
+	 * @return
+	 */
+	List<EduCourse> getEWCDList(Map<String, Object> map);
 
     int getEWCDCount(Map<String, Object> map);
 

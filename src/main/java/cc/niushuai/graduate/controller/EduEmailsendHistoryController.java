@@ -8,6 +8,7 @@ import cc.niushuai.graduate.commons.utils.ResultUtil;
 import cc.niushuai.graduate.config.log.Log;
 import cc.niushuai.graduate.entity.EduEmailsendHistory;
 import cc.niushuai.graduate.service.EduEmailsendHistoryService;
+import cn.hutool.core.date.DateUtil;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
@@ -85,12 +86,14 @@ public class EduEmailsendHistoryController {
     /**
      * 信息
      */
-    @ResponseBody
     @RequestMapping("/info/{id}")
     @RequiresPermissions("eduemailsendhistory:info")
-    public ResultUtil info(@PathVariable("id") Integer id) {
+    public String info(Model model, @PathVariable("id") Integer id) {
         EduEmailsendHistory eduEmailsendHistory = eduEmailsendHistoryService.get(id);
-        return ResultUtil.ok().put("eduEmailsendHistory", eduEmailsendHistory);
+        model.addAttribute("model",eduEmailsendHistory);
+        model.addAttribute("sendTime", DateUtil.formatDateTime(eduEmailsendHistory.getSendTime()));
+        model.addAttribute("readOnly","readOnly");
+        return "eduemailsendhistory/sendShow";
     }
 
     /**
@@ -213,11 +216,11 @@ public class EduEmailsendHistoryController {
             if ("2".equalsIgnoreCase(type) && StringUtils.isEmpty(sendTime)) {
                 return ResultUtil.error("定时发送时间不能为空");
             }
-
             // 校验日期是否能被定时处理
-            if (!CronDateUtils.isValidDate(sendTime)) {
+            if ("2".equalsIgnoreCase(type) && !CronDateUtils.isValidDate(sendTime)) {
                 return ResultUtil.error("定时发送时间[" + sendTime + "]永远不可能到达");
             }
+
 
             /**
              * md格式正文

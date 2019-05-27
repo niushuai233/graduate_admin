@@ -38,13 +38,7 @@
         <button class="layui-btn" onclick="editPage('eduTeacherTable','/eduteacher/edit')">
             <i class="fa fa-pencil-square-o">&nbsp;</i>修改
         </button>
-        <button class="layui-btn layui-btn-green" onclick="updateState('批量启用','eduTeacherTable','/eduteacher/enable')">
-            <i class="fa fa-check-square-o">&nbsp;</i>启用
-        </button>
-        <button class="layui-btn  layui-btn-danger"
-                onclick="updateState('批量禁用','eduTeacherTable','/eduteacher/disable')">
-            <i class="fa fa-expeditedssl">&nbsp;</i>禁用
-        </button>
+
     </@shiro.hasPermission>
     <@shiro.hasPermission name="eduteacher:delete">
         <button class="layui-btn layui-btn-delete"
@@ -85,8 +79,7 @@
 
 
             <!--isPrimary：渲染列-->
-            <th width="4%" param="{name:'status',enumName:'StateEnum',render:'Render.customState'}">状态</th>
-            <th width="10%" param="{operate:'true',buttons:'Render.state,Render.edit,Render.delete'}">操作</th>
+            <th width="10%" param="{operate:'true',buttons:'Render.edit,Render.delete'}">操作</th>
         </tr>
         </thead>
     </table>

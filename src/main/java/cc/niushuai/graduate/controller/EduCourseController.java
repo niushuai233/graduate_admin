@@ -210,7 +210,7 @@ public class EduCourseController {
 
 
     /**
-     * 列表数据
+     * 列表数据 edu_website_course_detail
      */
     @ResponseBody
     @RequestMapping("/listEWCDData")

@@ -71,5 +71,12 @@ var Render = {
         }
 
         return "";
+    },
+    content: function (rowData, renderData, index, value) {
+        if (value.length > 10){
+            return value.substring(0, 10);
+        }
+        return value;
+
     }
 };

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cc.niushuai.graduate.mapper.EduFileMapper">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="cc.niushuai.graduate.entity.EduFile" id="eduFileMap">
+                    <result property="id" column="id"/>
+                    <result property="name" column="name"/>
+                    <result property="url" column="url"/>
+                    <result property="courseid" column="courseId"/>
+            </resultMap>
+
+    <select id="get" resultType="cc.niushuai.graduate.entity.EduFile">
+		select * from edu_file where id = #{value}
+	</select>
+
+    <select id="getList" resultType="cc.niushuai.graduate.entity.EduFile">
+        select * from edu_file t
+        <include refid="where_clause"/>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="getCount" resultType="int">
+        select count(*) from edu_file t
+        <include refid="where_clause"/>
+    </select>
+
+    <!-- 搜索数据区域 -->
+    <sql id="where_clause">
+        <where>
+            1=1
+                            <if test="id != null and id != ''">and t.id =
+                    #{id}
+                </if>
+                <if test="idVague != null and idVague != ''">and t.id
+                    like concat('%',#{idVague},'%')
+                </if>
+                            <if test="name != null and name != ''">and t.name =
+                    #{name}
+                </if>
+                <if test="nameVague != null and nameVague != ''">and t.name
+                    like concat('%',#{nameVague},'%')
+                </if>
+                            <if test="url != null and url != ''">and t.url =
+                    #{url}
+                </if>
+                <if test="urlVague != null and urlVague != ''">and t.url
+                    like concat('%',#{urlVague},'%')
+                </if>
+                            <if test="courseid != null and courseid != ''">and t.courseId =
+                    #{courseid}
+                </if>
+                <if test="courseidVague != null and courseidVague != ''">and t.courseId
+                    like concat('%',#{courseidVague},'%')
+                </if>
+                    </where>
+    </sql>
+
+    <insert id="save" parameterType="cc.niushuai.graduate.entity.EduFile"            useGeneratedKeys="true" keyProperty="id">
+		insert into edu_file
+		(
+                    			`name`, 
+                    			`url`, 
+                    			`courseId`
+            		)
+		values
+		(
+                    			#{name}, 
+                    			#{url}, 
+                    			#{courseid}
+            		)
+	</insert>
+
+    <update id="update" parameterType="cc.niushuai.graduate.entity.EduFile">
+        update edu_file
+        <set>
+                                                                            <if test="name != null">`name` = #{name
+                        }, </if>
+                                                                <if test="url != null">`url` = #{url
+                        }, </if>
+                                                                <if test="courseid != null">`courseId` = #{courseid
+                        }</if>
+                                    </set>
+        where id = #{id}
+    </update>
+
+    <delete id="delete">
+		delete from edu_file where id = #{value}
+	</delete>
+
+    <delete id="deleteBatch">
+        delete from edu_file where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>
