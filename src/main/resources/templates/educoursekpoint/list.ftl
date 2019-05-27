@@ -11,7 +11,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">名称:</label>
         <div class="layui-input-inline">
-            <input type="text" name="" placeholder="请输入名称" class="layui-input">
+            <input type="text" name="kpointNameVague" placeholder="请输入名称" class="layui-input">
         </div>
 
         <div class="layui-input-normal">
@@ -77,7 +77,7 @@
 
             <#--<th width="10%" param="{name:'isFree'}">是否可以试听1免费2收费</th>-->
 
-            <th width="7%" param="{name:'playCount'}">播放量</th>
+            <#--<th width="7%" param="{name:'playCount'}">播放量</th>-->
 
             <#--<th width="10%" param="{name:'teacherId'}">讲师id</th>-->
 

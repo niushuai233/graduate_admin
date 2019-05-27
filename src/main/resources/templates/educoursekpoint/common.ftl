@@ -13,7 +13,7 @@
     <label class="layui-form-label">选择节点<span class="span_must">*</span></label>
     <div class="layui-input-normal">
 
-        <input value="${(model.name)!""}" id="name" name="name" maxlength="20"
+        <input value="${(model.name)!""}" id="name" name="name" maxlength="20"  lay-verify="required"
                placeholder="请输入节点名称" class="layui-input"/>
     </div>
 </div>
@@ -82,7 +82,7 @@
     <label class="layui-form-label">节点类型<span class="span_must">*</span></label>
     <div class="layui-input-normal">
         <div cyType="selectTool" cyProps="codeName:'kpointType',search:'false',filter:'kpointType'"
-             name="kpointType" value="${(model.kpointType)!""}" class="layui-input-inline"></div>
+             name="kpointType" value="${(model.kpointType)!"0"}" class="layui-input-inline"></div>
     </div>
 </div>
 

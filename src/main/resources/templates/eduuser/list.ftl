@@ -90,17 +90,14 @@
             <th width="1%" param="{type:'checkbox'}">
                 <input type="checkbox" lay-skin="primary" lay-filter="allChoose">
             </th>
-            <th width="2%" param="{name:'userId',isPrimary:'true',hide:'true'}">id</th>
-            <th width="8%" param="{name:'stuNo'}">学号</th>
-            <th width="8%" param="{name:'userName'}">用户名</th>
-            <th width="8%" param="{name:'picImg',render:'Render.picImg'}">用户头像</th>
+            <th width="5%" param="{name:'userId',isPrimary:'true',hide:'false'}">id</th>
+            <th width="10%" param="{name:'stuNo'}">学号</th>
+            <th width="10%" param="{name:'userName'}">姓名</th>
             <th width="7%" param="{name:'mobile'}">手机号</th>
-            <th width="10%" param="{name:'email'}">邮箱号</th>
+            <th width="10%" param="{name:'email'}">邮箱</th>
             <th width="5%" param="{name:'sex',render:'Render.sex'}">性别</th>
             <th width="5%" param="{name:'age'}">年龄</th>
-            <th width="10%" param="{name:'createTime'}">注册时间</th>
-            <th width="10%" param="{name:'lastLoginTime'}">上次登录时间</th>
-            <th width="10%" param="{name:'lastLoginIp'}">上次登录IP</th>
+            <th width="10%" param="{name:'createTime'}">创建时间</th>
             <th width="5%" param="{name:'isAvalible',enumName:'StateEnum',render:'Render.mmmState'}">状态</th>
             <th width="10%" param="{operate:'true',buttons:'Render.state,Render.edit,Render.delete'}">操作</th>
         </tr>

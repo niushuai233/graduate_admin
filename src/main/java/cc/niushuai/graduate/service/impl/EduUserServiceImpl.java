@@ -1,5 +1,6 @@
 package cc.niushuai.graduate.service.impl;
 
+import cc.niushuai.graduate.commons.utils.MD5;
 import cc.niushuai.graduate.entity.EduUser;
 import cc.niushuai.graduate.mapper.EduUserMapper;
 import cc.niushuai.graduate.service.EduUserService;
@@ -17,7 +18,7 @@ import java.util.Map;
  */
 @Service("eduUserService")
 @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-public class EduUserServiceImpl implements EduUserService {
+public class EduUserServiceImpl extends BaseServiceImpl<EduUser> implements EduUserService {
     @Autowired
     private EduUserMapper eduUserMapper;
 
@@ -38,11 +39,16 @@ public class EduUserServiceImpl implements EduUserService {
 
     @Override
     public void save(EduUser eduUser) {
+        super.addValue(eduUser, false, 0);
+        eduUser.setIsAvalible(1);
+        String md5 = MD5.getMD5("123456");
+        eduUser.setPassword(md5);
         eduUserMapper.save(eduUser);
     }
 
     @Override
     public void update(EduUser eduUser) {
+        super.addValue(eduUser, false, 1);
         eduUserMapper.update(eduUser);
     }
 

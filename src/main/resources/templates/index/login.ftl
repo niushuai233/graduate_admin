@@ -13,11 +13,10 @@
     </script>
 </head>
 <body>
-<video class="video-player" preload="auto" autoplay="autoplay" loop="loop" data-height="100%" data-width="100%"
+<#--<video class="video-player" preload="auto" autoplay="autoplay" loop="loop" data-height="100%" data-width="100%"
        height="100%" width="100%">
     <source src="/login/login.mp4" type="video/mp4">
-    <!--需要视频制作请联系作者qq228112142   土豆作品地址http://id.tudou.com/i/UMTQ5MTY4MzM2MA-->
-</video>
+</video>-->
 
 <div class="video_mask"></div>
 <div class="login">

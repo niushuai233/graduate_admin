@@ -1,6 +1,5 @@
 package cc.niushuai.graduate.service.impl;
 
-import cc.niushuai.graduate.commons.utils.Query;
 import cc.niushuai.graduate.entity.EduCourseKpoint;
 import cc.niushuai.graduate.mapper.EduCourseKpointMapper;
 import cc.niushuai.graduate.mapper.EduCourseTeacherMapper;
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -56,6 +55,7 @@ public class EduCourseKpointServiceImpl extends BaseServiceImpl<EduCourseKpoint>
     @Override
     public void save(EduCourseKpoint eduCourseKpoint) {
         super.addValue(eduCourseKpoint, false, 0);
+        eduCourseKpoint.setAddTime(new Date());
         eduCourseKpointMapper.save(eduCourseKpoint);
     }
 

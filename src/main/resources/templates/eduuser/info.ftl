@@ -53,10 +53,6 @@
             <label class="layui-label-right">${(model.lastLoginTime)!"-"}</label>
         </div>
         <div class="layui-form-item">
-            <label class="layui-label-left">上次登录IP<span class="label_span">:</span></label>
-            <label class="layui-label-right">${(model.lastLoginIp)!"-"}</label>
-        </div>
-        <div class="layui-form-item">
             <label class="layui-label-left">是否可用 1正常 0冻结<span class="label_span">:</span></label>
             <label class="layui-label-right">${(model.isAvalible)!"-"}</label>
         </div>

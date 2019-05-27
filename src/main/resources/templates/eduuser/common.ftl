@@ -55,7 +55,7 @@
 </div>
 
 <script>
-    var sexValue = '${model.sex}';
+    var sexValue = '${(model.sex)!""}';
     if (!isEmpty(sexValue)) {
         $("#sexSelect").find('option[value="' + sexValue + '"]').prop("selected", true);
         layui.form.render();
