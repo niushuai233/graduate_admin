@@ -3,10 +3,10 @@
 
 
 <div class="layui-form-item">
-    <label class="layui-form-label">学号<span class="span_must">*</span></label>
+    <label class="layui-form-label">学号或工号<span class="span_must">*</span></label>
     <div class="layui-input-normal">
         <input type="text" name="stuNo" maxlength="255" lay-verify="required"
-               value="${(model.stuNo)!""}" placeholder="请输入学号" class="layui-input">
+               value="${(model.stuNo)!""}" placeholder="请输入学号或工号" class="layui-input">
     </div>
 </div>
 
@@ -32,10 +32,10 @@
 </div>
 
 <div class="layui-form-item">
-    <label class="layui-form-label">年龄<span class="span_must">*</span></label>
+    <label class="layui-form-label">年龄</label>
     <div class="layui-input-normal">
         <input type="text" name="age" maxlength="3"
-               value="${(model.age)!""}" placeholder="请输入年龄" lay-verify="required" class="layui-input">
+               value="${(model.age)!""}" placeholder="请输入年龄"  class="layui-input">
     </div>
 </div>
 <div class="layui-form-item">

@@ -12,6 +12,7 @@ import cc.niushuai.graduate.vo.UserImportVo;
 import cn.hutool.poi.excel.ExcelReader;
 import cn.hutool.poi.excel.ExcelUtil;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -182,11 +183,11 @@ public class EduUserController {
         List<String> stuNos = new ArrayList<String>();
         for (UserImportVo userImportVo : userImportVos) {
             EduUser user = new EduUser();
-            user.setStuNo(userImportVo.get学号());
+            user.setStuNo(userImportVo.get学号或工号());
 
-            boolean stuNoExistFlag = eduUserService.checkStuNoExist(userImportVo.get学号());
+            boolean stuNoExistFlag = eduUserService.checkStuNoExist(userImportVo.get学号或工号());
             if (stuNoExistFlag) {
-                stuNos.add(userImportVo.get学号());
+                stuNos.add(userImportVo.get学号或工号());
                 continue;
             }
 
@@ -202,6 +203,22 @@ public class EduUserController {
         }
 
         return ResultUtil.ok("导入"+userImportVos.size()+"条数据成功, 其中学号为"+JSONObject.toJSONString(stuNos)+"的学生导入失败");
+    }
+
+    /**
+     * 初始化密码
+     */
+    @ResponseBody
+    @Log("初始化密码")
+    @RequestMapping("/initPassword")
+    @RequiresPermissions("sys:user:list")
+    public ResultUtil initPassword(@RequestBody Long[] userIds) {
+        if (ArrayUtils.isEmpty(userIds)) {
+            return ResultUtil.error("user id为null");
+        }
+        eduUserService.initPassword(userIds);
+
+        return ResultUtil.ok();
     }
 
 }

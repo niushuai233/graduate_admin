@@ -14,7 +14,7 @@ import java.io.Serializable;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserImportVo implements Serializable {
 
-    private String 学号;
+    private String 学号或工号;
     private String 姓名;
     private String 性别;
     private String 手机号;

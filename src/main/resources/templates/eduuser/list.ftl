@@ -9,9 +9,9 @@
 <body>
 <form class="layui-form " action="">
     <div class="layui-form-item">
-        <label class="layui-form-label">学号:</label>
+        <label class="layui-form-label">学号或工号:</label>
         <div class="layui-input-inline">
-            <input type="text" name="stuNoVague" placeholder="请输入学号" class="layui-input">
+            <input type="text" name="stuNoVague" placeholder="请输入学号或工号" class="layui-input">
         </div>
         <label class="layui-form-label">姓名:</label>
         <div class="layui-input-inline">
@@ -79,6 +79,10 @@
         </button>
         <button class="layui-btn  layui-btn-danger" onclick="updateState('批量禁用','eduUserTable','/eduuser/disable')">
             <i class="fa fa-expeditedssl">&nbsp;</i>禁用
+        </button>
+        <button class="layui-btn" onclick="initPassword('eduUserTable','/eduuser/initPassword');"
+                style="margin-left: 5px!important;">
+            <i class="fa fa-refresh">&nbsp;</i>初始化密码 123456
         </button>
     </@shiro.hasPermission>
 

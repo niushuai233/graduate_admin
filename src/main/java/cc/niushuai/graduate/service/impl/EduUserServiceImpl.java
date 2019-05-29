@@ -89,4 +89,14 @@ public class EduUserServiceImpl extends BaseServiceImpl<EduUser> implements EduU
         return !CollectionUtils.isEmpty(list);
     }
 
+    @Override
+    public void initPassword(Long[] userIds) {
+        for (Long userId : userIds) {
+            EduUser user = eduUserMapper.get(userId);
+            user.setPassword(MD5.getMD5("123456"));
+
+            update(user);
+        }
+    }
+
 }

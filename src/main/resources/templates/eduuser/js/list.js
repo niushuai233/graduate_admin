@@ -1,3 +1,35 @@
+
+function initPassword(table_id, url) {
+    //获取选中的id
+    var ids = getSelectedRows(table_id);
+    if (ids != null) {
+        confirm("确认初始化？", function () {
+            $.ajax({
+                type: "post",
+                url: url,
+                contentType: "application/json",
+                data: JSON.stringify(ids),
+                async: false,
+                dataType: "json",
+                success: function (R) {
+                    if (R.code === 0) {
+                        Msg.success('操作成功');
+                        $(".search-btn").click();
+                    } else {
+                        Msg.error(R.msg);
+                    }
+                },
+                error: function () {
+                    Msg.error("系统繁忙");
+                }
+            });
+        });
+
+    }
+
+}
+
+
 /**
  * 学生信息表
  * @author niushuai
